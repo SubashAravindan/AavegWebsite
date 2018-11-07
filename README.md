@@ -18,8 +18,8 @@ You need to install Node, npm and mongoDB
 
 ```shell
 git clone https://github.com/SubashAravindan/AavegWebsite
-cd AavegWebsite/config
-cp config.example.js config.js
+cd AavegWebsite
+cp config/config.example.js config/config.js
 #Replace the values in config.js
 npm install
 npm install -g standard
