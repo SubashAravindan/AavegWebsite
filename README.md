@@ -1,8 +1,8 @@
-![Logo of the project](./public/assets/logo.png)
+<center><img src="./public/assets/logo.png" alt="Logo of the project" width="300" height="300"/></center>
 
-# Aaveg
-
+<center><h1>Aaveg</h1>
 Website and app backend for Aaveg.
+</center>
 
 ## Developing
 
