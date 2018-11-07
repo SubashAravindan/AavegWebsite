@@ -1,8 +1,8 @@
-<center><img src="./public/assets/logo.png" alt="Logo of the project" width="300" height="300"/></center>
+<img src="./public/assets/logo.png" alt="Logo of the project" width="300" height="300"/>
 
-<center><h1>Aaveg</h1>
+# Aaveg
+
 Website and app backend for Aaveg.
-</center>
 
 ## Developing
 
