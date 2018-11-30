@@ -4,22 +4,34 @@ const accessList = require('../../config/adminAccess.js')
 const logger = require('../../config/winston.js')
 
 exports.showLogin = (req, res) => {
-  res.render('auth/login')
+  res.render('auth/admin/login')
 }
 
 exports.showRegister = (req, res) => {
-  res.render('auth/register')
+  res.render('auth/admin/register')
 }
 
 exports.authenticate = passport.authenticate('local',
   {
-    successRedirect: '/',
     failureRedirect: '/login'
   })
 
 exports.logout = (req, res) => {
   req.logout()
   res.redirect('/')
+}
+exports.logOutFromStudent = (req, res, next) => {
+  if (req.session.stype === 'student') {
+    req.session.rollnumber = null
+    req.session.type = null
+  }
+  next()
+}
+
+exports.login = (req, res) => {
+  req.session.type = 'admin'
+  req.session.save()
+  res.send(200)
 }
 
 exports.register = (req, res) => {
@@ -48,8 +60,9 @@ exports.checkAdminAccess = (req, res, next) => {
   }
 }
 
+// Middleware for admin login check
 exports.checkAdminLogin = (req, res, next) => {
-  if (req.user) {
+  if (req.session.type === 'admin' && req.user.permissions.length) {
     return next()
   } else {
     res.redirect('/login')
