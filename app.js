@@ -10,7 +10,8 @@ const logger = require('./config/winston.js')
 const Admin = require('./app/models/Admin.js')
 const LocalStrategy = require('passport-local')
 const config = require('./config/config.js')
-const authRoutes = require('./app/routes/adminAuth.js')
+const adminAuthRoutes = require('./app/routes/adminAuth.js')
+const studentAuthRoutes = require('./app/routes/studentAuth.js')
 // ==================Middleware================
 app.use(helmet())
 app.set('view engine', 'ejs')
@@ -22,7 +23,7 @@ mongoose.connect(config.dbURI)
 app.use(session({
   secret: config.sessionSecret,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true
 }))
 
 app.use(passport.initialize())
@@ -36,7 +37,8 @@ app.use((req, res, next) => {
 })
 
 // =============Routes=============
-app.use(authRoutes)
+app.use(adminAuthRoutes)
+app.use(studentAuthRoutes)
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
