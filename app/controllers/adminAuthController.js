@@ -31,7 +31,7 @@ exports.logOutFromStudent = (req, res, next) => {
 exports.login = (req, res) => {
   req.session.type = 'admin'
   req.session.save()
-  res.send(200)
+  res.redirect('/')
 }
 
 exports.register = (req, res) => {
