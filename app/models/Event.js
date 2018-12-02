@@ -4,13 +4,6 @@ const eventSchema = new mongoose.Schema({
   name: 'string',
   cup: 'string',
   points: ['number'],
-  winners: {
-    hostel: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Hostel'
-    }],
-    position: ['number']
-  },
   venue: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Venue'
