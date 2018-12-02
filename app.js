@@ -12,6 +12,8 @@ const LocalStrategy = require('passport-local')
 const config = require('./config/config.js')
 const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
+const tshirtRoutes = require('./app/routes/tshirtReg.js')
+const hostelRoutes = require('./app/routes/hostel.js')
 // ==================Middleware================
 app.use(helmet())
 app.set('view engine', 'ejs')
@@ -32,13 +34,19 @@ passport.use(new LocalStrategy(Admin.authenticate()))
 passport.serializeUser(Admin.serializeUser())
 passport.deserializeUser(Admin.deserializeUser())
 app.use((req, res, next) => {
-  res.locals.currentUser = req.user
+  if (req.session.type === 'student') {
+    res.locals.rollnumber = req.session.rollnumber
+  } else if (req.session.type === 'admin') {
+    res.locals.adminUser = req.user
+  }
   next()
 })
 
 // =============Routes=============
 app.use(adminAuthRoutes)
 app.use(studentAuthRoutes)
+app.use(tshirtRoutes)
+app.use(hostelRoutes)
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)

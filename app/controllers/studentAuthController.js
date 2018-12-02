@@ -26,11 +26,12 @@ exports.login = async (req, res) => {
     res.redirect('/')
   }).catch(err => {
     logger.error(err)
+    return res.redirect('/studentLogin')
   })
 }
 
 exports.checkStudentLogin = (req, res, next) => {
-  if (req.session.rollnumber && req.session.type) {
+  if (req.session.rollnumber && req.session.type === 'student') {
     next()
   } else {
     res.redirect('/studentLogin')
