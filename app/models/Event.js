@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const eventSchema = new mongoose.Schema({
   name: 'string',
   cup: 'string',
+  cluster: 'string',
   points: ['number'],
   venue: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Add Cluster </title>
+    </head>
+    <body>
+        <%if(locals.error){ %>
+            <div id="error"><%=error%></div>
+        <%}%>
+
+        <form action="/event" method="POST">
+            <label for="event_name">Name of Event: </label>
+            <input type="text" value="<%=data.event_name%>" name='event_name' required>
+            <label for="cluster">Cluster: </label>
+            <select name="cluster" id="cluster" value="<%=data.cluster%>" required>
+                <option value="">Please select</option>
+                <option value="culturals">Culturals</option>
+                <option value="lits">Lits</option>
+                <option value="dramatics">Dramatics</option>
+                <option value="videography">Videography</option>
+                <option value="sports">Sports</option>
+                <option value="miscellaneous">Miscellaneous</option>
+                <option value="gaming">Gaming</option>
+                <option value="arts">Arts</option>
+            </select>
+            <label for="cup">Cup: </label>
+            <select name="cup" id="cup" value="<%=data.cup%>" required>
+                <option value="">Please select</option>
+                <option value="culturals">Culturals</option>
+                <option value="sports">Sports</option>
+                <option value="spectrum">Spectrum</option>
+            </select>
+            <label for="points1">Points for First Place: </label>
+            <input type="number" value="<%=data.points1%>" name='points1'>
+            <label for="points2">Points for Second Place: </label>
+            <input type="number" value="<%=data.points2%>" name='points2'>
+            <label for="points3">Points for Third Place: </label>
+            <input type="number" value="<%=data.points3%>" name='points3'>
+            <label for="description">Description: </label>
+            <input type="text" value="<%=data.description%>" name='description'>
+            <label for="rules">Rules: </label>
+            <input type="text" value="<%=data.rules%>" name='rules'>
+            <label for="date">Date: </label>
+            <input type="text" value="<%=data.date%>" name='date'>
+            <label for="startTime">Starting Time: </label>
+            <input type="text" value="<%=data.startTime%>" name='startTime'>
+            <label for="endTime">Ending Time: </label>
+            <input type="text" value="<%=data.endTime%>" name='endTime'>
+            <label for="venue">Venue: </label>
+            <input type="text" value="<%=data.venue%>" name='venue'>
+        </form>
+    </body>
+</html>
