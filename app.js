@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const engine = require('ejs-locals')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const mongoose = require('mongoose')
@@ -16,17 +17,20 @@ const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
 // ==================Middleware================
 app.use(helmet())
+app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/public')))
 
 mongoose.connect(config.dbURI)
 
-app.use(session({
-  secret: config.sessionSecret,
-  resave: false,
-  saveUninitialized: true
-}))
+app.use(
+  session({
+    secret: config.sessionSecret,
+    resave: false,
+    saveUninitialized: true
+  })
+)
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -47,6 +51,10 @@ app.use(adminAuthRoutes)
 app.use(studentAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
+
+app.get('/sample', (req, res) => {
+  res.render('sample', { title: 'aavegsample' })
+})
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
