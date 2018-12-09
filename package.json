@@ -14,11 +14,18 @@
       "pre-push": "npm test"
     }
   },
+  "standard": {
+    "ignore": [
+      "public/js/main.js",
+      "public/js/util.js"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.3",
     "ejs": "^2.6.1",
+    "ejs-locals": "^1.0.2",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "express-validator": "5.3.0",
