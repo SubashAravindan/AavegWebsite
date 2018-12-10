@@ -8,6 +8,9 @@
     "start": "node app.js",
     "server": "nodemon app.js"
   },
+  "standard": {
+    "globals": [ "$" ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test",
