@@ -8,9 +8,6 @@
     "start": "node app.js",
     "server": "nodemon app.js"
   },
-  "standard": {
-    "globals": [ "$" ]
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm test",
@@ -21,7 +18,8 @@
     "ignore": [
       "public/js/main.js",
       "public/js/util.js"
-    ]
+    ],
+    "globals": [ "$" ]
   },
   "author": "",
   "license": "ISC",
