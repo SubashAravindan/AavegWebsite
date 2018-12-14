@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    font-family:'Lato','sans-serif';
+    font-family:'Exo2','sans-serif';
+}
+form{
+  margin:1.5em auto;
+  width:90%;
+
+}
+select{
+    width: 150%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    margin-top:5px;
+    margin-left:10px;
+    font-size: 17px;
+
+}
+.event-div{
+  margin-top:10px;
+  display:inline-block;
+}
+.event-label-div{
+  float:left;
+}
+.event-input-div{
+  float:right;
+}
+.hostel-div{
+  float:left;
+}
+.points-div{
+  float:center;
+}
+.container{
+  margin: 5px;
+}
+input[type=text]{
+  size: 50%;
+}
+.button-div{
+  text-align:center;
+  margin-bottom:12px;
+}
