@@ -1,0 +1,78 @@
+<% layout('../../partials/template') -%>
+<% stylesheet('../css/addScore.css') -%>
+<% stylesheet("https://fonts.googleapis.com/css?family=Exo+2|Lato") -%>
+      <%if(locals.error){ %>
+          <div id="error"><%=error%></div>
+      <%}%>
+      <form action="/admin/scoreboard" method="POST">
+        <div class="event-div">
+        <div class="event-label-div">
+          <label for="eventId">Choose Event: </label>
+        </div>
+            <div class="event-input-div">
+          <select name="eventId" id="eventId" value ="" required onChange="setPoints(this.value)">
+              <option value="">Please select</option>
+              <% for(var i = 0; i< eventList.length; i++){ %>
+              <option value= "<%=eventList[i]._id%>" ><%=eventList[i].name%></option>
+              <% } %>
+          </select>
+        </div>
+      </div>
+      <div>
+          <label for="first">First Place: </label>
+          <div class="container">
+          <div class="hostel-div">
+          <label for="first">Hostel: </label>
+          <select name="first" id="first" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
+              <option value="">Please select</option>
+              <% for(var i = 0; i< hostels.length; i++){ %>
+              <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
+              <% } %>
+          </select>
+        </div>
+          <div class="points-div">
+            <label for="firstPoints">Points: </label>
+              <input type="number" name="firstPoints" id="firstPoints" min=0 default=0>
+          </div>
+        </div>
+      </div>
+      <div>
+      <label for="second">Second Position : </label>
+        <div class="container">
+          <div class="hostel-div">
+            <label for="second">Hostel: </label>
+            <select name="second" id="second" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
+                <option value="">Please select</option>
+                <% for(var i = 0; i< hostels.length; i++){ %>
+                <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
+                <% } %>
+            </select>
+          </div>
+            <div class="points-div">
+              <label for="secondPoints">Points: </label>
+                <input type="number" name="secondPoints" id="secondPoints" min=0 default=0>
+            </div>
+      </div>
+    </div>
+    <div>
+        <label for="third">Third Position : </label>
+        <div class="container">
+          <div class="hostel-div">
+            <label for="third">Hostel: </label>
+            <select name="third" id="third" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
+                <option value="">Please select</option>
+                <% for(var i = 0; i< hostels.length; i++){ %>
+                <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
+                <% } %>
+            </select>
+          </div>
+            <div class="points-div">
+              <label for="thirdPoints">Points: </label>
+                <input type="number" name="thirdPoints" id="thirdPoints" min=0 default=0>
+            </div>
+          </div>
+        </div>
+        <div class="button-div">
+        <button type="submit" value="Add" class="button primary">Add</button>
+      </div>
+      </form>

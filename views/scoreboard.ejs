@@ -1,0 +1,40 @@
+<div class = "hostelwise">
+  <h1> ScoreBoard for <%= hostel %></h1>
+ <table>
+  <th>
+    <td>Event</td>
+    <td>Position</td>
+    <td>Points</td>
+  </th>
+  <% hostelData.forEach(function(item){ %>
+    <tr>
+      <td><%= item[0] %></td>
+      <td><%= item[1] %></td>
+      <td><%= item[2] %></td>
+    </tr>
+
+  <% }); %>
+
+ </table>
+ <h2>Total Points: <%= totalHostelPoints %></h2>
+</div>
+
+<div class = "clusterwise">
+  <h1> Scoreboard for <%= cup %></h1>
+    <table>
+      <th>
+        <td>Event</td>
+        <% for( var i=0;i< hostels.length; i++) {%>
+        <td><% =hostels[i] %></td>
+        <% } %>
+      </th>
+      <tr>
+        <% clusterData
+      </tr>
+    </table>
+  </div>
+
+
+  <div class = "all">
+    <h1> Scoreboard</h1>
+    <table>
