@@ -16,7 +16,12 @@ const photographyRoutes = require('./app/routes/photography')
 const eventRoutes = require('./app/routes/events')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
+<<<<<<< HEAD
 const authSetup = require('./app/utils/authSetup')
+=======
+const scoreRoutes = require('./app/routes/scoreboard.js')
+const adminScoreRoutes = require('./app/routes/adminScore.js')
+>>>>>>> Scoreboard controller and add score template
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -51,6 +56,8 @@ app.use(adminAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
 app.use(eventRoutes)
+app.use(scoreRoutes)
+app.use(adminScoreRoutes)
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
