@@ -15,6 +15,8 @@ const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
+const scoreRoutes = require('./app/routes/scoreboard.js')
+const adminScoreRoutes = require('./app/routes/adminScore.js')
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -60,6 +62,8 @@ app.use(adminAuthRoutes)
 app.use(studentAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
+app.use(scoreRoutes)
+app.use(adminScoreRoutes)
 
 app.get('/sample', (req, res) => {
   res.render('sample', { title: 'aavegsample' })
