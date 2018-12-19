@@ -7,9 +7,21 @@
   </title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="icon" type="image/png" href="images/aaveg_glyph_black.png">
   <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    body {
+      background: #2c2c54;
+    }
+
+    #aaveg-motto,
+    #aaveg-header {
+      color: #f49d6e;
+    }
+  </style>
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="/css/noscript.css" />
+  </noscript>
   <%-scripts%>
   <%-stylesheets%>
 </head>
@@ -19,18 +31,24 @@
   <div id="wrapper">
     <!-- Header -->
     <header id="header" class="alt">
-      <span class="logo"><img src="images/logo.svg" alt="" /></span>
-      <h1>Aaveg</h1>
-      <p>Aaveg is awesome.</p>
+      <span class="logo"><a href="#"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
+      <span class="logo"><a href="#"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
+      <p id="aaveg-motto">Channeling Fury
+      </p>
     </header>
 
     <!-- Nav -->
     <nav id="nav">
       <ul>
-        <li><a href="#intro" class="active">Introduction</a></li>
-        <li><a href="#first">First Section</a></li>
-        <li><a href="#second">Second Section</a></li>
-        <li><a href="#cta">Get Started</a></li>
+        <li><a href="#" class="active">About</a></li>
+        <li><a href="#">Scoreboard</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Schedule</a></li>
+        <% if(typeof adminUser!=='undefined') { %>
+        <li><a href="#">
+            <%= adminUser %> : Logout</a></li>
+        <% }%>
       </ul>
     </nav>
 
@@ -42,7 +60,7 @@
     <!-- Footer -->
     <footer id="footer">
       <section>
-        <h2>Aliquam sed mauris</h2>
+        <h2>Aaveg Web Team</h2>
         <p>
           Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat
           magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris.
@@ -50,39 +68,32 @@
           velit, vitae tincidunt odio.
         </p>
         <ul class="actions">
-          <li><a href="generic.html" class="button">Learn More</a></li>
+          <li><a href="#" class="button">About Us</a></li>
         </ul>
       </section>
       <section>
-        <h2>Etiam feugiat</h2>
-        <dl class="alt">
-          <dt>Address</dt>
-          <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
-          <dt>Phone</dt>
-          <dd>(000) 000-0000 x 0000</dd>
-          <dt>Email</dt>
-          <dd><a href="#">information@untitled.tld</a></dd>
-        </dl>
+        <h2>Reach Us</h2>
         <ul class="icons">
           <li>
             <a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a>
           </li>
           <li>
-            <a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a>
+            <a href="https://www.facebook.com/aaveg.nitt" class="icon fa-facebook alt"><span class="label">Facebook</span></a>
           </li>
           <li>
-            <a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a>
+            <a href="https://medium.com/aaveg-blog" class="icon fa-medium alt"><span class="label">Medium</span></a>
           </li>
           <li>
-            <a href="#" class="icon fa-github alt"><span class="label">GitHub</span></a>
+            <a href="#" class="icon fa-behance alt"><span class="label">GitHub</span></a>
           </li>
-          <li>
-            <a href="#" class="icon fa-dribbble alt"><span class="label">Dribbble</span></a>
-          </li>
+        </ul>
+        <ul class="actions">
+          <li><a href="#" class="button">Contact Us</a></li>
         </ul>
       </section>
       <p class="copyright">
-        &copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.
+        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="#">Web Team</a> & <a href="#">Design
+          Team</a>.
       </p>
     </footer>
   </div>
