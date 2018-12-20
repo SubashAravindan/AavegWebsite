@@ -9,16 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="icon" type="image/png" href="images/aaveg_glyph_black.png">
   <link rel="stylesheet" href="/css/main.css" />
-  <style>
-    body {
-      background: #2c2c54;
-    }
-
-    #aaveg-motto,
-    #aaveg-header {
-      color: #f49d6e;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/custom_main.css" />
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css" />
   </noscript>
@@ -47,10 +38,34 @@
         <li><a href="#">Schedule</a></li>
         <% if(typeof adminUser!=='undefined') { %>
         <li><a href="#">
-            <%= adminUser %> : Logout</a></li>
+            Logout :
+            <%= adminUser %></a></li>
         <% }%>
       </ul>
     </nav>
+
+    <div id="mini-nav" class="">
+      <i class="icon fa-bars"></i> MENU
+    </div>
+
+    <div id="mini-nav-wrapper" class="modal hidden">
+      <nav id="nav-mobile" class="">
+        <div id="nav-mob-close" class="fa-times icon"></div>
+        <ul>
+          <li><a href="#" class="active">About</a></li>
+          <li><a href="#">Scoreboard</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Schedule</a></li>
+          <% if(typeof adminUser!=='undefined') { %>
+          <li><a href="#">
+              Logout :
+              <%= adminUser %></a></li>
+          <% }%>
+        </ul>
+      </nav>
+    </div>
+
 
     <!-- Main -->
     <div id="main">
@@ -107,6 +122,7 @@
   <script src="/js/breakpoints.min.js"></script>
   <script src="/js/util.js"></script>
   <script src="/js/main.js"></script>
+  <script src="/js/custom_main.js"></script>
 </body>
 
 </html>

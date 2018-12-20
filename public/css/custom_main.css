@@ -1,0 +1,109 @@
+body {
+  background: #2c2c54;
+}
+
+main {
+  color: #2c2c54;
+}
+
+#aaveg-motto,
+#aaveg-header {
+  color: #f49d6e;
+}
+
+#mini-nav {
+  display: none;
+  width: 100px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  z-index: 20;
+  color: white;
+  margin: 10px;
+  transition: all 0.2s ease-in;
+}
+
+.mod{
+  color: black !important;
+  background: rgba(255,255,255, 0.8);
+  box-shadow: 0 0 5px 1px gray;
+}
+
+#nav-mobile>ul {
+  list-style-type: none;
+  padding-left: 0 !important;
+}
+
+#nav-mobile li::after {
+  content: '';
+  width: 100%;
+  margin: auto;
+  height: 3px;
+  background: rgba(128, 128, 128, 0.644);
+  margin: 10px 0;
+  display: block;
+  padding: 0;
+}
+
+#nav-mobile a {
+  border: none;
+}
+
+#nav-mobile a:hover {
+  color: gray !important;
+}
+
+#nav-mobile {
+  height: 100vh;
+  width: 80vw;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: white;
+  z-index: 30;
+  padding: 50px 10px;
+  font-size: xx-large;
+  font-weight: normal;
+  color: black;
+  font-variant-caps: all-small-caps;
+  transition: all 1s ease-in;
+}
+
+#nav-mob-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0 20px 0 0;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 735px) {
+  #mini-nav{
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 736px) {
+  #mini-nav, #mini-nav-wrapper{
+    display: none;
+  }
+}
+
+.hidden {
+  display: none;
+}
