@@ -17,7 +17,6 @@ const photographyRoutes = require('./app/routes/photography')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
 const scoreRoutes = require('./app/routes/scoreboard.js')
-const adminScoreRoutes = require('./app/routes/adminScore.js')
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -67,7 +66,6 @@ app.get('*', (req, res) => {
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
 app.use(scoreRoutes)
-app.use(adminScoreRoutes)
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
