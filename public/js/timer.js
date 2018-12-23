@@ -49,8 +49,6 @@ function countdown (endDate) {
       hrsS1.innerHTML = stringH[1]
       minsS1.innerHTML = stringM[1]
       secsS1.innerHTML = stringS[1]
-    } else {
-
     }
   }
 }
