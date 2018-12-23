@@ -50,3 +50,18 @@ input[type=text]{
   text-align:center;
   margin-bottom:12px;
 }
+.hidden{
+  display:none;
+}
+.border-class{
+  border:2px solid black;
+}
+
+.delete{
+  background-color:#f44336;
+  float: right;
+  width: 20px;
+  padding:0px;
+  margin:0px;
+
+}
