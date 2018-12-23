@@ -5,55 +5,51 @@ const Score = require('../models/Score.js')
 
 exports.showScoreForm = async (req, res) => {
   const hostels = await Hostels.find({}).exec()
-  logger.log('debug', hostels)
   const eventList = await Events.find({}).exec()
-  logger.log('debug', eventList)
-  res.render('auth/admin/addScore', { 'eventList': eventList, 'hostels': hostels, 'title': 'Add Score' })
+  res.render('auth/addScore', { 'eventList': eventList, 'hostels': hostels, 'title': 'Add Score' })
 }
 
-exports.createScore = (req, res) => {
-  logger.log('debug', req.body.first)
+exports.getPoints = async (req, res) => {
+  const points = await Events.findById(req.query.data).exec()
+  return res.status(200).send(points.points)
+}
 
-  for (let i = 0; i < req.bodyfirst.length; i++) {
-    var firstPos = new Score({
-      hostel: req.body.first[i],
-      event: req.body.eventId,
-      position: 1,
-      points: req.body.firstPoints
-    })
-    firstPos.save(function (error) {
-      logger.log('debug', 'success')
-      if (error) { return res.status(500).send(error) }
-    })
+exports.createScore = async (req, res) => {
+  let noOfPositions = []
+  let noOfPoints = []
+  let keys = Object.keys(req.body)
+  logger.log('debug', 'keys' + keys)
+  keys.forEach(function (item) {
+    if (item.indexOf('position') !== -1) {
+      noOfPositions.push(req.body[item])
+      logger.log('debug', req.body[item])
+    }
+    if (item.indexOf('points') !== -1) { noOfPoints.push(req.body[item]) }
+  })
+  logger.log('debug', 'noOfPositions' + noOfPositions)
+  logger.log('debug', 'noofPoints' + noOfPoints)
+
+  for (let j = 0; j < noOfPositions.length; j++) {
+    let hostelList = noOfPositions[j]
+    logger.log('debug', hostelList)
+    let points = noOfPoints[j]
+
+    for (let i = 0; i < hostelList.length; i++) {
+      let Pos = new Score({
+        hostel: hostelList[i],
+        event: req.body.eventId,
+        position: (j + 1),
+        points: points
+      })
+      logger.log('debug', 'here' + hostelList[i])
+      try {
+        await Pos.save()
+        logger.info(`Scores added by ${req.session.rollnumber}`)
+      } catch (error) {
+        logger.error(error)
+        return res.status(500).send(error)
+      }
+    }
   }
-
-  for (let i = 0; i < req.body.second.length; i++) {
-    var secondPos = new Score({
-      hostel: req.body.second[i],
-      event: req.body.eventId,
-      position: 2,
-      points: req.body.secondPoints
-    })
-
-    secondPos.save(function (error) {
-      logger.log('debug', 'success')
-      if (error) { return res.status(500).send(error) }
-    })
-  }
-
-  for (let i = 0; i < req.body.third.length; i++) {
-    var thirdPos = new Score({
-      hostel: req.body.third[i],
-      event: req.body.eventId,
-      position: 3,
-      points: req.body.thirdPoints
-    })
-
-    thirdPos.save(function (error) {
-      logger.log('debug', 'success')
-      if (error) { return res.status(500).send(error) }
-    })
-  }
-
-  return res.status(200)
+  res.redirect('/admin')
 }
