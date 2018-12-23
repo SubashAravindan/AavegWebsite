@@ -17,7 +17,7 @@ const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
 // ==================Middleware================
 
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(helmet())
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')

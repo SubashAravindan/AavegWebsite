@@ -233,7 +233,8 @@ html, body {
 }
 
 .rain {
-  z-index: 500;
+  z-index: 100;
+  opacity: 0.8;
   -webkit-filter: opacity(0%);
           filter: opacity(0%);
   position: absolute;
@@ -713,6 +714,14 @@ html, body {
 
   #dtg-text {
     margin-top: 150px;
+  }
+  .left-door{
+    top: 15%;
+    height: 65vh;
+  }
+  .right-door{
+    top: 15%;
+    height: 65vh;
   }
 }
 
