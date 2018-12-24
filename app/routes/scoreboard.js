@@ -7,6 +7,6 @@ const adminAuthController = require('../controllers/adminAuthController.js')
 router.get('/admin/scoreboard', adminAuthController.checkAdminLogin, adminScoreboardController.showScoreForm)
 router.post('/admin/scoreboard', adminAuthController.checkAdminLogin, adminScoreboardController.createScore)
 router.get('/api/scoreboard', scoreController.showScoreboard)
-router.post('/getPoints', adminScoreboardController.getPoints)
+router.get('/getPoints', adminScoreboardController.getPoints)
 
 module.exports = router
