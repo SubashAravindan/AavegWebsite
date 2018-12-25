@@ -110,3 +110,7 @@ main {
 .hidden {
   display: none;
 }
+
+#footer *{
+  color: #f49d6e !important;
+}
