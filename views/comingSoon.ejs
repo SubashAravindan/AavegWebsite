@@ -1,10 +1,10 @@
 <html>
 <head>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="images/glyph-black.png" />
 
   <title>Aaveg</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -12,22 +12,57 @@
 </head>
 <body>
   <!-- what are you searching in the source ? This isn't CTF. Close it and enjoy the page. -->
-	<div class="jumbotron jumbotron-fluid">
-	
-  <div class="container-fluid">
-    <div class="text-center">
-      <img src="images/glyph-white.png" id="logo" class="img-fluid ">
+  <!-- Kill the man who wrote the above comment -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-trasparent fixed-bottom">
+    <a class="navbar-brand " href="/"><img src="images/glyph-white.png" alt="Aaveg" style="width: 40px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item active"><a href="about" class="nav-link">About</a></li>
+        <li class="nav-item active"><a href="events" class="nav-link">Events</a></li>
+        <li class="nav-item active"><a href="scoreboard" class="nav-link">ScoreBoard</a></li>
+        <li class="nav-item active"><a href="https://medium.com/aaveg-blog" class="nav-link">Blog</a></li>
+        <li class="nav-item active"><a href="schedule.pdf" class="nav-link">Schedule</a></li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a class="nav-link" tabindex="0" data-placement="top" role="button" data-toggle="popover" data-trigger="click" id="contactLink">C<span oncut =display()>o</span>ntact</a></li>
+        <li class="nav-item active"> <a href="https://www.facebook.com/aaveg.nitt/" class="nav-link"> <i class="fab fa-facebook"></i> </a> </li>
+        <li class="nav-item active"> <a href="https://www.instagram.com/aaveg.nitt/" class="nav-link"> <i class="fab fa-instagram"></i> </a> </li>
+        <!--           <li class="nav-item active"> <a class="nav-link">Login</a> </li> -->
+      </ul>
     </div>
-    <h1 class="display-3 text-center" >  	<i class="fas fa-hammer"></i> Coming soon <i class="fas fa-cogs"></i></h1>
-    <%if(['events', 'scoreboard', 'schedule.pdf', 'about'].includes(url.slice(1).toLowerCase())){%>
-    <p class="lead text-center" >In the mean <a href="images/joke.jpeg" class="link"></a>time, check out last year's <a href="https://aaveg.net/18/<%=url.slice(1)%>"><%=url.slice(1)%></a></p>
-    <%}else{%>
-    <p class="lead text-center" >In the mean <a href="images/joke.jpeg" class="link"></a>time, check out last year's <a href="https://aaveg.net/18/">website</a></p>
-    <%}%>
+  </nav>
 
-  </div>
-</div>
+  <div class="jumbotron jumbotron-fluid">
 
-	<div class="rain"></div>
+    <div class="container-fluid">
+      <div class="text-center">
+        <img src="images/glyph-white.png" id="logo" class="img-fluid ">
+      </div>
+      <h1 class="display-3 text-center" ><i class="fas fa-hammer"></i> Coming soon <i class="fas fa-cogs"></i></h1>
+      <%if(['events', 'scoreboard', 'schedule.pdf', 'about'].includes(url.slice(1).toLowerCase())){%>
+        <p class="lead text-center" >In the mean <a href="images/joke.jpeg" class="link"></a>time, check out last year's <a href="https://aaveg.net/18/<%=url.slice(1)%>"><%=url.slice(1)%></a></p>
+        <%}else{%>
+          <p class="lead text-center" >In the mean <a href="images/joke.jpeg" class="link"></a>time, check out last year's <a href="https://aaveg.net/18/">website</a></p>
+          <%}%>
+
+        </div>
+      </div>
+
+      <div class="rain"></div>
+
+      <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="js/timer.js"></script>
+
 </body>
 </html>
