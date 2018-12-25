@@ -30,15 +30,15 @@
     <!-- Nav -->
     <nav id="nav">
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="/sb">Scoreboard</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/scoreboardb">Scoreboard</a></li>
         <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
         <li><a href="/events">Events</a></li>
         <li><a href="/schedule">Schedule</a></li>
-        <% if(typeof adminUser!=='undefined') { %>
+        <% if(typeof adminUser.username!=='undefined') { %>
         <li><a href="/logout">
             Logout :
-            <%= adminUser %></a></li>
+            <%= adminUser.username %></a></li>
         <% }%>
       </ul>
     </nav>
@@ -82,7 +82,7 @@
           velit, vitae tincidunt odio.
         </p>
         <ul class="actions">
-          <li><a href="/webteam" class="button">About Us</a></li>
+          <li><a href="/team" class="button">About Us</a></li>
         </ul>
       </section>
       <section>
