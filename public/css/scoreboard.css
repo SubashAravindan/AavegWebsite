@@ -1,0 +1,152 @@
+/* *{
+  box-sizing: border-box !important;
+} */
+.row{
+  padding:30px !important;
+  margin-left:0 !important;
+}
+
+#scorecard-container{
+  font-size: 1rem;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.scorecard{
+  margin: 10px auto !important;
+  padding: 0 !important;
+  max-width:13rem;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+  transform: scale(1.05);
+}
+
+.img-wrapper{
+  width:100%;
+  height: 200px;
+  position: relative;
+}
+
+.card-img-top{
+  max-height: 100%;  
+  max-width: 100%; 
+  width: auto;
+  height: auto;
+  position: absolute;  
+  top: 0;  
+  bottom: 0;  
+  left: 0;  
+  right: 0;  
+  margin: auto;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card-title{
+  text-align: center;
+}
+
+.card-body{
+  padding: 15px;
+}
+
+
+#standing-header{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mini-standings>ul{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.mini-standings .row{
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+  margin: 0 auto;
+}
+
+.mini-standings{
+  margin: 0 auto;
+}
+
+.mini-standings>ul {
+  list-style-type: none;
+  padding-left: 0 !important;
+}
+
+.mini-standings-header{
+  text-align: center;
+}
+
+.mini-standings li img{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+@media only screen and (min-width: 736px) {
+  
+  .mini-standings:nth-child(2)::before, .mini-standings:nth-child(3)::before{
+    content:'';
+    display: block;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to top, #ffffff, #000000, #ffffff);
+    float: left;
+  }
+
+  #chart-holder{
+    border-radius: 10px;
+    margin: 0 30px !important;
+  }
+}
+
+@media only screen and (max-width: 736px) {
+  #chart-holder{
+    padding: 0 !important;
+  }
+}
+
+#chart-holder{
+  background: #2c2c54;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#canvas{
+  display: block;
+  padding: 0 !important;
+}
+
+#chart-options{
+  width: 100%;
+}
+
+#chart-options>*{
+  padding: 0 !important;
+}
+
+#chart-options>button{
+  border-radius: 0;
+  background: #ffffff;
+  color: #2c2c54;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+#chart-options>button:hover{
+  color: #ffffff !important;
+}
