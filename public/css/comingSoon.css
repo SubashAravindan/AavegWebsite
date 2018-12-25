@@ -18,6 +18,43 @@ html, body {
   display: inline-block;
 }
 
+.navbar {
+  background-color:  #020202;
+  -webkit-filter: opacity(50%);
+          filter: opacity(50%);
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.popover-body, .popover-header, .arrow, div[id^="popover"]{
+  background: rgba(0,0,0,0.3);
+}
+.bs-popover-auto[x-placement^=top] .arrow::after, .bs-popover-top .arrow::after{
+  border-top-color: rgba(0,0,0,0.3);
+}
+
+#contactLink{
+  outline: none;
+  cursor: pointer;
+}
+#contactDiv, #contactTitle{
+  font-family: 'Exo-2' sans-serif;
+  color: white;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.fab.fa-facebook{
+  font-size: 2em;
+  margin-right: 10px;
+}
+.fab.fa-instagram{
+  font-size: 2em;
+  margin-right: 10px;
+}
+
+
 .rain {
   z-index: 5;
   -webkit-filter: opacity(0%);

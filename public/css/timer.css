@@ -7,7 +7,7 @@ html, body {
 }
 .popover-body, .popover-header, .arrow, div[id^="popover"]{
   background: rgba(0,0,0,0.3);
-
+  display: inline-block;
 }
 .links, .links:hover{
   color: inherit;
@@ -18,13 +18,16 @@ html, body {
 .bs-popover-auto[x-placement^=top] .arrow::after, .bs-popover-top .arrow::after{
   border-top-color: rgba(0,0,0,0.3);
 }
+
 #contactLink{
   outline: none;
+  cursor: pointer;
 }
 #contactDiv, #contactTitle{
   font-family: 'Exo-2' sans-serif;
   color: white;
   background: transparent;
+  white-space: nowrap;
 }
 
 .fab.fa-facebook{
