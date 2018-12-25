@@ -21,8 +21,8 @@
   <div id="wrapper">
     <!-- Header -->
     <header id="header" class="alt">
-      <span class="logo"><a href="#"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
-      <span class="logo"><a href="#"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
+      <span class="logo"><a href="/"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
+      <span class="logo"><a href="/"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
       <p id="aaveg-motto">Channeling Fury
       </p>
     </header>
@@ -30,13 +30,13 @@
     <!-- Nav -->
     <nav id="nav">
       <ul>
-        <li><a href="#" class="active">About</a></li>
-        <li><a href="#">Scoreboard</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Events</a></li>
-        <li><a href="#">Schedule</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="/sb">Scoreboard</a></li>
+        <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/schedule">Schedule</a></li>
         <% if(typeof adminUser!=='undefined') { %>
-        <li><a href="#">
+        <li><a href="/logout">
             Logout :
             <%= adminUser %></a></li>
         <% }%>
@@ -51,13 +51,13 @@
       <nav id="nav-mobile" class="">
         <div id="nav-mob-close" class="fa-times icon"></div>
         <ul>
-          <li><a href="#" class="active">About</a></li>
-          <li><a href="#">Scoreboard</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Schedule</a></li>
+          <li><a href="/about" class="active">About</a></li>
+          <li><a href="/scoreboard">Scoreboard</a></li>
+          <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/schedule">Schedule</a></li>
           <% if(typeof adminUser!=='undefined') { %>
-          <li><a href="#">
+          <li><a href="/logout">
               Logout :
               <%= adminUser %></a></li>
           <% }%>
@@ -82,14 +82,14 @@
           velit, vitae tincidunt odio.
         </p>
         <ul class="actions">
-          <li><a href="#" class="button">About Us</a></li>
+          <li><a href="/webteam" class="button">About Us</a></li>
         </ul>
       </section>
       <section>
         <h2>Reach Us</h2>
         <ul class="icons">
           <li>
-            <a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a>
+            <a href="http://twitter.com/aaveg_nitt" class="icon fa-twitter alt"><span class="label">Twitter</span></a>
           </li>
           <li>
             <a href="https://www.facebook.com/aaveg.nitt" class="icon fa-facebook alt"><span class="label">Facebook</span></a>
@@ -98,15 +98,15 @@
             <a href="https://medium.com/aaveg-blog" class="icon fa-medium alt"><span class="label">Medium</span></a>
           </li>
           <li>
-            <a href="#" class="icon fa-behance alt"><span class="label">GitHub</span></a>
+            <a href="" class="icon fa-behance alt"><span class="label">Behance</span></a>
           </li>
         </ul>
         <ul class="actions">
-          <li><a href="#" class="button">Contact Us</a></li>
+          <li><a href="/contact" class="button">Contact Us</a></li>
         </ul>
       </section>
       <p class="copyright">
-        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="#">Web Team</a> & <a href="#">Design
+        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="/team">Web Team</a> & <a href="/team">Design
           Team</a>.
       </p>
     </footer>

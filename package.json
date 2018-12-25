@@ -19,7 +19,9 @@
       "public/js/main.js",
       "public/js/util.js"
     ],
-    "globals": [ "$" ]
+    "globals": [
+      "$"
+    ]
   },
   "author": "",
   "license": "ISC",
