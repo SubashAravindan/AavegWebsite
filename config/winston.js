@@ -1,7 +1,6 @@
 const winston = require('winston')
 const path = require('path')
 const rootDir = path.parse(__dirname).dir
-console.log(rootDir)
 
 module.exports = winston.createLogger({
   format: winston.format.combine(
