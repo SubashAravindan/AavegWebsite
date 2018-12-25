@@ -1,0 +1,108 @@
+<% layout('../partials/template') -%>
+<% stylesheet('/css/scoreboard.css') -%>
+<% script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js') -%>
+<% script('/js/scoreboard.js') -%>
+<div id="scorecard-container">
+  <h1 id="standing-header">Standings</h1>
+  <div class="row" id="mini-standings">
+    <div class="mini-standings col-4-xlarge col-12-small">
+      <h2 class="mini-standings-header">Culturals</h2>
+      <ul>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+      </ul>
+    </div>
+    <div class="mini-standings col-4-xlarge col-12-small">
+      <h2 class="mini-standings-header">Spectrum</h2>
+      <ul>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+      </ul>
+    </div>
+    <div class="mini-standings col-4-xlarge col-12-small">
+      <h2 class="mini-standings-header">Culturals</h2>
+      <ul>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
+        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row" id="chart-holder">
+    <canvas id="canvas" width="1445" height="721" class="chartjs-render-monitor"></canvas>
+    <div class="row" id="chart-options">
+      <button class="col-3-xlarge" onclick="chartMaker(barChartData,true);">Overall</button>
+      <button class="col-3-xlarge" onclick="chartMaker(barChartDataCultural);">Cultural</button>
+      <button class="col-3-xlarge" onclick="chartMaker(barChartDataSports);">Sports</button>
+      <button class="col-3-xlarge" onclick="chartMaker(barChartDataSpectrum);">Spectrum</button>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Agate -->
+    <div class="scorecard card col-12-small col-6-large col-2-xlarge">
+      <div class="img-wrapper" style="background: #654ea3;background: -webkit-radial-gradient(center, black, purple);background: radial-gradient(center, black, purple);">
+        <img class="card-img-top" src="/images/agate_logo.png" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">9999</h1>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+    <!-- Diamond -->
+    <div class="scorecard card col-12-small col-6-large col-2-xlarge">
+      <div class="img-wrapper" style="background: white;">
+        <img class="card-img-top" src="/images/diamond_logo.png" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">9999</h1>
+        <p class="card-text">Some quick example text to build on the Card title and make up the bulk of the card's
+          content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+    <!-- Coral -->
+    <div class="scorecard card col-12-small col-6-large col-2-xlarge">
+      <div class="img-wrapper" style="background:darkred;">
+        <img class="card-img-top" src="/images/coral_logo.png" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">9999</h1>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <!-- Opal -->
+    <div class="scorecard card col-12-small col-6-large col-2-xlarge">
+      <div class="img-wrapper" style="background: gray;background: -webkit-radial-gradient(center, black, gray);background: radial-gradient(center, black, gray);">
+        <img class="card-img-top" src="/images/opal_logo.png" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">9999</h1>
+        <p class="card-text">Some quick example text to build on the Card title and make up the bulk of the card's
+          content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+    <!-- Jade -->
+    <div class="scorecard card col-12-small col-6-large col-2-xlarge">
+      <div class="img-wrapper" style="background:black;">
+        <img class="card-img-top" src="/images/jade_logo.png" alt="Card image cap">
+      </div>
+      <div class="card-body">
+        <h1 class="card-title">9999</h1>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+
+</div>
