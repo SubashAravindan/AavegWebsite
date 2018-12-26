@@ -63,7 +63,7 @@ $('[data-toggle="popover"]').popover({
   html: true,
   content:
   `<div id = "contactDiv">
-  <p>Chairman : Savita -<a href = "tel:+917339367931"> 7339367931</a></p>
+  <p>Chairperson : Savita -<a href = "tel:+917339367931"> 7339367931</a></p>
   <p>Head, OC : Deeraj <a href="css/source.jpg" id="hi" class="links">-</a> <a href = "tel:+917339367931">9600852718 </a></p>
   <p>Head, OC : Evlin - <a href = "tel:+918129052491">8129052491 </a></p>
   <p>Head, Design : Yagnesh - <a href = "tel:+917358778423">7358778423 </a></p>
@@ -79,5 +79,31 @@ $(document).click(function (e) {
     return false
   } else {
     $('[data-toggle="popover"]').popover('hide')
+  }
+})
+
+$(function () {
+  if ($(window).width() <= 767) {
+    $('#door1').attr('src', 'images/top.png')
+    $('#door2').attr('src', 'images/bottom.png')
+    $('.left-door').css('animation', 'slide-out-top 1s ease-in')
+    $('.left-door').css('animation-delay', '2s')
+    $('.left-door').css('animation-fill-mode', 'forwards')
+    $('.right-door').css('animation', 'slide-out-bottom 1s ease-in')
+    $('.right-door').css('animation-delay', '2s')
+    $('.right-door').css('animation-fill-mode', 'forwards')
+    $('.left-door').css('-webkit-animation', 'slide-out-top 1s ease-in')
+    $('.left-door').css('-webkit-animation-delay', '2s')
+    $('.left-door').css('-webkit-animation-fill-mode', 'forwards')
+    $('.right-door').css('-webkit-animation', 'slide-out-bottom 1s ease-in')
+    $('.right-door').css('-webkit-animation-delay', '2s')
+    $('.right-door').css('-webkit-animation-fill-mode', 'forwards')
+  }
+})
+
+$(function () {
+  if ($(window).width() > 767) {
+    $('#door1').attr('src', 'images/left-door.png')
+    $('#door2').attr('src', 'images/right-door.png')
   }
 })
