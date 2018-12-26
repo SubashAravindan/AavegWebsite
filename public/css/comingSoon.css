@@ -11,6 +11,12 @@ html, body {
   margin-bottom: 10px;
 }
 
+.links, .links:hover{
+  color: inherit;
+  position: relative;
+  z-index: 1001;
+}
+
 .link {
   box-sizing: inherit;
   width: 1px;
@@ -19,6 +25,7 @@ html, body {
 }
 
 .navbar {
+  position: fixed;
   background-color:  #020202;
   -webkit-filter: opacity(50%);
   filter: opacity(50%);
