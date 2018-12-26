@@ -81,3 +81,22 @@ $(document).click(function (e) {
     $('[data-toggle="popover"]').popover('hide')
   }
 })
+
+$(function () {
+  if ($(window).width() <= 767) {
+    $('#door1').attr('src', 'images/top.png')
+    $('#door2').attr('src', 'images/bottom.png')
+    $('.left-door').css('animation', 'slide-out-top 1s ease-in')
+    $('.left-door').css('animation-delay', '2s')
+    $('.left-door').css('animation-fill-mode', 'forwards')
+    $('.right-door').css('animation', 'slide-out-bottom 1s ease-in')
+    $('.right-door').css('animation-delay', '2s')
+    $('.right-door').css('animation-fill-mode', 'forwards')
+    $('.left-door').css('-webkit-animation', 'slide-out-top 1s ease-in')
+    $('.left-door').css('-webkit-animation-delay', '2s')
+    $('.left-door').css('-webkit-animation-fill-mode', 'forwards')
+    $('.right-door').css('-webkit-animation', 'slide-out-bottom 1s ease-in')
+    $('.right-door').css('-webkit-animation-delay', '2s')
+    $('.right-door').css('-webkit-animation-fill-mode', 'forwards')
+  }
+})
