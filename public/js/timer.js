@@ -100,3 +100,10 @@ $(function () {
     $('.right-door').css('-webkit-animation-fill-mode', 'forwards')
   }
 })
+
+$(function () {
+  if ($(window).width() > 767) {
+    $('#door1').attr('src', 'images/left-door.png')
+    $('#door2').attr('src', 'images/right-door.png')
+  }
+})
