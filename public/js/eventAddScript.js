@@ -20,7 +20,6 @@ $(document).ready(function () {
       'startTime': $('#startTime').val(),
       'endTime': $('#endTime').val()
     }
-    console.log(formData)
     $.ajax({
       url: '/admin/events',
       method: 'post',

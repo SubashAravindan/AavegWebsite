@@ -5,6 +5,7 @@ const eventSchema = new mongoose.Schema({
   cluster: 'string',
   cup: 'string',
   points: ['number'],
+  places: 'number',
   venue: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Venue'

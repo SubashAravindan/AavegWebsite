@@ -1,13 +1,21 @@
 const Venues = require('../models/Venue.js')
 
 exports.getVenues = async () => {
-  const venueData = await Venues.find({}).exec()
-  return venueData
+  try {
+    const venueData = await Venues.find({}).exec()
+    return venueData
+  } catch (error) {
+    return error
+  }
 }
 
 exports.getVenueById = async (id) => {
-  const venue = await Venues.findById(id).exec()
-  return venue
+  try {
+    const venue = await Venues.findById(id).exec()
+    return venue
+  } catch (error) {
+    return error
+  }
 }
 
 exports.getVenueData = async (req, res) => {

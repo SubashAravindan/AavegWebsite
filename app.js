@@ -48,6 +48,7 @@ app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
 })
 app.use(hostelRoutes)
+app.use(eventRoutes)
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
