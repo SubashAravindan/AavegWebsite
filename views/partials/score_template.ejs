@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="icon" type="image/png" href="images/aaveg_glyph_black.png">
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/custom_main.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css" />
+  </noscript>
+  <%-stylesheets%>
+</head>
+
+<body class="is-preload">
+  <!-- Wrapper -->
+  <div id="wrapper">
+    <!-- Header -->
+    <header id="header" class="alt">
+      <span class="logo"><a href="/"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
+      <span class="logo"><a href="/"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
+      <p id="aaveg-motto">Channeling Fury
+      </p>
+    </header>
+
+    <!-- Nav -->
+    <nav id="nav">
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/scoreboardb">Scoreboard</a></li>
+        <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/schedule">Schedule</a></li>
+
+      </ul>
+    </nav>
+
+    <div id="mini-nav" class="">
+      <i class="icon fa-bars"></i> MENU
+    </div>
+
+    <div id="mini-nav-wrapper" class="modal hidden">
+      <nav id="nav-mobile" class="">
+        <div id="nav-mob-close" class="fa-times icon"></div>
+        <ul>
+          <li><a href="/about" class="active">About</a></li>
+          <li><a href="/scoreboard">Scoreboard</a></li>
+          <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/schedule">Schedule</a></li>
+          <% if(typeof adminUser!=='undefined') { %>
+          <li><a href="/logout">
+              Logout :
+              <%= adminUser %></a></li>
+          <% }%>
+        </ul>
+      </nav>
+    </div>
+
+
+    <!-- Main -->
+    <div id="main">
+      <%-body%>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <section>
+        <h2>Aaveg Web Team</h2>
+        <p>
+          Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat
+          magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris.
+          Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas
+          velit, vitae tincidunt odio.
+        </p>
+        <ul class="actions">
+          <li><a href="/team" class="button">About Us</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Reach Us</h2>
+        <ul class="icons">
+          <li>
+            <a href="http://twitter.com/aaveg_nitt" class="icon fa-twitter alt"><span class="label">Twitter</span></a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/aaveg.nitt" class="icon fa-facebook alt"><span class="label">Facebook</span></a>
+          </li>
+          <li>
+            <a href="https://medium.com/aaveg-blog" class="icon fa-medium alt"><span class="label">Medium</span></a>
+          </li>
+          <li>
+            <a href="" class="icon fa-behance alt"><span class="label">Behance</span></a>
+          </li>
+        </ul>
+        <ul class="actions">
+          <li><a href="/contact" class="button">Contact Us</a></li>
+        </ul>
+      </section>
+      <p class="copyright">
+        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="/team">Web Team</a> & <a href="/team">Design
+          Team</a>.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.scrollex.min.js"></script>
+  <script src="/js/jquery.scrolly.min.js"></script>
+  <script src="/js/browser.min.js"></script>
+  <script src="/js/breakpoints.min.js"></script>
+  <script src="/js/util.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/custom_main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+  <%-scripts%>
+
+</body>
+
+</html>
