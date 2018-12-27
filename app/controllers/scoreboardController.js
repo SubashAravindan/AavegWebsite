@@ -38,22 +38,15 @@ async function getTotalByHostel () {
   } catch (error) {
     logger.error(error)
   }
-<<<<<<< HEAD
+
 }
 
 var getEventScores = async function getEventScores (eventId) {
   const scoreData = await Score.find({ 'event': eventId }).exec()
-  logger.log('debug', scoreData)
   return scoreData
-=======
->>>>>>> Fix:removed callbacks
+
 }
 
-var getEventScores = async function getEventScores (eventId) {
-  const scoreData = await Score.find({ 'event': eventId }).exec()
-  logger.log('debug', scoreData)
-  return scoreData
-}
 
 module.exports = {
   showScoreboard: showScoreboard,
