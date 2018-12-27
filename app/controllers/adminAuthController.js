@@ -150,7 +150,7 @@ exports.saveEventData = async (req, res) => {
 
 exports.deleteEventData = async (req, res) => {
   try {
-    await Event.findOneAndRemove({ id: req.params.id }).exec()
+    await Event.findByIdAndDelete(req.params.id).exec()
     logger.info(`Deleted event ${req.params.id}`)
   } catch (err) {
     logger.error(err)
