@@ -88,10 +88,22 @@ exports.createEventForm = async (req, res) => {
 exports.editEventForm = async (req, res) => {
   const venueData = await venueController.getVenues()
   const venueNames = venueData.map(venue => venue.name)
+  const EventtoEdit = await Event.findById(req.params.id)
   res.render('auth/admin/eventEdit', {
     data: {
       rollno: req.session.rollnumber,
-      venues: venueNames
+      venues: venueNames,
+      _id: EventtoEdit._id,
+      eventName: EventtoEdit.name,
+      cluster: EventtoEdit.cluster,
+      cup: EventtoEdit.cup,
+      description: EventtoEdit.description,
+      rules: EventtoEdit.rules,
+      date: EventtoEdit.date,
+      startTime: EventtoEdit.startTime,
+      endTime: EventtoEdit.endTime,
+      places: EventtoEdit.places,
+      points: EventtoEdit.points
     },
     title: 'Event Edit'
   })
@@ -118,6 +130,7 @@ exports.saveEventData = async (req, res) => {
     newEvent.date = req.body.date
     newEvent.startTime = req.body.startTime
     newEvent.endTime = req.body.endTime
+    newEvent.places = req.body.places
     for (var i = 0; i < req.body.places; i++) { newEvent.points[i] = req.body.points[i] }
     await Venue.findOne({ name: req.body.venue }).then(doc => {
       newEvent.venue = doc['_id']
