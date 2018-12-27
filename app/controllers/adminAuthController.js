@@ -69,7 +69,6 @@ exports.checkAdminLogin = (req, res, next) => {
   if (req.session && req.session.type === 'admin' && req.user.permissions.length) {
     return next()
   } else {
-<<<<<<< HEAD
     res.redirect(config.APP_BASE_URL + 'login')
   }
 }
