@@ -82,6 +82,8 @@ html, body {
 
 .navbar {
   background-color:  #020202;
+  position: fixed;
+  z-index: 650;
   -webkit-filter: opacity(50%);
   filter: opacity(50%);
   font-family: 'Lato', sans-serif;
@@ -100,7 +102,7 @@ html, body {
   height: 100vh;
   float: left;
   position: relative;
-  z-index: 1000;
+  z-index: 800;
   -webkit-animation: slide-out-left 1s ease-in;
   animation: slide-out-left 1s ease-in;
   -webkit-animation-delay: 2s;
@@ -116,7 +118,7 @@ html, body {
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index: 500;
+  z-index: 700;
   -webkit-animation: slide-out-right 1s ease-in;
   animation: slide-out-right 1s ease-in;
   -webkit-animation-delay: 2s;
