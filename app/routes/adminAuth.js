@@ -13,5 +13,6 @@ router.get('/admin/events', adminAuthController.checkAdminLogin, adminAuthContro
 router.post('/admin/events', adminAuthController.checkAdminLogin, adminAuthController.saveEventData)
 router.delete('/admin/events/:id', adminAuthController.checkAdminLogin, adminAuthController.deleteEventData)
 router.put('/admin/events/:id', adminAuthController.checkAdminLogin, adminAuthController.editEventData)
+router.delete('/admin/events/:id', adminAuthController.checkAdminLogin, adminAuthController.deleteEventData)
 
 module.exports = router
