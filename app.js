@@ -53,9 +53,9 @@ app.get('/', (req, res) => {
   res.render('timer')
 })
 
-app.get('*', (req, res) => {
+/* app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
-})
+}) */
 app.use(adminAuthRoutes)
 app.use(studentAuthRoutes)
 app.use(tshirtRoutes)

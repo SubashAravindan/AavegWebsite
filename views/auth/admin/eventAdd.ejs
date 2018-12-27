@@ -1,0 +1,54 @@
+<% layout('../../partials/template') -%>
+<% script('/js/eventAddScript.js') -%>
+
+<%if(locals.error){ %>
+    <div id="error"><%=error%></div>
+<%}%>
+<label for="eventName">Name of Event: </label><br/>
+<input type="text" id="eventName" name='eventName' required><br/>
+<label for="cluster">Cluster: </label><br/>
+<select name="cluster" id="cluster" required>
+    <option value="">Please select</option>
+    <option value="culturals">Culturals</option>
+    <option value="lits">Lits</option>
+    <option value="dramatics">Dramatics</option>
+    <option value="videography">Videography</option>
+    <option value="sports">Sports</option>
+    <option value="miscellaneous">Miscellaneous</option>
+    <option value="gaming">Gaming</option>
+    <option value="arts">Arts</option>
+</select><br/>
+<label for="cup">Cup: </label><br/>
+<select name="cup" id="cup" required>
+    <option value="">Please select</option>
+    <option value="culturals">Culturals</option>
+    <option value="sports">Sports</option>
+    <option value="spectrum">Spectrum</option>
+</select><br/>
+<div id="wrapdiv">
+    <button id="addPoints"> Add points for more Winners </button><br/>
+    <label for="points1">Points for Winner 1: </label><br/>
+    <input type="number" id = 'points1' name='points1'><br/>
+    <label for="points2">Points for Winner 2: </label><br/>
+    <input type="number" id = 'points2' name='points2'><br/>
+    <label for="points3">Points for Winner 3: </label><br/>
+    <input type="number" id = 'points3' name='points3'><br/>
+</div>
+<label for="venue">Venue: </label><br/>
+<select name="venue" id="venue" required >
+    <option value="">Please Select </option>
+    <%data.venues.forEach(venue=>{%>
+    <option value="<%=venue%>"><%=venue%></option>
+<% })%>
+</select><br/>
+<label for="description">Description: </label><br/>
+<input type="text" id="description" name='description'><br/>
+<label for="rules">Rules: </label><br/>
+<input type="text" id="rules" name='rules'><br/>
+<label for="date">Date: </label><br/>
+<input type="date" id="date" name='date'><br/>
+<label for="startTime">Starting Time: </label><br/>
+<input type="time" id='startTime' name='startTime'><br/>
+<label for="endTime">Ending Time: </label><br/>
+<input type="time" id='endTime' name='endTime'><br/>
+<button id="submitCreate"> Submit </button>
