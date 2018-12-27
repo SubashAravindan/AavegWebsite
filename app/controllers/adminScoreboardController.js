@@ -18,20 +18,15 @@ exports.createScore = async (req, res) => {
   let noOfPositions = []
   let noOfPoints = []
   let keys = Object.keys(req.body)
-  logger.log('debug', 'keys' + keys)
   keys.forEach(function (item) {
     if (item.indexOf('position') !== -1) {
       noOfPositions.push(req.body[item])
-      logger.log('debug', req.body[item])
     }
     if (item.indexOf('points') !== -1) { noOfPoints.push(req.body[item]) }
   })
-  logger.log('debug', 'noOfPositions' + noOfPositions)
-  logger.log('debug', 'noofPoints' + noOfPoints)
 
   for (let j = 0; j < noOfPositions.length; j++) {
     let hostelList = noOfPositions[j]
-    logger.log('debug', hostelList)
     let points = noOfPoints[j]
 
     for (let i = 0; i < hostelList.length; i++) {
@@ -41,7 +36,6 @@ exports.createScore = async (req, res) => {
         position: (j + 1),
         points: points
       })
-      logger.log('debug', 'here' + hostelList[i])
       try {
         await Pos.save()
         logger.info(`Scores added by ${req.session.rollnumber}`)
