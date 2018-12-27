@@ -23,6 +23,7 @@ exports.logout = (req, res) => {
   req.session.save()
   res.redirect(config.APP_BASE_URL)
 }
+
 exports.logOutFromStudent = (req, res, next) => {
   if (req.session.type === 'student') {
     req.session.rollnumber = null

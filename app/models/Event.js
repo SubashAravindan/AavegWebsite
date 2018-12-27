@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const eventSchema = new mongoose.Schema({
   name: 'string',
+  cluster: 'string',
   cup: 'string',
   points: ['number'],
   venue: {
@@ -10,9 +11,9 @@ const eventSchema = new mongoose.Schema({
   },
   description: 'string',
   rules: 'string',
+  date: 'string',
   startTime: 'string',
-  endTime: 'string',
-  date: 'string'
+  endTime: 'string'
 })
 
 module.exports = mongoose.model('Event', eventSchema)
