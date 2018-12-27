@@ -49,6 +49,12 @@ var getEventScores = async function getEventScores (eventId) {
 >>>>>>> Fix:removed callbacks
 }
 
+var getEventScores = async function getEventScores (eventId) {
+  const scoreData = await Score.find({ 'event': eventId }).exec()
+  logger.log('debug', scoreData)
+  return scoreData
+}
+
 module.exports = {
   showScoreboard: showScoreboard,
   getEventScores: getEventScores
