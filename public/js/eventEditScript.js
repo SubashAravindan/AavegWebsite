@@ -21,7 +21,6 @@ $(document).ready(function () {
       'startTime': $('#startTime').val(),
       'endTime': $('#endTime').val()
     }
-    console.log(formData)
     $.ajax({
       url: '/admin/events/' + url.split('/')[url.split('/').length - 1],
       method: 'put',
