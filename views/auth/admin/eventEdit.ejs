@@ -1,4 +1,5 @@
 <% layout('../../partials/template') -%>
+<% stylesheet('/css/eventDisplay.css') -%>
 <% script('/js/eventEditScript.js') -%>
 
 <%if(locals.error){ %>
@@ -39,11 +40,11 @@
 <select name="venue" id="venue" required >
     <option value="">Please Select </option>
     <%data.venues.forEach(venue=>{%>
-    <option value="<%=venue%>"><%=venue%></option>
+    <option value="<%=venue._id%>"><%=venue.name%></option>
 <% })%>
 </select><br/>
 <label for="description">Description: </label>
-<input type="text" id="description" value="<%=data.description%>" name='description'><br/>
+<textarea id="description" value="<%=data.description%>" name='description'></textarea><br/>
 <label for="rules">Rules: </label>
 <input type="text" id="rules" value="<%=data.rules%>" name='rules'><br/>
 <label for="date">Date: </label>
@@ -51,5 +52,5 @@
 <label for="startTime">Starting Time: </label>
 <input type="time" id='startTime' value="<%=data.startTime%>" name='startTime'><br/>
 <label for="endTime">Ending Time: </label>
-<input type="time" id='endTime' value="<%=data.endTime%>" name='endTime'><br/>
+<input type="time" id='endTime' value="<%=data.endTime%>" name='endTime'><br/><br/>
 <button id="submitCreate"> Submit </button>
