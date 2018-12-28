@@ -15,6 +15,7 @@ const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
+const eventRoutes = require('./app/routes/events.js')
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -60,6 +61,7 @@ app.use(adminAuthRoutes)
 app.use(studentAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
+app.use(eventRoutes)
 
 app.get('/sample', (req, res) => {
   res.render('sample', { title: 'aavegsample' })
