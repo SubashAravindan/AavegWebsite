@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const logger = require('../../config/winston.js')
 const Events = require('../models/Event.js')
 const Hostels = require('../models/Hostel.js')
@@ -28,17 +29,16 @@ exports.createScore = async (req, res) => {
   for (let j = 0; j < noOfPositions.length; j++) {
     let hostelList = noOfPositions[j]
     let points = noOfPoints[j]
-
     for (let i = 0; i < hostelList.length; i++) {
-      let Pos = new Score({
-        hostel: hostelList[i],
-        event: req.body.eventId,
+      let pos = new Score({
+        hostel: mongoose.Types.ObjectId(hostelList[i]),
+        event: mongoose.Types.ObjectId(req.body.eventId),
         position: (j + 1),
         points: points
       })
       try {
-        await Pos.save()
-        logger.info(`Scores added by ${req.session.rollnumber}`)
+        let savedPos=await pos.save()
+      logger.info(`Scores of ${savedPos._id} added by ${req.session.rollnumber}`)
       } catch (error) {
         logger.error(error)
         return res.status(500).send(error)

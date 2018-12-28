@@ -1,10 +1,7 @@
-$('document').ready(function(){
-  $('.selectpicker').selectpicker();
-
-});
+$('document').ready(function () {
+  $('.selectpicker').selectpicker()
+})
 window.onload = function () {
-
-
   $('#eventId').change(function () {
     let eventId = $(this).val()
     console.log(eventId)
@@ -57,7 +54,7 @@ window.onload = function () {
             let br2 = document.getElementsByTagName('br')[-4]
             br1.removeChild(br1)
             br2.removeChild(br2)
-            ct=ct-1
+            ct = ct - 1
           })
           div.appendChild(deleteButton)
           wrapper.appendChild(br1)
@@ -79,9 +76,9 @@ window.onload = function () {
           hostelDiv.appendChild(hostelLabel)
 
           let selectHostel = document.createElement('select')
-          selectHostel.setAttribute('multiple','multiple');
-          selectHostel.classList.add('selectpicker');
-          selectHostel.setAttribute('data-live-search','true');
+          selectHostel.setAttribute('multiple', 'multiple')
+          selectHostel.classList.add('selectpicker')
+          selectHostel.setAttribute('data-live-search', 'true')
 
           for (let i = 0; i < result.length; i++) {
             let hostel = document.createElement('option')
@@ -111,8 +108,8 @@ window.onload = function () {
           container.appendChild(pointsDiv)
           div.appendChild(container)
           wrapper.appendChild(div)
-          $(document).ready(function(){
-            $('.selectpicker').selectpicker();
+          $(document).ready(function () {
+            $('.selectpicker').selectpicker()
           })
         }
       }
