@@ -1,14 +1,59 @@
 const logger = require('../../config/winston.js')
 const Event = require('../models/Event.js')
+const Cup = require('../models/Cup.js')
+const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
+const { check, validationResult } = require('express-validator/check')
+
+exports.validate = [
+  check('name')
+    .exists().withMessage('Event name is missing'),
+  check('cluster')
+    .exists().withMessage('Cluster is missing')
+    .isIn(['Culturals', 'Lits', 'Dramatics', 'Videography', 'Sports', 'Miscellaneous', 'Gaming', 'Arts']).withMessage('Select an appropriate cluster'),
+  check('cup')
+    .exists().withMessage('Cup is missing')
+    .isIn(['Culturals', 'Sports', 'Spectrum']).withMessage('Select appropriate cup'),
+  check('points')
+    .custom(async (points) => {
+      if (points.length < 3) { throw new Error('Enter points to be allotted to at least 3 winners') } else { return true }
+    }),
+  check('venue')
+    .exists().withMessage('Venue is missing')
+    .custom(async (venue) => {
+      const venueData = await venueController.getVenues()
+      const venueIDs = venueData.map(v => v._id.toString())
+      if (!venueIDs.includes(venue)) {
+        throw new Error('Venue data incorrect')
+      } else {
+        return true
+      }
+    }),
+  check('description')
+    .exists().withMessage('Description is missing'),
+  check('rules')
+    .exists().withMessage('Rules is missing'),
+  check('date')
+    .exists().withMessage('Date is missing'),
+  check('startTime')
+    .exists().withMessage('Start time is missing'),
+  check('endTime')
+    .exists().withMessage('End time is missing')
+]
 
 exports.createEventForm = async (req, res) => {
   try {
     const venueData = await venueController.getVenues()
+    const clusterData = await Cluster.find({}).exec()
+    const clusterNames = clusterData.map(cluster => cluster.name)
+    const cupData = await Cup.find({}).exec()
+    const cupNames = cupData.map(cup => cup.name)
     res.render('auth/admin/eventAdd', {
       data: {
         rollno: req.session.rollnumber,
-        venues: venueData
+        venues: venueData,
+        clusters: clusterNames,
+        cups: cupNames
       },
       title: 'Event Create'
     })
@@ -21,13 +66,20 @@ exports.createEventForm = async (req, res) => {
 exports.editEventForm = async (req, res) => {
   try {
     const venueData = await venueController.getVenues()
+    const clusterData = await Cluster.find({}).exec()
+    const clusterNames = clusterData.map(cluster => cluster.name)
+    const cupData = await Cup.find({}).exec()
+    const cupNames = cupData.map(cup => cup.name)
     const EventtoEdit = await Event.findById(req.params.id)
     res.render('auth/admin/eventEdit', {
       data: {
         rollno: req.session.rollnumber,
         venues: venueData,
+        venue: EventtoEdit.venue,
         _id: EventtoEdit._id,
         eventName: EventtoEdit.name,
+        clusters: clusterNames,
+        cups: cupNames,
         cluster: EventtoEdit.cluster,
         cup: EventtoEdit.cup,
         description: EventtoEdit.description,
@@ -47,26 +99,46 @@ exports.editEventForm = async (req, res) => {
 }
 
 exports.saveEventData = async (req, res) => {
-  try {
-    let newEvent = new Event()
-    newEvent.name = req.body.name
-    newEvent.cluster = req.body.cluster
-    newEvent.cup = req.body.cup
-    newEvent.description = req.body.description
-    newEvent.rules = req.body.rules
-    newEvent.date = req.body.date
-    newEvent.startTime = req.body.startTime
-    newEvent.endTime = req.body.endTime
-    for (let i = 0; i < req.body.places; i++) { newEvent.points[i] = req.body.points[i] }
-    newEvent.venue = req.body.venue
-    newEvent.places = req.body.places
-    newEvent.save().then(() => {
-      logger.info(`Event ${req.body.name} has been created by ${req.session.user}`)
-      res.redirect('admin/events')
+  const errors = validationResult(req).array()
+  if (errors.length) {
+    const errorMessages = errors.map(error => error.msg)
+    logger.error({ user: req.session.user, errors: errorMessages })
+    const venueData = await venueController.getVenues()
+    const clusterData = await Cluster.find({}).exec()
+    const clusterNames = clusterData.map(cluster => cluster.name)
+    const cupData = await Cup.find({}).exec()
+    const cupNames = cupData.map(cup => cup.name)
+    let data = req.body
+    data.venues = venueData
+    data.clusters = clusterNames
+    data.cups = cupNames
+    res.render('auth/admin/eventAdd', {
+      data: data,
+      error: errorMessages,
+      title: 'Error page'
     })
-  } catch (err) {
-    logger.error(err)
-    res.status(500).send(err)
+  } else {
+    try {
+      let newEvent = new Event()
+      newEvent.name = req.body.name
+      newEvent.cluster = req.body.cluster
+      newEvent.cup = req.body.cup
+      newEvent.description = req.body.description
+      newEvent.rules = req.body.rules
+      newEvent.date = req.body.date
+      newEvent.startTime = req.body.startTime
+      newEvent.endTime = req.body.endTime
+      for (let i = 0; i < req.body.places; i++) { newEvent.points[i] = req.body.points[i] }
+      newEvent.venue = req.body.venue
+      newEvent.places = req.body.places
+      newEvent.save().then(() => {
+        logger.info(`Event ${req.body.name} has been created by ${req.session.user}`)
+        res.redirect('admin/events')
+      })
+    } catch (err) {
+      logger.error(err)
+      res.status(500).send(err)
+    }
   }
 }
 
@@ -81,25 +153,45 @@ exports.deleteEventData = async (req, res) => {
 }
 
 exports.editEventData = async (req, res) => {
-  try {
-    const EventtoEdit = await Event.findById(req.params.id)
-    EventtoEdit.name = req.body.name
-    EventtoEdit.cluster = req.body.cluster
-    EventtoEdit.cup = req.body.cup
-    EventtoEdit.description = req.body.description
-    EventtoEdit.rules = req.body.rules
-    EventtoEdit.date = req.body.date
-    EventtoEdit.startTime = req.body.startTime
-    EventtoEdit.endTime = req.body.endTime
-    EventtoEdit.places = req.body.places
-    for (let i = 0; i < req.body.places; i++) { EventtoEdit.points[i] = req.body.points[i] }
-    EventtoEdit.venue = req.body.venue
-    EventtoEdit.save().then(() => {
-      logger.info(`Event ${req.params.id} edited by ${req.session.user}`)
-      res.redirect('admin/events')
+  const errors = validationResult(req).array()
+  if (errors.length) {
+    const errorMessages = errors.map(error => error.msg)
+    logger.error({ user: req.session.user, errors: errorMessages })
+    const venueData = await venueController.getVenues()
+    const clusterData = await Cluster.find({}).exec()
+    const clusterNames = clusterData.map(cluster => cluster.name)
+    const cupData = await Cup.find({}).exec()
+    const cupNames = cupData.map(cup => cup.name)
+    let data = req.body
+    data.venues = venueData
+    data.clusters = clusterNames
+    data.cups = cupNames
+    res.render('auth/admin/eventEdit', {
+      data: data,
+      error: errorMessages,
+      title: 'Error page'
     })
-  } catch (err) {
-    logger.error(err)
-    res.status(500).send(err)
+  } else {
+    try {
+      const EventtoEdit = await Event.findById(req.params.id)
+      EventtoEdit.name = req.body.name
+      EventtoEdit.cluster = req.body.cluster
+      EventtoEdit.cup = req.body.cup
+      EventtoEdit.description = req.body.description
+      EventtoEdit.rules = req.body.rules
+      EventtoEdit.date = req.body.date
+      EventtoEdit.startTime = req.body.startTime
+      EventtoEdit.endTime = req.body.endTime
+      EventtoEdit.places = req.body.places
+      for (let i = 0; i < req.body.places; i++) { EventtoEdit.points[i] = req.body.points[i] }
+      EventtoEdit.venue = req.body.venue
+      EventtoEdit.save().then(() => {
+        logger.info(`Event ${req.params.id} edited by ${req.session.user}`)
+        res.redirect('admin/events')
+      })
+    } catch (err) {
+      logger.error(err)
+      res.status(500).send(err)
+    }
   }
 }

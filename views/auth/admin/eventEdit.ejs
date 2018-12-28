@@ -11,21 +11,24 @@
 <label for="cluster">Cluster: </label>
 <select name="cluster" id="cluster" value="<%=data.cluster%>" required>
     <option value="">Please select</option>
-    <option value="culturals">Culturals</option>
-    <option value="lits">Lits</option>
-    <option value="dramatics">Dramatics</option>
-    <option value="videography">Videography</option>
-    <option value="sports">Sports</option>
-    <option value="miscellaneous">Miscellaneous</option>
-    <option value="gaming">Gaming</option>
-    <option value="arts">Arts</option>
+    <%data.clusters.forEach(cluster=>{%>
+    <% if(data.cluster == cluster){ %>
+        <option value="<%=cluster%>" selected><%=cluster%></option>
+    <% } else{ %>  
+        <option value="<%=cluster%>"><%=cluster%></option>
+    <% } %>
+<% })%>
 </select><br/>
 <label for="cup">Cup: </label>
 <select name="cup" id="cup" value="<%=data.cup%>" required>
     <option value="">Please select</option>
-    <option value="culturals">Culturals</option>
-    <option value="sports">Sports</option>
-    <option value="spectrum">Spectrum</option>
+    <%data.cups.forEach(cup=>{%>
+    <% if(data.cup == cup){ %>
+        <option value="<%=cup%>" selected><%=cup%></option>
+    <% } else{ %>  
+        <option value="<%=cup%>"><%=cup%></option>
+    <% } %>
+<% })%>
 </select><br/>
 <div id="wrapdiv">
     <button id="addPoints"> Add points for more Winners </button><br/><br/>
@@ -39,12 +42,16 @@
 <label for="venue">Venue: </label>
 <select name="venue" id="venue" required >
     <option value="">Please Select </option>
-    <%data.venues.forEach(venue=>{%>
-    <option value="<%=venue._id%>"><%=venue.name%></option>
+    <%data.venues.forEach(v=>{%>
+    <% if(data.venue == v._id.toString()){ %>
+        <option value="<%=v._id%>" selected><%=v.name%></option>
+    <% } else{ %>  
+        <option value="<%=v._id%>"><%=v.name%></option>
+    <% } %>
 <% })%>
 </select><br/>
 <label for="description">Description: </label>
-<textarea id="description" value="<%=data.description%>" name='description'></textarea><br/>
+<textarea id="description" name='description'><%=data.description%></textarea><br/>
 <label for="rules">Rules: </label>
 <input type="text" id="rules" value="<%=data.rules%>" name='rules'><br/>
 <label for="date">Date: </label>
