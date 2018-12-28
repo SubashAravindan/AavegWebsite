@@ -14,8 +14,6 @@ exports.validate = [
     .isIn(['Culturals', 'Sports', 'Spectrum']).withMessage('Select appropriate cup'),
   check('points')
     .custom(async (points) => {
-      logger.info(`${typeof points[0]}`)
-      logger.info(`${typeof 0}`)
       if (Number(points[0]) === 0 || Number(points[1]) === 0 || Number(points[2]) === 0) { throw new Error('Enter points to be allotted to at least 3 winners') } else { return true }
     }),
   check('venue')
