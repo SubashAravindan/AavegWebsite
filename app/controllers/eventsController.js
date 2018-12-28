@@ -1,16 +1,14 @@
 const logger = require('../../config/winston.js')
 const Event = require('../models/Event.js')
-const Venue = require('../models/Venue.js')
 const venueController = require('./venueController.js')
 
 exports.createEventForm = async (req, res) => {
   try {
     const venueData = await venueController.getVenues()
-    const venueNames = venueData.map(venue => venue.name)
     res.render('auth/admin/eventAdd', {
       data: {
         rollno: req.session.rollnumber,
-        venues: venueNames
+        venues: venueData
       },
       title: 'Event Create'
     })
@@ -23,12 +21,11 @@ exports.createEventForm = async (req, res) => {
 exports.editEventForm = async (req, res) => {
   try {
     const venueData = await venueController.getVenues()
-    const venueNames = venueData.map(venue => venue.name)
     const EventtoEdit = await Event.findById(req.params.id)
     res.render('auth/admin/eventEdit', {
       data: {
         rollno: req.session.rollnumber,
-        venues: venueNames,
+        venues: venueData,
         _id: EventtoEdit._id,
         eventName: EventtoEdit.name,
         cluster: EventtoEdit.cluster,
@@ -61,9 +58,7 @@ exports.saveEventData = async (req, res) => {
     newEvent.startTime = req.body.startTime
     newEvent.endTime = req.body.endTime
     for (let i = 0; i < req.body.places; i++) { newEvent.points[i] = req.body.points[i] }
-    await Venue.findOne({ name: req.body.venue }).then(doc => {
-      newEvent.venue = doc['_id']
-    })
+    newEvent.venue = req.body.venue
     newEvent.places = req.body.places
     newEvent.save().then(() => {
       logger.info(`Event ${req.body.name} has been created by ${req.session.user}`)
@@ -98,9 +93,7 @@ exports.editEventData = async (req, res) => {
     EventtoEdit.endTime = req.body.endTime
     EventtoEdit.places = req.body.places
     for (let i = 0; i < req.body.places; i++) { EventtoEdit.points[i] = req.body.points[i] }
-    await Venue.findOne({ name: req.body.venue }).then(doc => {
-      EventtoEdit.venue = doc['_id']
-    })
+    EventtoEdit.venue = req.body.venue
     EventtoEdit.save().then(() => {
       logger.info(`Event ${req.params.id} edited by ${req.session.user}`)
       res.redirect('admin/events')
