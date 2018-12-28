@@ -4,39 +4,49 @@ const Venue = require('../models/Venue.js')
 const venueController = require('./venueController.js')
 
 exports.createEventForm = async (req, res) => {
-  const venueData = await venueController.getVenues()
-  const venueNames = venueData.map(venue => venue.name)
-  res.render('auth/admin/eventAdd', {
-    data: {
-      rollno: req.session.rollnumber,
-      venues: venueNames
-    },
-    title: 'Event Create'
-  })
+  try {
+    const venueData = await venueController.getVenues()
+    const venueNames = venueData.map(venue => venue.name)
+    res.render('auth/admin/eventAdd', {
+      data: {
+        rollno: req.session.rollnumber,
+        venues: venueNames
+      },
+      title: 'Event Create'
+    })
+  } catch (err) {
+    logger.error(err)
+    res.status(500).send(err)
+  }
 }
 
 exports.editEventForm = async (req, res) => {
-  const venueData = await venueController.getVenues()
-  const venueNames = venueData.map(venue => venue.name)
-  const EventtoEdit = await Event.findById(req.params.id)
-  res.render('auth/admin/eventEdit', {
-    data: {
-      rollno: req.session.rollnumber,
-      venues: venueNames,
-      _id: EventtoEdit._id,
-      eventName: EventtoEdit.name,
-      cluster: EventtoEdit.cluster,
-      cup: EventtoEdit.cup,
-      description: EventtoEdit.description,
-      rules: EventtoEdit.rules,
-      date: EventtoEdit.date,
-      startTime: EventtoEdit.startTime,
-      endTime: EventtoEdit.endTime,
-      places: EventtoEdit.places,
-      points: EventtoEdit.points
-    },
-    title: 'Event Edit'
-  })
+  try {
+    const venueData = await venueController.getVenues()
+    const venueNames = venueData.map(venue => venue.name)
+    const EventtoEdit = await Event.findById(req.params.id)
+    res.render('auth/admin/eventEdit', {
+      data: {
+        rollno: req.session.rollnumber,
+        venues: venueNames,
+        _id: EventtoEdit._id,
+        eventName: EventtoEdit.name,
+        cluster: EventtoEdit.cluster,
+        cup: EventtoEdit.cup,
+        description: EventtoEdit.description,
+        rules: EventtoEdit.rules,
+        date: EventtoEdit.date,
+        startTime: EventtoEdit.startTime,
+        endTime: EventtoEdit.endTime,
+        places: EventtoEdit.places,
+        points: EventtoEdit.points
+      },
+      title: 'Event Edit'
+    })
+  } catch (err) {
+    logger.error(err)
+    res.status(500).send(err)
+  }
 }
 
 exports.saveEventData = async (req, res) => {
@@ -56,7 +66,7 @@ exports.saveEventData = async (req, res) => {
     })
     newEvent.places = req.body.places
     newEvent.save().then(() => {
-      logger.info(`Event ${req.body.name} has been created by ${req.session.rollno}`)
+      logger.info(`Event ${req.body.name} has been created by ${req.session.user}`)
       res.redirect('admin/events')
     })
   } catch (err) {
@@ -68,7 +78,7 @@ exports.saveEventData = async (req, res) => {
 exports.deleteEventData = async (req, res) => {
   try {
     await Event.findByIdAndDelete(req.params.id).exec()
-    logger.info(`Event ${req.params.id} deleted by ${req.session.rollno}`)
+    logger.info(`Event ${req.params.id} deleted by ${req.session.user}`)
   } catch (err) {
     logger.error(err)
     res.status(500).send(err)
@@ -92,7 +102,7 @@ exports.editEventData = async (req, res) => {
       EventtoEdit.venue = doc['_id']
     })
     EventtoEdit.save().then(() => {
-      logger.info(`Event ${req.params.id} edited by ${req.session.rollno}`)
+      logger.info(`Event ${req.params.id} edited by ${req.session.user}`)
       res.redirect('admin/events')
     })
   } catch (err) {
