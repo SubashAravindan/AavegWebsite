@@ -4,9 +4,10 @@
 <%if(locals.error){ %>
     <div id="error"><%=error%></div>
 <%}%>
-<label for="eventName">Name of Event: </label><br/>
+<br/><br/><br/>
+<label for="eventName">Name of Event: </label>
 <input type="text" id="eventName" name='eventName' required><br/>
-<label for="cluster">Cluster: </label><br/>
+<label for="cluster">Cluster: </label>
 <select name="cluster" id="cluster" required>
     <option value="">Please select</option>
     <option value="culturals">Culturals</option>
@@ -18,7 +19,7 @@
     <option value="gaming">Gaming</option>
     <option value="arts">Arts</option>
 </select><br/>
-<label for="cup">Cup: </label><br/>
+<label for="cup">Cup: </label>
 <select name="cup" id="cup" required>
     <option value="">Please select</option>
     <option value="culturals">Culturals</option>
@@ -26,29 +27,29 @@
     <option value="spectrum">Spectrum</option>
 </select><br/>
 <div id="wrapdiv">
-    <button id="addPoints"> Add points for more Winners </button><br/>
-    <label for="points1">Points for Winner 1: </label><br/>
+    <button id="addPoints"> Add points for more Winners </button><br/><br/>
+    <label for="points1">Points for Winner 1: </label>
     <input type="number" id = 'points1' name='points1'><br/>
-    <label for="points2">Points for Winner 2: </label><br/>
+    <label for="points2">Points for Winner 2: </label>
     <input type="number" id = 'points2' name='points2'><br/>
-    <label for="points3">Points for Winner 3: </label><br/>
+    <label for="points3">Points for Winner 3: </label>
     <input type="number" id = 'points3' name='points3'><br/>
-</div>
-<label for="venue">Venue: </label><br/>
+</div><br/>
+<label for="venue">Venue: </label>
 <select name="venue" id="venue" required >
     <option value="">Please Select </option>
     <%data.venues.forEach(venue=>{%>
     <option value="<%=venue%>"><%=venue%></option>
 <% })%>
 </select><br/>
-<label for="description">Description: </label><br/>
+<label for="description">Description: </label>
 <input type="text" id="description" name='description'><br/>
-<label for="rules">Rules: </label><br/>
+<label for="rules">Rules: </label>
 <input type="text" id="rules" name='rules'><br/>
-<label for="date">Date: </label><br/>
+<label for="date">Date: </label>
 <input type="date" id="date" name='date'><br/>
-<label for="startTime">Starting Time: </label><br/>
+<label for="startTime">Starting Time: </label>
 <input type="time" id='startTime' name='startTime'><br/>
-<label for="endTime">Ending Time: </label><br/>
-<input type="time" id='endTime' name='endTime'><br/>
+<label for="endTime">Ending Time: </label>
+<input type="time" id='endTime' name='endTime'><br/><br/>
 <button id="submitCreate"> Submit </button>
