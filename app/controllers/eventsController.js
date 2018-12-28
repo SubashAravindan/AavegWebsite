@@ -7,16 +7,16 @@ const { check, validationResult } = require('express-validator/check')
 
 exports.validate = [
   check('name')
-    .exists().withMessage('Event name is missing'),
+    .not().isEmpty().withMessage('Event name is missing'),
   check('cluster')
-    .exists().withMessage('Cluster is missing')
     .isIn(['Culturals', 'Lits', 'Dramatics', 'Videography', 'Sports', 'Miscellaneous', 'Gaming', 'Arts']).withMessage('Select an appropriate cluster'),
   check('cup')
-    .exists().withMessage('Cup is missing')
     .isIn(['Culturals', 'Sports', 'Spectrum']).withMessage('Select appropriate cup'),
   check('points')
     .custom(async (points) => {
-      if (points.length < 3) { throw new Error('Enter points to be allotted to at least 3 winners') } else { return true }
+      logger.info(`${typeof points[0]}`)
+      logger.info(`${typeof 0}`)
+      if (Number(points[0]) === 0 || Number(points[1]) === 0 || Number(points[2]) === 0) { throw new Error('Enter points to be allotted to at least 3 winners') } else { return true }
     }),
   check('venue')
     .exists().withMessage('Venue is missing')
@@ -30,15 +30,15 @@ exports.validate = [
       }
     }),
   check('description')
-    .exists().withMessage('Description is missing'),
+    .not().isEmpty().withMessage('Description is missing'),
   check('rules')
-    .exists().withMessage('Rules is missing'),
+    .not().isEmpty().withMessage('Rules is missing'),
   check('date')
-    .exists().withMessage('Date is missing'),
+    .not().isEmpty().withMessage('Date is missing'),
   check('startTime')
-    .exists().withMessage('Start time is missing'),
+    .not().isEmpty().withMessage('Start time is missing'),
   check('endTime')
-    .exists().withMessage('End time is missing')
+    .not().isEmpty().withMessage('End time is missing')
 ]
 
 exports.createEventForm = async (req, res) => {
