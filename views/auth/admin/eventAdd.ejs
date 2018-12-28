@@ -11,21 +11,16 @@
 <label for="cluster">Cluster: </label>
 <select name="cluster" id="cluster" required>
     <option value="">Please select</option>
-    <option value="culturals">Culturals</option>
-    <option value="lits">Lits</option>
-    <option value="dramatics">Dramatics</option>
-    <option value="videography">Videography</option>
-    <option value="sports">Sports</option>
-    <option value="miscellaneous">Miscellaneous</option>
-    <option value="gaming">Gaming</option>
-    <option value="arts">Arts</option>
+    <%data.clusters.forEach(cluster=>{%>
+    <option value="<%=cluster%>"><%=cluster%></option>
+<% })%>
 </select><br/>
 <label for="cup">Cup: </label>
 <select name="cup" id="cup" required>
     <option value="">Please select</option>
-    <option value="culturals">Culturals</option>
-    <option value="sports">Sports</option>
-    <option value="spectrum">Spectrum</option>
+    <%data.cups.forEach(cup=>{%>
+    <option value="<%=cup%>"><%=cup%></option>
+<% })%>
 </select><br/>
 <div id="wrapdiv">
     <button id="addPoints"> Add points for more Winners </button><br/><br/>
@@ -39,8 +34,8 @@
 <label for="venue">Venue: </label>
 <select name="venue" id="venue" required >
     <option value="">Please Select </option>
-    <%data.venues.forEach(venue=>{%>
-    <option value="<%=venue._id%>"><%=venue.name%></option>
+    <%data.venues.forEach(v=>{%>
+    <option value="<%=v._id%>"><%=v.name%></option>
 <% })%>
 </select><br/>
 <label for="description">Description: </label>
