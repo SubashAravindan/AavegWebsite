@@ -38,15 +38,12 @@ async function getTotalByHostel () {
   } catch (error) {
     logger.error(error)
   }
-
 }
 
 var getEventScores = async function getEventScores (eventId) {
   const scoreData = await Score.find({ 'event': eventId }).exec()
   return scoreData
-
 }
-
 
 module.exports = {
   showScoreboard: showScoreboard,
