@@ -5,13 +5,57 @@ const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
 const { check, validationResult } = require('express-validator/check')
 
+async function importantQueries () {
+  const venueData = await venueController.getVenues()
+  const clusterData = await Cluster.find({}).exec()
+  const clusterNames = clusterData.map(cluster => cluster.name)
+  const cupData = await Cup.find({}).exec()
+  const cupNames = cupData.map(cup => cup.name)
+  const queryResult = {
+    venueData: venueData,
+    clusterNames: clusterNames,
+    cupNames: cupNames
+  }
+  return queryResult
+}
+
+async function errorHandling (req, errors) {
+  const errorMessages = errors.map(error => error.msg)
+  logger.error({ user: req.session.passport.user, errors: errorMessages })
+  const { venueData, clusterNames, cupNames } = await importantQueries()
+  let data = req.body
+  data.venues = venueData
+  data.clusters = clusterNames
+  data.cups = cupNames
+  const result = {
+    data: data,
+    error: errorMessages,
+    title: 'Error page'
+  }
+  return result
+}
+
 exports.validate = [
   check('name')
     .trim().not().isEmpty().withMessage('Event name is missing'),
   check('cluster')
-    .isIn(['Culturals', 'Lits', 'Dramatics', 'Videography', 'Sports', 'Miscellaneous', 'Gaming', 'Arts']).withMessage('Select an appropriate cluster'),
+    .custom(async (cluster) => {
+      const clusterNames = (await importantQueries()).clusterNames
+      if (!clusterNames.includes(cluster)) {
+        throw new Error('Select appropriate cluster')
+      } else {
+        return true
+      }
+    }),
   check('cup')
-    .isIn(['Culturals', 'Sports', 'Spectrum']).withMessage('Select appropriate cup'),
+    .custom(async (cup) => {
+      const cupNames = (await importantQueries()).cupNames
+      if (!cupNames.includes(cup)) {
+        throw new Error('Select appropriate cup')
+      } else {
+        return true
+      }
+    }),
   check('points')
     .custom(async (points) => {
       if (Number(points[0]) === 0 || Number(points[1]) === 0 || Number(points[2]) === 0) { throw new Error('Enter points to be allotted to at least 3 winners') } else { return true }
@@ -41,11 +85,7 @@ exports.validate = [
 
 exports.createEventForm = async (req, res) => {
   try {
-    const venueData = await venueController.getVenues()
-    const clusterData = await Cluster.find({}).exec()
-    const clusterNames = clusterData.map(cluster => cluster.name)
-    const cupData = await Cup.find({}).exec()
-    const cupNames = cupData.map(cup => cup.name)
+    const { venueData, clusterNames, cupNames } = await importantQueries()
     res.render('auth/admin/eventAdd', {
       data: {
         rollno: req.session.rollnumber,
@@ -63,11 +103,7 @@ exports.createEventForm = async (req, res) => {
 
 exports.editEventForm = async (req, res) => {
   try {
-    const venueData = await venueController.getVenues()
-    const clusterData = await Cluster.find({}).exec()
-    const clusterNames = clusterData.map(cluster => cluster.name)
-    const cupData = await Cup.find({}).exec()
-    const cupNames = cupData.map(cup => cup.name)
+    const { venueData, clusterNames, cupNames } = await importantQueries()
     const EventtoEdit = await Event.findById(req.params.id)
     res.render('auth/admin/eventEdit', {
       data: {
@@ -99,22 +135,7 @@ exports.editEventForm = async (req, res) => {
 exports.saveEventData = async (req, res) => {
   const errors = validationResult(req).array()
   if (errors.length) {
-    const errorMessages = errors.map(error => error.msg)
-    logger.error({ user: req.session.passport.user, errors: errorMessages })
-    const venueData = await venueController.getVenues()
-    const clusterData = await Cluster.find({}).exec()
-    const clusterNames = clusterData.map(cluster => cluster.name)
-    const cupData = await Cup.find({}).exec()
-    const cupNames = cupData.map(cup => cup.name)
-    let data = req.body
-    data.venues = venueData
-    data.clusters = clusterNames
-    data.cups = cupNames
-    res.render('auth/admin/eventAdd', {
-      data: data,
-      error: errorMessages,
-      title: 'Error page'
-    })
+    res.render('auth/admin/eventAdd', await errorHandling(req, errors))
   } else {
     try {
       let newEvent = new Event()
@@ -153,22 +174,7 @@ exports.deleteEventData = async (req, res) => {
 exports.editEventData = async (req, res) => {
   const errors = validationResult(req).array()
   if (errors.length) {
-    const errorMessages = errors.map(error => error.msg)
-    logger.error({ user: req.session.passport.user, errors: errorMessages })
-    const venueData = await venueController.getVenues()
-    const clusterData = await Cluster.find({}).exec()
-    const clusterNames = clusterData.map(cluster => cluster.name)
-    const cupData = await Cup.find({}).exec()
-    const cupNames = cupData.map(cup => cup.name)
-    let data = req.body
-    data.venues = venueData
-    data.clusters = clusterNames
-    data.cups = cupNames
-    res.render('auth/admin/eventEdit', {
-      data: data,
-      error: errorMessages,
-      title: 'Error page'
-    })
+    res.render('auth/admin/eventEdit', await errorHandling(req, errors))
   } else {
     try {
       const EventtoEdit = await Event.findById(req.params.id)
