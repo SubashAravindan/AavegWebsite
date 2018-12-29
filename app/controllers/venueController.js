@@ -2,7 +2,7 @@ const Venues = require('../models/Venue.js')
 
 exports.getVenues = async () => {
   try {
-    const venueData = await Venues.find({}).exec()
+    const venueData = Venues.find({}).exec()
     return venueData
   } catch (error) {
     return error
