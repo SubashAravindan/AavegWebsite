@@ -1,0 +1,22 @@
+#oops, #oops-tag, #error-msg{
+  position: relative;
+}
+
+#oops{
+  text-align: center;
+  font-size: 20vw;
+  margin-top: 50px;
+  margin-bottom: 0;
+  padding-bottom: 5vh;
+}
+
+#oops-tag, #error-msg{
+  text-align: center;
+  font-size: 4vw;
+  padding-bottom: 5vh;
+}   
+
+#error-msg{
+  color: red !important;
+}
+
