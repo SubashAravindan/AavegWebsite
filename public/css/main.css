@@ -2002,6 +2002,7 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+	input[type="number"],
 	select,
 	textarea {
 		-moz-appearance: none;
@@ -2021,6 +2022,7 @@ input, select, textarea {
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
+ 		input[type="number"],
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -2046,6 +2048,7 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+	input[type="number"],
 	select {
 		height: 2.75em;
 	}
@@ -2141,6 +2144,7 @@ input, select, textarea {
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
+	input[type="number"],
 	select,
 	textarea {
 		background-color: rgba(255, 255, 255, 0.075);
@@ -2150,6 +2154,7 @@ input, select, textarea {
 		input[type="text"]:focus,
 		input[type="password"]:focus,
 		input[type="email"]:focus,
+		input[type="number"]:focus,
 		select:focus,
 		textarea:focus {
 			border-color: #8cc9f0;
@@ -3426,6 +3431,7 @@ input, select, textarea {
 		#main input[type="text"],
 		#main input[type="password"],
 		#main input[type="email"],
+		#main input[type="number"],
 		#main select,
 		#main textarea {
 			background-color: rgba(222, 222, 222, 0.25);
@@ -3435,6 +3441,7 @@ input, select, textarea {
 			#main input[type="text"]:focus,
 			#main input[type="password"]:focus,
 			#main input[type="email"]:focus,
+			#main input[type="number"]:focus,
 			#main select:focus,
 			#main textarea:focus {
 				border-color: #8cc9f0;
