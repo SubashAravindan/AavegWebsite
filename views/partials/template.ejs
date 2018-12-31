@@ -22,9 +22,9 @@
   <div id="wrapper">
     <!-- Header -->
     <header id="header" class="alt">
-      <span class="logo"><a href="/19/"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
-      <span class="logo"><a href="/19/"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
-      <p id="aaveg-motto">Channeling Fury
+      <span class="logo"><a href="#"><img src="images/aaveg_glyph_white.png" alt="" height="150px" width="150px" /></a></span>
+      <span class="logo"><a href="#"><img src="images/wordmark_white.png" alt="" width="150px" /></a></span>
+      <span class="logo"><img src="images/tagline.png" alt="" width="200px" /></span>
       </p>
     </header>
 
@@ -34,11 +34,11 @@
         <li><a href="about">About</a></li>
         <li><a href="scoreboardb">Scoreboard</a></li>
         <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
-        <li><a href="events">Events</a></li>
-        <li><a href="schedule">Schedule</a></li>
-        <% if(typeof adminUser!=='undefined') { %>
-        <li><a href="logout">
-            Admin logout :
+        <li><a href="/events">Events</a></li>
+        <li><a href="/schedule">Schedule</a></li>
+        <% if(typeof adminUser!=='undefined' && typeof adminUser.username!=='undefined') { %>
+        <li><a href="/logout">
+            Logout :
             <%= adminUser.username %></a></li>
         <% }else if(typeof rollnumber!=='undefined'){%>
           <li><a href="studentLogout">
