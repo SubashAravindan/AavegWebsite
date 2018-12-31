@@ -12,12 +12,11 @@ async function getVenueClusterCup () {
   const clusterNames = clusterData.map(cluster => cluster.name)
   const cupData = await Cup.find({}).exec()
   const cupNames = cupData.map(cup => cup.name)
-  const queryResult = {
+  return {
     venueData: venueData,
     clusterNames: clusterNames,
     cupNames: cupNames
   }
-  return queryResult
 }
 
 async function errorHandling (req, errors) {
