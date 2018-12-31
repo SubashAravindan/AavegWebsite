@@ -1,0 +1,14 @@
+#loginFormContainer{
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+#loginFormHeader{
+  text-align: center;
+  padding-top: 100px;
+}
+
+#loginFormSubmitBtn{
+  background-color: #5f4d93 !important;
+}
