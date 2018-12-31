@@ -1,6 +1,20 @@
-<h1>Student login</h1>
-<form action="studentLogin" method="POST">
-	<input type="number" name="rollnumber">
-	<button>submit</button>
-	<input type="password" name="password" id="password">
-</form>
+<% layout('../../partials/template') %>
+<% stylesheet('/css/login_student.css') %>
+
+<div id="loginFormContainer">
+	<h1 id="loginFormHeader">Student login</h1>
+	<form method="post" action="studentLogin">
+		<div class="form-group">
+			<label for="rollnumber">Roll Number</label>
+			<input type="number" id="rollnumber" name="rollnumber" placeholder="Enter your Rollnumber">
+		</div>
+		<br>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" placeholder="Enter your password">
+			<small id="passwordHelp">Please enter your webmail password.</small>
+		</div>
+		<br>
+		<button id="loginFormSubmitBtn" type="submit" class="primary">Submit</button>
+	</form>
+</div>
