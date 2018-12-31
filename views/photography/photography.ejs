@@ -1,62 +1,69 @@
 <% layout('../partials/template') -%>
-<% stylesheet('/css/photography.css')%>
+<% stylesheet('css/photography.css')%>
 
 <div id="formWrapper">
   <h1 id="form-title">Photography</h1>
-  <form method="post" action="">
-    <div class="row gtr-uniform">
-      <div class="col-6 col-12-small">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="Enter name" required>
-      </div>
-      <div class="col-6 col-12-small">
-        <label for="rollNumber">Roll No.</label>
-        <input type="number" name="rollNumber" id="rollNumber" value=<%=rollnumber %> readonly>
-      </div>
-      <div class="col-6 col-12-small">
-        <label for="email">Email address</label>
-        <input type="email" name="email" id="email" placeholder="Enter email" required>
-        <small id="emailHelp">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="col-6 col-12-small">
-        <label for="demo-category">Hostel</label>
-        <select name="hostel" required>
-          <% hostelNames.forEach((item,index)=>{%>
-          <option value=<%=item %>
-            <% if(!index){%>selected
-            <%}%>>
-            <%=item %>
-          </option>
-          <% })%>
-        </select>
-      </div>
-      <label class="col-12">Device Type</label>
-      <div class="col-4 col-12-small">
-        <input type="radio" id="category-mobile" name="category" value="camera" checked>
-        <label for="category-mobile">Mobile</label>
-      </div>
-      <div class="col-4 col-12-small">
-        <input type="radio" id="category-camera" name="category" value="camera">
-        <label for="category-camera">Camera</label>
-      </div>
-      <div class="col-6 col-12-small">
-        <label for="device">Device Name/ Model</label>
-        <input type="text" name="device" id="device" placeholder="Enter Device Name & Model" required>
-      </div>
-      <div class="col-6 col-12-small">
-        <label for="phoneNumber">Mobile</label>
-        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Enter mobile number" required>
-      </div>
-      <div class="col-12">
-        <label for="link">Link</label>
-        <input type="text" name="link" id="link" placeholder="Enter photo's URL. Make sure you give public access."
-          required>
-      </div>
-      <div class="col-12">
-        <ul class="actions">
-          <li><input type="submit" value="Submit" class="primary" /></li>
-        </ul>
-      </div>
+  <%if(submitted){%>
+    <div id="submitted">
+      <div>You have successfully submitted</div>
+      <a href="photography" class="primary button">Submit another photo</a>
     </div>
-  </form>
+  <%}else{%>
+    <form method="post" action="photography ">
+      <div class="row gtr-uniform">
+        <div class="col-6 col-12-small">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="Enter name" required>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="rollNumber">Roll No.</label>
+          <input type="number" name="rollNumber" id="rollNumber" value=<%=rollnumber %> readonly>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="email">Email address</label>
+          <input type="email" name="email" id="email" placeholder="Enter email" required>
+          <small id="emailHelp">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="demo-category">Hostel</label>
+          <select name="hostel" required>
+            <% hostelNames.forEach((item,index)=>{%>
+            <option value=<%=item.name %>
+              <% if(!index){%>selected
+              <%}%>>
+              <%=item.name %>
+            </option>
+            <% })%>
+          </select>
+        </div>
+        <label class="col-12">Device Type</label>
+        <div class="col-4 col-12-small">
+          <input type="radio" id="category-mobile" name="category" value="camera" checked>
+          <label for="category-mobile">Mobile</label>
+        </div>
+        <div class="col-4 col-12-small">
+          <input type="radio" id="category-camera" name="category" value="camera">
+          <label for="category-camera">Camera</label>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="device">Device Name/ Model</label>
+          <input type="text" name="device" id="device" placeholder="Enter Device Name & Model" required>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="phoneNumber">Mobile</label>
+          <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Enter mobile number" required>
+        </div>
+        <div class="col-12">
+          <label for="link">Link</label>
+          <input type="text" name="link" id="link" placeholder="Enter photo's URL. Make sure you give public access."
+            required>
+        </div>
+        <div class="col-12">
+          <ul class="actions">
+            <li><input type="submit" value="Submit" class="primary" /></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  <%}%>
 </div>

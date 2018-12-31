@@ -8,11 +8,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="icon" type="image/png" href="images/aaveg_glyph_black.png">
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/custom_main.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/custom_main.css" />
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css" />
+    <link rel="stylesheet" href="css/noscript.css" />
   </noscript>
+
   <%-stylesheets%>
 </head>
 
@@ -21,8 +22,8 @@
   <div id="wrapper">
     <!-- Header -->
     <header id="header" class="alt">
-      <span class="logo"><a href="/"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
-      <span class="logo"><a href="/"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
+      <span class="logo"><a href="/19/"><img src="images/aaveg_glyph_white.png" alt="" height="200px" width="200px" /></a></span>
+      <span class="logo"><a href="/19/"><img src="images/wordmark_white.png" alt="" width="200px" /></a></span>
       <p id="aaveg-motto">Channeling Fury
       </p>
     </header>
@@ -30,16 +31,20 @@
     <!-- Nav -->
     <nav id="nav">
       <ul>
-        <li><a href="/about">About</a></li>
-        <li><a href="/scoreboardb">Scoreboard</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="scoreboardb">Scoreboard</a></li>
         <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/schedule">Schedule</a></li>
-        <% if(typeof adminUser.username!=='undefined') { %>
-        <li><a href="/logout">
-            Logout :
+        <li><a href="events">Events</a></li>
+        <li><a href="schedule">Schedule</a></li>
+        <% if(typeof adminUser!=='undefined') { %>
+        <li><a href="logout">
+            Admin logout :
             <%= adminUser.username %></a></li>
-        <% }%>
+        <% }else if(typeof rollnumber!=='undefined'){%>
+          <li><a href="studentLogout">
+            Logout :
+            <%= rollnumber %></a></li>
+        <%}%>
       </ul>
     </nav>
 
@@ -51,16 +56,20 @@
       <nav id="nav-mobile" class="">
         <div id="nav-mob-close" class="fa-times icon"></div>
         <ul>
-          <li><a href="/about" class="active">About</a></li>
-          <li><a href="/scoreboard">Scoreboard</a></li>
+          <li><a href="about" class="active">About</a></li>
+          <li><a href="scoreboard">Scoreboard</a></li>
           <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
-          <li><a href="/events">Events</a></li>
-          <li><a href="/schedule">Schedule</a></li>
+          <li><a href="events">Events</a></li>
+          <li><a href="schedule">Schedule</a></li>
           <% if(typeof adminUser!=='undefined') { %>
-          <li><a href="/logout">
+          <li><a href="logout">
               Logout :
               <%= adminUser %></a></li>
-          <% }%>
+          <% }else if(typeof rollnumber!=='undefined'){%>
+            <li><a href="studentLogout">
+              Logout :
+              <%= rollnumber %></a></li>
+          <%}%>
         </ul>
       </nav>
     </div>
@@ -74,15 +83,13 @@
     <!-- Footer -->
     <footer id="footer">
       <section>
-        <h2>Aaveg Web Team</h2>
+        <h2>The Team</h2>
         <p>
-          Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat
-          magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris.
-          Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas
-          velit, vitae tincidunt odio.
+          A dynamic and diverse team comprised of over 90 people, with varied skill sets and expertise, who are constantly ideating, questioning and putting their most creative foot forward to give you the best possible experience and have this fest etched in your memories.
+          <br>PS: You can see us running around, talking or managing the audio and visuals during the fest.
         </p>
         <ul class="actions">
-          <li><a href="/team" class="button">About Us</a></li>
+          <li><a href="team" class="button">About Us</a></li>
         </ul>
       </section>
       <section>
@@ -102,11 +109,11 @@
           </li>
         </ul>
         <ul class="actions">
-          <li><a href="/contact" class="button">Contact Us</a></li>
+          <li><a href="contact" class="button">Contact Us</a></li>
         </ul>
       </section>
       <p class="copyright">
-        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="/team">Web Team</a> & <a href="/team">Design
+        &copy; Aaveg 2019. Made with &hearts; by Aaveg <a href="team">Web Team</a> & <a href="team">Design
           Team</a>.
       </p>
     </footer>
@@ -114,14 +121,14 @@
 
   <!-- Scripts -->
 
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery.scrollex.min.js"></script>
-  <script src="/js/jquery.scrolly.min.js"></script>
-  <script src="/js/browser.min.js"></script>
-  <script src="/js/breakpoints.min.js"></script>
-  <script src="/js/util.js"></script>
-  <script src="/js/main.js"></script>
-  <script src="/js/custom_main.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.scrollex.min.js"></script>
+  <script src="js/jquery.scrolly.min.js"></script>
+  <script src="js/browser.min.js"></script>
+  <script src="js/breakpoints.min.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/custom_main.js"></script>
   <%-scripts%>
 
 </body>

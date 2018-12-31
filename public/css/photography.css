@@ -16,3 +16,16 @@
 #formWrapper #form-title{
   text-align: center;
 }
+
+#submitted{
+  text-align: center;
+}
+#submitted div{
+  font-size: 2em;
+}
+
+@media (max-width:550px){
+  #submitted div{
+    font-size: 1.3em;
+  }
+}

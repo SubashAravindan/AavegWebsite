@@ -13,6 +13,8 @@ const LocalStrategy = require('passport-local')
 const config = require('./config/config.js')
 const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
+const eventRoutes = require('./app/routes/event.js')
+const photographyRoutes = require('./app/routes/photography')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
 // ==================Middleware================
@@ -53,17 +55,15 @@ app.get('/', (req, res) => {
   res.render('timer')
 })
 
+app.use(photographyRoutes)
+app.use(studentAuthRoutes)
 app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
 })
+app.use(eventRoutes)
 app.use(adminAuthRoutes)
-app.use(studentAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
-
-app.get('/sample', (req, res) => {
-  res.render('sample', { title: 'aavegsample' })
-})
 
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
