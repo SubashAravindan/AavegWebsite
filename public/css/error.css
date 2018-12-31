@@ -10,6 +10,10 @@
   padding-bottom: 5vh;
 }
 
+#oops a{
+  border-bottom: none;
+}
+
 #oops-tag, #error-msg{
   text-align: center;
   font-size: 4vw;

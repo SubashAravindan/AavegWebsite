@@ -4,27 +4,27 @@
 	<title>Tshirt Reg</title>
 </head>
 <body>
-	<%if(locals.error){ %>
+	<%if (typeof error !== 'undefined'){ %>
     <div id="error"><%=error%></div>
 	<%}%>
-	
+
 	<form action="/tshirt" method="POST">
 		<label for="rollno">Roll Number :</label>
 		<input type="number" value="<%=data.rollno%>" name='rollno' readonly required>
 		<label for="size">Size : </label>
-		<select name="size" id="size" value="<%=data.size%>" required>
-			<option value="">Please select</option>
-			<option value="s">S</option>
-			<option value="m">M</option>
-			<option value="l">L</option>
-			<option value="xl">XL</option>
-			<option value="xxl">XXL</option>
+		<select name="size" id="size" required>
+			<option value="" <%=data.size===''?'selected':''%>>Please select</option>
+			<option value="s" <%=data.size==='s'?'selected':''%>>S</option>
+			<option value="m" <%=data.size==='m'?'selected':''%>>M</option>
+			<option value="l" <%=data.size==='l'?'selected':''%>>L</option>
+			<option value="xl" <%=data.size==='xl'?'selected':''%>>XL</option>
+			<option value="xxl" <%=data.size==='xxl'?'selected':''%>>XXL</option>
 		</select>
 		<label for="hostel" id="hostel">Hostel :</label>
 		<select name="hostel" id="hostel" required value="<%=data.hostel%>">
 			<option value="">Please select</option>
 			<%data.hostels.forEach(hostel=>{%>
-				<option value="<%=hostel%>"><%=hostel%></option>
+				<option value="<%=hostel%>" <%=data.hostel===hostel?'selected':''%>><%=hostel%></option>
 			<% })%>
 		</select>
 		<button>Submit!</button>	
