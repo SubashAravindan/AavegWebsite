@@ -1,18 +1,22 @@
 $(document).ready(function () {
-  var counter = 4
+  var prizeCounter = 3
   $(document).on('click', '#addPoints', () => {
-    document.getElementById('wrapdiv').innerHTML = document.getElementById('wrapdiv').innerHTML + ('<label for="points' + counter + '">Points for Winner ' + counter + ': </label><input type="number" id="points' + counter + '" name="points' + counter + '">')
-    counter = counter + 1
+    document.getElementById('wrapdiv').innerHTML = document.getElementById('wrapdiv').innerHTML +
+    ('<label for="points' + prizeCounter +
+    '">Points for Winner ' + prizeCounter +
+    ': </label><input type="number" id="points' + prizeCounter +
+    '" name="points' + prizeCounter + '">')
+    prizeCounter = prizeCounter + 1
   })
   $(document).on('click', '#submitCreate', () => {
     var points = []
-    for (var i = 1; i < counter; i++) { points.push($('#points' + i.toString()).val()) }
+    for (var i = 1; i <= prizeCounter; i++) { points.push($('#points' + i.toString()).val()) }
     const formData = {
       'name': $('#eventName').val(),
       'cluster': $('#cluster').val(),
       'cup': $('#cup').val(),
       'points': points,
-      'places': counter - 1,
+      'places': prizeCounter,
       'venue': $('#venue').val(),
       'description': $('#description').val(),
       'rules': $('#rules').val(),
