@@ -41,6 +41,7 @@ passport.use(new LocalStrategy(Admin.authenticate()))
 passport.serializeUser(Admin.serializeUser())
 passport.deserializeUser(Admin.deserializeUser())
 app.use((req, res, next) => {
+  res.locals.baseUrl = config.APP_BASE_URL
   if (req.session.type === 'student') {
     res.locals.rollnumber = req.session.rollnumber
   } else if (req.session.type === 'admin') {
@@ -57,11 +58,11 @@ app.get('/', (req, res) => {
 
 app.use(photographyRoutes)
 app.use(studentAuthRoutes)
+app.use(adminAuthRoutes)
 app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
 })
 app.use(eventRoutes)
-app.use(adminAuthRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
 

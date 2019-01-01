@@ -6,6 +6,7 @@
     <%= title %>
   </title>
   <meta charset="utf-8" />
+  <base href="<%=baseUrl%>">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="icon" type="image/png" href="images/aaveg_glyph_black.png">
   <link rel="stylesheet" href="css/main.css" />
@@ -34,10 +35,10 @@
         <li><a href="about">About</a></li>
         <li><a href="scoreboardb">Scoreboard</a></li>
         <li><a href="https://medium.com/aaveg-blog">Blog</a></li>
-        <li><a href="/events">Events</a></li>
-        <li><a href="/schedule">Schedule</a></li>
+        <li><a href="events">Events</a></li>
+        <li><a href="schedule">Schedule</a></li>
         <% if(typeof adminUser!=='undefined' && typeof adminUser.username!=='undefined') { %>
-        <li><a href="/logout">
+        <li><a href="logout">
             Logout :
             <%= adminUser.username %></a></li>
         <% }else if(typeof rollnumber!=='undefined'){%>
