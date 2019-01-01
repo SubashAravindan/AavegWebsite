@@ -13,10 +13,10 @@ const LocalStrategy = require('passport-local')
 const config = require('./config/config.js')
 const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
-const eventRoutes = require('./app/routes/event.js')
 const photographyRoutes = require('./app/routes/photography')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
+const adminAuthController = require('./app/controllers/adminAuthController')
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -40,6 +40,7 @@ app.use(passport.session())
 passport.use(new LocalStrategy(Admin.authenticate()))
 passport.serializeUser(Admin.serializeUser())
 passport.deserializeUser(Admin.deserializeUser())
+app.use('/admin', adminAuthController.checkAdminLogin)
 app.use((req, res, next) => {
   res.locals.baseUrl = config.APP_BASE_URL
   if (req.session.type === 'student') {
@@ -62,7 +63,6 @@ app.use(adminAuthRoutes)
 app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
 })
-app.use(eventRoutes)
 app.use(tshirtRoutes)
 app.use(hostelRoutes)
 
