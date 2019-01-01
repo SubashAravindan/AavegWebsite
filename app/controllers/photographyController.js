@@ -3,6 +3,7 @@ const PhotographyDetail = require('../models/photographySubmission.js')
 const hostelController = require('../controllers/hostelController')
 const { check, validationResult } = require('express-validator/check')
 const json2csv = require('json2csv').parse
+const adminController = require('../controllers/adminAuthController')
 
 exports.showPhotographyForm = async (req, res) => {
   if (await exceedSubmissionLimit(req.session.rollnumber)) {
@@ -35,7 +36,11 @@ exports.submitEntry = async (req, res) => {
       try {
         const newEntry = await PhotographyDetail.create({ name, rollNumber, device, phoneNumber, category, hostel, email, link })
         logger.info(`Submission accepted for ${rollNumber}, with id ${newEntry._id}`)
-        res.render('photography/photography', { title: 'Photography', hostelNames: await hostelController.getHostels(), submitted: true })
+        res.render('photography/photography', {
+          title: 'Photography',
+          hostelNames: await hostelController.getHostels(),
+          submitted: true
+        })
       } catch (error) {
         logger.error(error)
         res.status(500).send(error)
@@ -62,13 +67,14 @@ exports.validate = [
   check('rollNumber')
     .custom((rollno, { req }) => {
       if (req.session.rollnumber !== rollno) {
-        throw new Error('Lmao nice attempt to change rollnumber')
+        throw new Error('Session and given rollnumber doesn\'t match')
       } else {
         return true
       }
     })
-    .custom(rollNumber => {
-      if (rollNumber.toString()[5] !== '8' && rollNumber !== '102117058') {
+    .custom(async (rollNumber) => {
+      const admins = await adminController.getAdminUsernames()
+      if (rollNumber.toString()[5] !== '8' && !admins.includes(rollNumber)) {
         throw new Error('This is only for first years. 7 kazhutha vayasu aachu, first year fest la enna da vela? ')
       } else {
         return true
@@ -77,7 +83,7 @@ exports.validate = [
   check('email').isEmail().trim(),
   check('name').isLength({ min: 1 }),
   check('device').isLength({ min: 1 }),
-  check('phoneNumber').isNumeric(),
+  check('phoneNumber').isNumeric().isLength({ min: 1 }),
   check('link').isURL(),
   check('category').isIn(['mobile', 'camera']),
   check('hostel')

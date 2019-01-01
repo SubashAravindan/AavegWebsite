@@ -1,8 +1,9 @@
 const imaps = require('imap-simple')
 const logger = require('../../config/winston.js')
+const config = require('../../config/config')
 
 exports.showLogin = (req, res) => {
-  res.render('auth/student/login')
+  res.render('auth/student/login', { title: 'Login' })
 }
 
 exports.login = async (req, res) => {
@@ -26,7 +27,7 @@ exports.login = async (req, res) => {
     res.redirect('/')
   }).catch(err => {
     logger.error(err)
-    return res.redirect('studentLogin')
+    return res.redirect(config.APP_BASE_URL + 'studentLogin')
   })
 }
 
@@ -34,7 +35,7 @@ exports.checkStudentLogin = (req, res, next) => {
   if (req.session.rollnumber && req.session.type === 'student') {
     next()
   } else {
-    res.redirect('studentLogin')
+    res.redirect(config.APP_BASE_URL + 'studentLogin')
   }
 }
 

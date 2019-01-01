@@ -1,6 +1,22 @@
-<h1>Loginn</h1>
-<form action="/login" method="POST">
-	<input type="text" name="username">
-	<button>submit</button>
-	<input type="password" name="password" id="password">
-</form>
+<% layout('../../partials/template') -%>
+<% stylesheet('css/adminLogin.css') %>
+
+<section id="loginSection">
+	<h2>Login</h2>
+	<form method="post" action="login">
+		<div class="row gtr-uniform">
+			<div class="col-6 col-12-xsmall">
+				<input type="text" name="username" id="username" placeholder="Username" />
+			</div>
+			<div class="col-6 col-12-xsmall">
+				<input type="password" name="password" id="password" placeholder="Password" />
+			</div>
+		</div>
+		<div class="col-12">
+			<ul class="actions">
+				<li><input type="submit" value="Submit" class="primary" /></li>
+				<li><input type="reset" value="Reset" /></li>
+			</ul>
+		</div>
+	</form>
+</section>

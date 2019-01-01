@@ -1,0 +1,10 @@
+#loginSection{
+  padding-top: 100px;
+  padding-right: 10%;
+  padding-left: 10%;
+  padding-bottom: 10px;
+}
+
+#username, #password{
+  margin-bottom: 10px;
+}
