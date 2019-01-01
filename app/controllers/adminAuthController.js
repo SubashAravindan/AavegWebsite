@@ -65,7 +65,7 @@ exports.checkAdminAccess = (req, res, next) => {
 
 // Middleware for admin login check
 exports.checkAdminLogin = (req, res, next) => {
-  if (req.session.type === 'admin' && req.user.permissions.length) {
+  if (req.session && req.session.type === 'admin' && req.user.permissions.length) {
     return next()
   } else {
     res.redirect(config.APP_BASE_URL + 'login')
