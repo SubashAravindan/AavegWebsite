@@ -3,10 +3,10 @@ $(document).ready(function () {
   var prizeCounter = 3
   $(document).on('click', '#addPoints', () => {
     document.getElementById('wrapdiv').innerHTML = document.getElementById('wrapdiv').innerHTML +
-    ('<label for="points' + prizeCounter +
-    '">Points for Winner ' + prizeCounter +
-    ': </label><input type="number" id="points' + prizeCounter +
-    '" name="points' + prizeCounter + '">')
+    ('<label for="points' + (prizeCounter + 1) +
+    '">Points for Winner ' + (prizeCounter + 1) +
+    ': </label><input type="number" id="points' + (prizeCounter + 1) +
+    '" name="points' + (prizeCounter + 1) + '">')
     prizeCounter = prizeCounter + 1
   })
   $(document).on('click', '#submitCreate', () => {
@@ -27,7 +27,7 @@ $(document).ready(function () {
       'endTime': $('#endTime').val()
     }
     $.ajax({
-      url: '/admin/events/' + ID,
+      url: 'admin/events/' + ID,
       method: 'put',
       data: formData,
       contentType: 'application/x-www-form-urlencoded',

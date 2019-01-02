@@ -3,6 +3,7 @@ const Event = require('../models/Event.js')
 const Cup = require('../models/Cup.js')
 const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
+const config = require('../../config/config')
 const { check, validationResult } = require('express-validator/check')
 
 /* Returns venue data, cluster names, cup names all at once for simplification */
@@ -154,7 +155,7 @@ exports.saveEventData = async (req, res) => {
       newEvent.places = req.body.places
       newEvent.save().then(() => {
         logger.info(`Event ${req.body.name} has been created by ${req.session.passport.user}`)
-        res.redirect('admin/events')
+        res.redirect(config.APP_BASE_URL + 'admin/events')
       })
     } catch (err) {
       logger.error(err)
@@ -194,7 +195,7 @@ exports.editEventData = async (req, res) => {
       eventToEdit.venue = req.body.venue
       eventToEdit.save().then(() => {
         logger.info(`Event ${req.params.id} edited by ${req.session.passport.user}`)
-        res.redirect('admin/events')
+        res.redirect(config.APP_BASE_URL + 'admin/events')
       })
     } catch (err) {
       logger.error(err)
