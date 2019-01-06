@@ -7,16 +7,15 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const helmet = require('helmet')
 const path = require('path')
+const methodOverride = require('method-override')
 const logger = require('./config/winston.js')
-const Admin = require('./app/models/Admin.js')
-const LocalStrategy = require('passport-local')
 const config = require('./config/config.js')
 const adminAuthRoutes = require('./app/routes/adminAuth.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
 const photographyRoutes = require('./app/routes/photography')
 const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
-const adminAuthController = require('./app/controllers/adminAuthController')
+const authSetup = require('./app/utils/authSetup')
 // ==================Middleware================
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -24,7 +23,7 @@ app.use(helmet())
 app.engine('ejs', engine)
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(methodOverride('_method'))
 mongoose.connect(config.dbURI)
 
 app.use(
@@ -34,23 +33,7 @@ app.use(
     saveUninitialized: true
   })
 )
-
-app.use(passport.initialize())
-app.use(passport.session())
-passport.use(new LocalStrategy(Admin.authenticate()))
-passport.serializeUser(Admin.serializeUser())
-passport.deserializeUser(Admin.deserializeUser())
-app.use('/admin', adminAuthController.checkAdminLogin)
-app.use((req, res, next) => {
-  res.locals.baseUrl = config.APP_BASE_URL
-  if (req.session.type === 'student') {
-    res.locals.rollnumber = req.session.rollnumber
-  } else if (req.session.type === 'admin') {
-    res.locals.adminUser = req.user
-  }
-  next()
-})
-
+authSetup(passport, app)
 // =============Routes=============
 
 app.get('/', (req, res) => {
