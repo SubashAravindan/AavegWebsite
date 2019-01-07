@@ -61,7 +61,6 @@ input[type=text]{
 }
 
 .delete{
-  background-color:red !important;
   float: right;
   width: 20px;
 }

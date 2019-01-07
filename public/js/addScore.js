@@ -32,10 +32,13 @@ window.onload = function () {
         type: 'GET',
         success: function (result) {
           console.log(JSON.stringify(result))
+            ct++
           let br1 = document.createElement('br')
           let br2 = document.createElement('br')
+          br1.classList.add('position'+ct+'-br')
+          br2.classList.add('position'+ct+'-br')
           console.log('inside function')
-          ct++
+
           let position = 'position' + ct
           let wrapper = document.getElementById('p-div')
 
@@ -43,17 +46,19 @@ window.onload = function () {
           div.classList.add('border-class')
           div.setAttribute('id', 'div' + ct)
           let deleteButton = document.createElement('button')
-          deleteButton.innerHTML = 'X Close'
+          deleteButton.innerHTML = 'Close ❌ '
           deleteButton.classList.add('delete')
           deleteButton.addEventListener('click', function () {
             console.log('in remove')
             let elem = document.getElementById('div' + ct)
             elem.parentNode.removeChild(elem)
-            console.log(wrapper.getElementsByTagName('br'))
-            let br1 = document.getElementsByTagName('br')[-3]
-            let br2 = document.getElementsByTagName('br')[-4]
-            br1.removeChild(br1)
-            br2.removeChild(br2)
+            let len=wrapper.getElementsByClassName('position'+ct+'-br').length
+            let br1 = wrapper.getElementsByClassName('position'+ct+'-br')[0]
+            let br2 =wrapper.getElementsByClassName('position'+ct+'-br')[1]
+            console.log(br1)
+            console.log(br2)
+            wrapper.removeChild(br1)
+            wrapper.removeChild(br2)
             ct = ct - 1
           })
           div.appendChild(deleteButton)
