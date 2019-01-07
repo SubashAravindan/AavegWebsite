@@ -7,7 +7,7 @@ exports.showLogin = (req, res) => {
 }
 
 exports.login = async (req, res) => {
-  let config = {
+  let imapConfig = {
     imap: {
       user: req.body.rollnumber,
       password: req.body.password,
@@ -18,13 +18,13 @@ exports.login = async (req, res) => {
     }
   }
 
-  imaps.connect(config).then(connection => {
+  imaps.connect(imapConfig).then(connection => {
     req.logout()
     req.session.rollnumber = req.body.rollnumber
     req.session.type = 'student'
     req.session.save()
     logger.info(`student ${req.session.rollnumber} logged in`)
-    res.redirect('/')
+    res.redirect(config.APP_BASE_URL)
   }).catch(err => {
     logger.error(err)
     return res.redirect(config.APP_BASE_URL + 'studentLogin')
@@ -42,7 +42,7 @@ exports.checkStudentLogin = (req, res, next) => {
 exports.logout = (req, res) => {
   req.logout()
   req.session.destroy()
-  res.redirect('/')
+  res.redirect(config.APP_BASE_URL)
 }
 exports.logOutFromAdmin = (req, res, next) => {
   req.logout()

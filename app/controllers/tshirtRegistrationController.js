@@ -2,6 +2,7 @@ const TshirtDetail = require('../models/TshirtDetail.js')
 const hostelController = require('./hostelController.js')
 const { check, validationResult } = require('express-validator/check')
 const logger = require('../../config/winston.js')
+const config = require('../../config/config.js')
 const json2csv = require('json2csv').parse
 
 exports.displayTshirtForm = async (req, res) => {
@@ -19,7 +20,7 @@ exports.validate = [
   check('rollno')
     .custom((rollno, { req }) => {
       if (req.session.rollnumber !== rollno) {
-        throw new Error('Lmao nice attempt to change rollnumber')
+        throw new Error('Session and rollnumber does not match')
       } else {
         return true
       }
@@ -43,7 +44,7 @@ exports.validate = [
       }
     }),
   check('size')
-    .isIn(['s', 'm', 'l', 'xl', 'xxl']).withMessage('Invalid size')
+    .isIn(['s', 'm', 'l', 'xl', 'xxl', 'xxxl']).withMessage('Invalid size')
 ]
 
 exports.savetTshirtData = async (req, res) => {
@@ -66,7 +67,7 @@ exports.savetTshirtData = async (req, res) => {
     newTshirt.size = req.body.size
     newTshirt.rollNumber = req.session.rollnumber
     newTshirt.save().then(() => {
-      res.redirect('/tshirt')
+      res.redirect(config.APP_BASE_URL + 'tshirt')
     })
   }
 }
