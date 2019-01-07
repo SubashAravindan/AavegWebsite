@@ -1,0 +1,16 @@
+#heading-wrapper{
+  padding-top: 100px;
+  padding-bottom: 200px; 
+  text-align: center;
+  font-size: 2vw;
+  font-weight: 400;
+}
+
+#msg{
+  padding: 20px 0;
+  background: #00ff00a3;
+  color: #006000;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+}

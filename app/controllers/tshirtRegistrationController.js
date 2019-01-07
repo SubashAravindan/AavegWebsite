@@ -59,7 +59,8 @@ exports.savetTshirtData = async (req, res) => {
     data.hostels = hostelNames
     res.render('tshirt/tshirtReg', {
       data: data,
-      error: errorMessages
+      error: errorMessages,
+      title: 'Tshirt'
     })
   } else {
     logger.info(`Registration done for ${req.session.rollnumber}`)
@@ -91,7 +92,7 @@ exports.registrationCheck = async (req, res, next) => {
   try {
     const tshirtData = await TshirtDetail.find({ rollNumber: req.session.rollnumber }).exec()
     if (tshirtData.length) {
-      return res.render('tshirt/alreadyRegistered')
+      return res.render('tshirt/alreadyRegistered', { title: 'Tshirt' })
     } else {
       return next()
     }
