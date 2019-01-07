@@ -43,10 +43,10 @@ app.get('/', (req, res) => {
 app.use(photographyRoutes)
 app.use(studentAuthRoutes)
 app.use(adminAuthRoutes)
+app.use(tshirtRoutes)
 app.get('*', (req, res) => {
   res.render('comingSoon', { url: req.url })
 })
-app.use(tshirtRoutes)
 app.use(hostelRoutes)
 
 app.listen(config.port, () => {
