@@ -21,6 +21,10 @@
 }   
 
 #error-msg{
-  color: red !important;
+  background: rgba(255, 0, 0, 0.58);
+  padding: 5px;
+  text-align: center;
+  color: #6d0000 !important;
+  font-size: 2vw;
+  font-weight: 400;
 }
-
