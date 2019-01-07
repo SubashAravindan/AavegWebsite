@@ -12,7 +12,8 @@ exports.displayTshirtForm = async (req, res) => {
     data: {
       rollno: req.session.rollnumber,
       hostels: hostelNames
-    }
+    },
+    title: 'Tshirt'
   })
 }
 

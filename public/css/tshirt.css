@@ -1,0 +1,31 @@
+#formWrapper input[type=number]::-webkit-inner-spin-button, 
+#formWrapper input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+#formWrapper{
+  margin-top: 50px;
+  padding: 40px 60px;
+  background: white;
+  border-radius: 5px;
+}
+
+#formWrapper #form-title{
+  text-align: center;
+}
+
+.actions .primary{
+  background: #2c2c54 !important;
+}
+
+#error{
+  background: rgba(255, 0, 0, 0.58);
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  color: #6d0000;
+  font-weight: 400;
+}
