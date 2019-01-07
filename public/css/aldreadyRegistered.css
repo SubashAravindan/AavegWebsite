@@ -1,9 +1,15 @@
 #heading-wrapper{
   padding-top: 100px;
-  padding-bottom: 200px; 
+  padding-bottom: 50px; 
   text-align: center;
   font-size: 2vw;
   font-weight: 400;
+}
+
+@media (max-width: 530px) {
+  #msg{
+    font-size: 2rem;
+  }
 }
 
 #msg{
