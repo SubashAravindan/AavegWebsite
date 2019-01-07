@@ -14,9 +14,9 @@ async function getVenueClusterCup () {
   const cupData = await Cup.find({}).exec()
   const cupNames = cupData.map(cup => cup.name)
   return {
-    venueData: venueData,
-    clusterNames: clusterNames,
-    cupNames: cupNames
+    venueData,
+    clusterNames,
+    cupNames
   }
 }
 
@@ -28,12 +28,11 @@ async function errorHandling (req, errors) {
   data.venues = venueData
   data.clusters = clusterNames
   data.cups = cupNames
-  const result = {
+  return {
     data: data,
     error: errorMessages,
     title: 'Error page'
   }
-  return result
 }
 
 exports.validate = [
@@ -75,7 +74,7 @@ exports.validate = [
       }
     }),
   check('description')
-    .trim().not().isEmpty().withMessage('Description is missing'),
+    .trim().isLength({ min: 1, max: 1000 }).withMessage('Your description is either blank or full of spam'),
   check('rules')
     .trim().not().isEmpty().withMessage('Rules is missing'),
   check('date')
@@ -150,7 +149,9 @@ exports.saveEventData = async (req, res) => {
       newEvent.date = req.body.date
       newEvent.startTime = req.body.startTime
       newEvent.endTime = req.body.endTime
-      for (let i = 0; i < req.body.places; i++) { newEvent.points[i] = Number(req.body.points[i]) }
+      req.body.points.forEach(function (point) {
+        newEvent.points.push(point)
+      })
       newEvent.venue = req.body.venue
       newEvent.places = req.body.places
       newEvent.save().then(() => {
@@ -190,7 +191,10 @@ exports.editEventData = async (req, res) => {
       eventToEdit.startTime = req.body.startTime
       eventToEdit.endTime = req.body.endTime
       eventToEdit.places = req.body.places
-      for (let i = 0; i < req.body.places; i++) { eventToEdit.points[i] = Number(req.body.points[i]) }
+      eventToEdit.points = []
+      req.body.points.forEach(function (point) {
+        eventToEdit.points.push(point)
+      })
       eventToEdit.markModified('points')
       eventToEdit.venue = req.body.venue
       eventToEdit.save().then(() => {

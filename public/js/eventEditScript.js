@@ -1,16 +1,22 @@
 $(document).ready(function () {
-  var url = window.location.href
-  var prizeCounter = 3
+  const url = window.location.href
+  let prizeCounter = 3
+  prizeCounter = prizeCounter + 1
   $(document).on('click', '#addPoints', () => {
     document.getElementById('wrapdiv').innerHTML = document.getElementById('wrapdiv').innerHTML +
-    ('<label for="points' + (prizeCounter + 1) +
-    '">Points for Winner ' + (prizeCounter + 1) +
-    ': </label><input type="number" id="points' + (prizeCounter + 1) +
-    '" name="points' + (prizeCounter + 1) + '">')
+    ('<label for="points' + prizeCounter +
+    '">Points for Winner ' + prizeCounter +
+    ': </label><input type="number" id="points' + prizeCounter +
+    '" name="points' + prizeCounter + '">')
     prizeCounter = prizeCounter + 1
   })
+  let start = document.getElementById('startTime')
+  let end = document.getElementById('endTime')
+  start.addEventListener('change', function () {
+    if (start.value) { end.min = start.value }
+  }, false)
   $(document).on('click', '#submitCreate', () => {
-    const ID = url.split('/')[url.split('/').length - 1]
+    const eventId = url.split('/')[url.split('/').length - 1]
     var points = []
     for (var i = 1; i <= prizeCounter; i++) { points.push($('#points' + i.toString()).val()) }
     const formData = {
@@ -27,7 +33,7 @@ $(document).ready(function () {
       'endTime': $('#endTime').val()
     }
     $.ajax({
-      url: 'admin/events/' + ID,
+      url: 'admin/events/' + eventId,
       method: 'put',
       data: formData,
       contentType: 'application/x-www-form-urlencoded',
