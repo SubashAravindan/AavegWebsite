@@ -32,11 +32,11 @@ window.onload = function () {
         type: 'GET',
         success: function (result) {
           console.log(JSON.stringify(result))
-            ct++
+          ct++
           let br1 = document.createElement('br')
           let br2 = document.createElement('br')
-          br1.classList.add('position'+ct+'-br')
-          br2.classList.add('position'+ct+'-br')
+          br1.classList.add('position' + ct + '-br')
+          br2.classList.add('position' + ct + '-br')
           console.log('inside function')
 
           let position = 'position' + ct
@@ -52,9 +52,8 @@ window.onload = function () {
             console.log('in remove')
             let elem = document.getElementById('div' + ct)
             elem.parentNode.removeChild(elem)
-            let len=wrapper.getElementsByClassName('position'+ct+'-br').length
-            let br1 = wrapper.getElementsByClassName('position'+ct+'-br')[0]
-            let br2 =wrapper.getElementsByClassName('position'+ct+'-br')[1]
+            let br1 = wrapper.getElementsByClassName('position' + ct + '-br')[0]
+            let br2 = wrapper.getElementsByClassName('position' + ct + '-br')[1]
             console.log(br1)
             console.log(br2)
             wrapper.removeChild(br1)
