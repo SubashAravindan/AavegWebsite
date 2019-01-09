@@ -21,6 +21,10 @@
   background: #2c2c54 !important;
 }
 
+label a{
+  border-bottom: none;
+}
+
 #error{
   background: rgba(255, 0, 0, 0.58);
   border-radius: 5px;
@@ -28,4 +32,24 @@
   text-align: center;
   color: #6d0000;
   font-weight: 400;
+}
+
+.requirementSelector{
+  justify-content: center;
+  display: flex;
+}
+
+.gtr-uniform{
+  width: 100%;
+  margin: 0;
+}
+
+.hidden{
+  display: none;
+}
+
+@media screen and (max-width: 736px) {
+  .requirementSelector{
+    justify-content: flex-start;
+  }
 }

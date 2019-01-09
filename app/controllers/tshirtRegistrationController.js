@@ -43,9 +43,7 @@ exports.validate = [
       } else {
         return true
       }
-    }),
-  check('size')
-    .isIn(['s', 'm', 'l', 'xl', 'xxl', 'xxxl']).withMessage('Invalid size')
+    })
 ]
 
 exports.savetTshirtData = async (req, res) => {
