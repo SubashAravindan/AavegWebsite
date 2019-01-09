@@ -1,5 +1,7 @@
 <% layout('../partials/template') -%>
-<% stylesheet('css/tshirt.css')%>
+<% script('js/tshirt.js') -%>
+<% stylesheet('css/tshirt.css') -%>
+
 
 <div id="formWrapper">
 	<h1 id="form-title">T-Shirt Registration</h1>
@@ -9,26 +11,24 @@
 	</div>
 	<br>
 	<%}%>
+	<br>
 	<form action="tshirt" method="POST">
 		<div class="row gtr-uniform">
+			<br>
+			<br>
+			<div class="col-6 col-12-small requirementSelector">
+				<input type="radio" id="requirement-foodonly" name="requirement" value="foodcard" required>
+				<label for="requirement-foodonly">Foodcard</label>
+			</div>
+			<div class="col-6 col-12-small requirementSelector">
+				<input type="radio" id="requirement-both" name="requirement" value="foodcard_tshirt" required>
+				<label for="requirement-both">Foodcard + Tshirt</label>
+			</div>
 			<div class="col-12">
-				<label for="rollno">Roll Number </label>
+				<label for="rollno">Roll<a href="images/treasurer.jpeg"> </a>Number </label>
 				<input type="number" value="<%=data.rollno%>" name='rollno' readonly required>
 			</div>
 
-			<br>
-			<div class="col-6 col-12-small">
-				<label for="size">Size </label>
-				<select name="size" id="size" required>
-					<option value="" <%=data.size==='' ?'selected':''%>>Please select</option>
-					<option value="s" <%=data.size==='s' ?'selected':''%>>S</option>
-					<option value="m" <%=data.size==='m' ?'selected':''%>>M</option>
-					<option value="l" <%=data.size==='l' ?'selected':''%>>L</option>
-					<option value="xl" <%=data.size==='xl' ?'selected':''%>>XL</option>
-					<option value="xxl" <%=data.size==='xxl' ?'selected':''%>>XXL</option>
-					<option value="xxxl" <%=data.size==='xxxl' ?'selected':''%>>XXXL</option>
-				</select>
-			</div>
 			<br>
 			<div class="col-6 col-12-small">
 				<label for="hostel">Hostel</label>
@@ -41,6 +41,20 @@
 					<% })%>
 				</select>
 			</div>
+			<br>
+			<div class="col-6 col-12-small hidden" id="tshirt-selector">
+				<label for="size">Size </label>
+				<select name="size" id="size">
+					<option value="" <%=data.size==='' ?'selected':''%>>Please select</option>
+					<option value="s" <%=data.size==='s' ?'selected':''%>>S</option>
+					<option value="m" <%=data.size==='m' ?'selected':''%>>M</option>
+					<option value="l" <%=data.size==='l' ?'selected':''%>>L</option>
+					<option value="xl" <%=data.size==='xl' ?'selected':''%>>XL</option>
+					<option value="xxl" <%=data.size==='xxl' ?'selected':''%>>XXL</option>
+					<option value="xxxl" <%=data.size==='xxxl' ?'selected':''%>>XXXL</option>
+				</select>
+			</div>
+
 			<br>
 			<div class="col-12">
 				<ul class="actions">
