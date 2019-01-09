@@ -32,8 +32,8 @@ async function getTotalByHostel () {
         localField: 'hostel',
         foreignField: '_id',
         as: 'hostel' } },
-      { $group: { '_id': { 'cup': '$event.cup', 'hostel': '$hostel.name' }, 'hostel_total_points': { $sum: '$points' } } }])
-
+      { $group: { '_id': { 'cup': '$event.cup', 'hostel': '$hostel.name' }, 'hostel_total_points': { $sum: '$points' } } },{'$sort':{'hostel_total_points':-1}}])
+   console.log('debug',totals)
     return totals
   } catch (error) {
     logger.error(error)
