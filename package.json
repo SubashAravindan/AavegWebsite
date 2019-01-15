@@ -20,8 +20,12 @@
       "public/js/util.js"
     ],
     "globals": [
-      "$"
+      "$",
+      "swal"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": ["public/*"]
   },
   "author": "",
   "license": "ISC",
