@@ -1,63 +1,78 @@
 <% layout('../../partials/template') -%>
+<% stylesheet('css/eventEdit.css') %>
 <% script('https://unpkg.com/sweetalert/dist/sweetalert.min.js') -%>
 <% script('js/eventEditScript.js') -%>
 
 <%if(typeof error !== 'undefined'){ %>
     <div id="error"><%=error%></div>
 <%}%>
-<br/><br/><br/>
-<label for="eventName">Name of Event: </label>
-<input type="text" id="eventName" value="<%=data.eventName%>" name='eventName' required><br/>
-<label for="cluster">Cluster: </label>
-<select name="cluster" id="cluster" value="<%=data.cluster%>" required>
-    <option value="">Please select</option>
-    <%data.clusters.forEach(cluster=>{%>
-    <% if(data.cluster == cluster){ %>
-        <option value="<%=cluster%>" selected><%=cluster%></option>
-    <% } else{ %>  
-        <option value="<%=cluster%>"><%=cluster%></option>
-    <% } %>
-<% })%>
-</select><br/>
-<label for="cup">Cup: </label>
-<select name="cup" id="cup" value="<%=data.cup%>" required>
-    <option value="">Please select</option>
-    <%data.cups.forEach(cup=>{%>
-    <% if(data.cup == cup){ %>
-        <option value="<%=cup%>" selected><%=cup%></option>
-    <% } else{ %>  
-        <option value="<%=cup%>"><%=cup%></option>
-    <% } %>
-<% })%>
-</select><br/>
-<div id="wrapdiv">
-    <button id="addPoints"> Add points for more Winners </button><br/><br/>
-    <label for="points1">Points for Winner 1: </label>
-    <input type="number" id = 'points1' value="<%=data.points[0]%>" name='points1'><br/>
-    <label for="points2">Points for Winner 2: </label>
-    <input type="number" id = 'points2' value="<%=data.points[1]%>" name='points2'><br/>
-    <label for="points3">Points for Winner 3: </label>
-    <input type="number" id = 'points3' value="<%=data.points[2]%>" name='points3'><br/>
+<div id="formWrapper">
+  <h1 class="align-center">
+      Edit Event
+  </h1> 
+  <label for="eventName">Name of Event: </label>
+  <input type="text" id="eventName" value="<%=data.eventName%>" name='eventName' required><br/>
+  <div class="row">
+      <div class="col-6 col-12-xsmall">
+        <label for="cluster">Cluster: </label>
+        <select name="cluster" id="cluster" value="<%=data.cluster%>" required>
+            <option value="">Please select</option>
+            <%data.clusters.forEach(cluster=>{%>
+              <% if(data.cluster == cluster){ %>
+                <option value="<%=cluster%>" selected><%=cluster%></option>
+              <% } else{ %>  
+                <option value="<%=cluster%>"><%=cluster%></option>
+            <% } %>
+        <% })%>
+        </select>
+      </div>
+      <div class="col-6 col-12-xsmall">
+        <label for="cup">Cup: </label>
+        <select name="cup" id="cup" value="<%=data.cup%>" required>
+            <option value="">Please select</option>
+            <%data.cups.forEach(cup=>{%>
+              <% if(data.cup == cup){ %>
+                <option value="<%=cup%>" selected><%=cup%></option>
+              <% } else{ %>  
+                <option value="<%=cup%>"><%=cup%></option>
+            <% } %>
+        <% })%>
+        </select>
+      </div>
+  </div>  
+  <div id="wrapdiv">
+      <button id="addPoints"> Add points for more Winners </button><br/><br/>
+      <label for="points1">Points for Winner 1: </label>
+      <input type="number" id = 'points1' value="<%=data.points[0]%>" name='points1'><br/>
+      <label for="points2">Points for Winner 2: </label>
+      <input type="number" id = 'points2' value="<%=data.points[1]%>" name='points2'><br/>
+      <label for="points3">Points for Winner 3: </label>
+      <input type="number" id = 'points3' value="<%=data.points[2]%>" name='points3'><br/>
+  </div>
+  <label for="venue">Venue: </label>
+  <select name="venue" id="venue" required >
+      <option value="">Please Select </option>
+      <%data.venues.forEach(v=>{%>
+      <% if(data.venue == v._id.toString()){ %>
+          <option value="<%=v._id%>" selected><%=v.name%></option>
+      <% } else{ %>  
+          <option value="<%=v._id%>"><%=v.name%></option>
+      <% } %>
+  <% })%>
+  </select><br/>
+  <label for="description">Description: </label>
+  <textarea id="description" name='description'><%=data.description%></textarea><br/>
+  <label for="rules">Rules: </label>
+  <input type="text" id="rules" value="<%=data.rules%>" name='rules'><br/>
+  <div class="row">
+      <div class="col-6 col-12-xsmall">
+        <label for="startTime">Starting Time: </label>
+        <input type="datetime-local" id='startTime' value="<%=data.startTime%>" name='startTime'><br/>
+      </div>
+      <div class="col-6 col-12-xsmall">
+        <label for="endTime">Ending Time: </label>
+        <input type="datetime-local" id='endTime' value="<%=data.endTime%>" name='endTime'><br/><br/>
+      </div>
+    </div>
+  <button id="submitCreate" class="button primary large"> Submit </button>
 </div>
-<label for="venue">Venue: </label>
-<select name="venue" id="venue" required >
-    <option value="">Please Select </option>
-    <%data.venues.forEach(v=>{%>
-    <% if(data.venue == v._id.toString()){ %>
-        <option value="<%=v._id%>" selected><%=v.name%></option>
-    <% } else{ %>  
-        <option value="<%=v._id%>"><%=v.name%></option>
-    <% } %>
-<% })%>
-</select><br/>
-<label for="description">Description: </label>
-<textarea id="description" name='description'><%=data.description%></textarea><br/>
-<label for="rules">Rules: </label>
-<input type="text" id="rules" value="<%=data.rules%>" name='rules'><br/>
-<label for="date">Date: </label>
-<input type="date" id="date" value="<%=data.date%>" name='date'><br/>
-<label for="startTime">Starting Time: </label>
-<input type="time" id='startTime' value="<%=data.startTime%>" name='startTime'><br/>
-<label for="endTime">Ending Time: </label>
-<input type="time" id='endTime' value="<%=data.endTime%>" name='endTime'><br/><br/>
-<button id="submitCreate"> Submit </button>
