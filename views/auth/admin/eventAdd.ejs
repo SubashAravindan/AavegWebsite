@@ -1,5 +1,6 @@
 <% layout('../../partials/template') -%>
-<% script('/js/eventAddScript.js') -%>
+<% script('https://unpkg.com/sweetalert/dist/sweetalert.min.js') -%>
+<% script('js/eventAddScript.js') -%>
 
 <%if(locals.error){ %>
     <div id="error"><%=error%></div>

@@ -17,8 +17,14 @@ $(document).ready(function () {
   }, false)
   $(document).on('click', '#submitCreate', () => {
     const eventId = url.split('/')[url.split('/').length - 1]
-    var points = []
-    for (var i = 1; i <= prizeCounter; i++) { points.push($('#points' + i.toString()).val()) }
+    let points = []
+    points.length = prizeCounter
+    for (let i = 1; i <= prizeCounter; i++) {
+      if (!$(`#points${i}`).val()) {
+        points.length = i - 1
+        break
+      } else { points[i - 1] = $(`#points${i}`).val() }
+    }
     const formData = {
       'name': $('#eventName').val(),
       'cluster': $('#cluster').val(),
@@ -33,12 +39,21 @@ $(document).ready(function () {
       'endTime': $('#endTime').val()
     }
     $.ajax({
-      url: 'admin/events/' + eventId,
+      url: `admin/events/${eventId}`,
       method: 'put',
       data: formData,
       contentType: 'application/x-www-form-urlencoded',
-      success: function (response) {
-        console.log(response)
+      success: function (data) {
+        swal('Done', 'Event edited successfully', 'success').then(() => {
+          window.location.href = 'events'
+        })
+      },
+      error: (res) => {
+        if (res.status < 500) {
+          swal('Validation Error', res.responseText, 'error')
+        } else {
+          swal('Server Error', res.responseText, 'error')
+        }
       }
     })
   })

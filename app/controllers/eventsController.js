@@ -3,35 +3,18 @@ const Event = require('../models/Event.js')
 const Cup = require('../models/Cup.js')
 const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
-const config = require('../../config/config')
 const { check, validationResult } = require('express-validator/check')
 
 /* Returns venue data, cluster names, cup names all at once for simplification */
 async function getVenueClusterCup () {
-  const venueData = await venueController.getVenues()
-  const clusterData = await Cluster.find({}).exec()
-  const clusterNames = clusterData.map(cluster => cluster.name)
-  const cupData = await Cup.find({}).exec()
-  const cupNames = cupData.map(cup => cup.name)
+  let venue = venueController.getVenues()
+  let clusterData = Cluster.find({}).exec()
+  let cupData = Cup.find({}).exec()
+  const [venueData, clusterNames, cupNames] = await Promise.all([venue, clusterData, cupData])
   return {
     venueData,
-    clusterNames,
-    cupNames
-  }
-}
-
-async function errorHandling (req, errors) {
-  const errorMessages = errors.map(error => error.msg)
-  logger.error({ user: req.session.passport.user, errors: errorMessages })
-  const { venueData, clusterNames, cupNames } = await getVenueClusterCup()
-  let data = req.body
-  data.venues = venueData
-  data.clusters = clusterNames
-  data.cups = cupNames
-  return {
-    data: data,
-    error: errorMessages,
-    title: 'Error page'
+    clusterNames: clusterNames.map(a => a.name),
+    cupNames: cupNames.map(a => a.name)
   }
 }
 
@@ -58,9 +41,11 @@ exports.validate = [
     }),
   check('points')
     .custom(async (points) => {
-      if (Number(points[0]) === 0 || Number(points[1]) === 0 || Number(points[2]) === 0) {
-        throw new Error('Enter points to be allotted to at least 3 winners')
-      } else { return true }
+      if (!Number(points[0])) {
+        throw new Error('Enter points to be allotted to at least 1 winner')
+      } else {
+        return true
+      }
     }),
   check('venue')
     .exists().withMessage('Venue is missing')
@@ -74,7 +59,7 @@ exports.validate = [
       }
     }),
   check('description')
-    .trim().isLength({ min: 1, max: 1000 }).withMessage('Your description is either blank or full of spam'),
+    .trim().isLength({ min: 1, max: 1000 }).withMessage('Your description is either blank or too long'),
   check('rules')
     .trim().not().isEmpty().withMessage('Rules is missing'),
   check('date')
@@ -107,57 +92,46 @@ exports.editEventForm = async (req, res) => {
   try {
     const { venueData, clusterNames, cupNames } = await getVenueClusterCup()
     const eventToEdit = await Event.findById(req.params.id)
+    Object.assign(eventToEdit, {
+      rollno: req.session.rollnumber,
+      venues: venueData,
+      clusters: clusterNames,
+      cups: cupNames
+    })
     res.render('auth/admin/eventEdit', {
-      data: {
-        rollno: req.session.rollnumber,
-        venues: venueData,
-        venue: eventToEdit.venue,
-        _id: eventToEdit._id,
-        eventName: eventToEdit.name,
-        clusters: clusterNames,
-        cups: cupNames,
-        cluster: eventToEdit.cluster,
-        cup: eventToEdit.cup,
-        description: eventToEdit.description,
-        rules: eventToEdit.rules,
-        date: eventToEdit.date,
-        startTime: eventToEdit.startTime,
-        endTime: eventToEdit.endTime,
-        places: eventToEdit.places,
-        points: eventToEdit.points
-      },
+      data: eventToEdit,
       title: 'Event Edit'
     })
   } catch (err) {
-    logger.error(err)
     res.status(500).send(err)
+    logger.error(err)
   }
 }
 
 exports.saveEventData = async (req, res) => {
   const errors = validationResult(req).array()
+  const errorMessages = errors.map(error => error.msg)
+  logger.error({ user: req.session.passport.user, errors: errorMessages })
   if (errors.length) {
-    res.render('auth/admin/eventAdd', await errorHandling(req, errors))
+    res.status(422).send(errorMessages)
   } else {
     try {
-      let newEvent = new Event()
-      newEvent.name = req.body.name
-      newEvent.cluster = req.body.cluster
-      newEvent.cup = req.body.cup
-      newEvent.description = req.body.description
-      newEvent.rules = req.body.rules
-      newEvent.date = req.body.date
-      newEvent.startTime = req.body.startTime
-      newEvent.endTime = req.body.endTime
-      req.body.points.forEach(function (point) {
-        newEvent.points.push(point)
+      const { name, cluster, cup, description, rules, date, startTime, endTime, points, venue, places } = req.body
+      const newEvent = await Event.create({
+        name,
+        cluster,
+        cup,
+        description,
+        rules,
+        date,
+        startTime,
+        endTime,
+        points,
+        venue,
+        places
       })
-      newEvent.venue = req.body.venue
-      newEvent.places = req.body.places
-      newEvent.save().then(() => {
-        logger.info(`Event ${req.body.name} has been created by ${req.session.passport.user}`)
-        res.redirect(config.APP_BASE_URL + 'admin/events')
-      })
+      logger.info(`Event ${newEvent.name} has been created by ${req.session.passport.user}`)
+      res.sendStatus(200)
     } catch (err) {
       logger.error(err)
       res.status(500).send(err)
@@ -169,6 +143,7 @@ exports.deleteEventData = async (req, res) => {
   try {
     await Event.findByIdAndDelete(req.params.id).exec()
     logger.info(`Event ${req.params.id} deleted by ${req.session.passport.user}`)
+    res.redirect('events')
   } catch (err) {
     logger.error(err)
     res.status(500).send(err)
@@ -177,30 +152,36 @@ exports.deleteEventData = async (req, res) => {
 
 exports.editEventData = async (req, res) => {
   const errors = validationResult(req).array()
+  const errorMessages = errors.map(error => error.msg)
+  logger.error({ user: req.session.passport.user, errors: errorMessages })
   if (errors.length) {
-    res.render('auth/admin/eventEdit', await errorHandling(req, errors))
+    res.status(422).send(errorMessages)
   } else {
     try {
       const eventToEdit = await Event.findById(req.params.id)
-      eventToEdit.name = req.body.name
-      eventToEdit.cluster = req.body.cluster
-      eventToEdit.cup = req.body.cup
-      eventToEdit.description = req.body.description
-      eventToEdit.rules = req.body.rules
-      eventToEdit.date = req.body.date
-      eventToEdit.startTime = req.body.startTime
-      eventToEdit.endTime = req.body.endTime
-      eventToEdit.places = req.body.places
-      eventToEdit.points = []
-      req.body.points.forEach(function (point) {
-        eventToEdit.points.push(point)
+      const {
+        name, cluster, cup, description, rules, venue, date, startTime, endTime, places, points
+      } = req.body
+      Object.assign(eventToEdit, {
+        name,
+        cluster,
+        cup,
+        description,
+        rules,
+        venue,
+        date,
+        startTime,
+        endTime,
+        places,
+        points
       })
-      eventToEdit.markModified('points')
-      eventToEdit.venue = req.body.venue
-      eventToEdit.save().then(() => {
+      try {
+        await eventToEdit.save()
         logger.info(`Event ${req.params.id} edited by ${req.session.passport.user}`)
-        res.redirect(config.APP_BASE_URL + 'admin/events')
-      })
+        res.sendStatus(200)
+      } catch (error) {
+        res.status(500).send(error)
+      }
     } catch (err) {
       logger.error(err)
       res.status(500).send(err)
