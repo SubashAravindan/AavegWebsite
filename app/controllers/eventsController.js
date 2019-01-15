@@ -4,7 +4,7 @@ const Cup = require('../models/Cup.js')
 const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
 const { check, validationResult } = require('express-validator/check')
-
+const moment = require('moment')
 /* Returns venue data, cluster names, cup names all at once for simplification */
 async function getVenueClusterCup () {
   let venue = venueController.getVenues()
@@ -62,12 +62,17 @@ exports.validate = [
     .trim().isLength({ min: 1, max: 1000 }).withMessage('Your description is either blank or too long'),
   check('rules')
     .trim().not().isEmpty().withMessage('Rules is missing'),
-  check('date')
-    .not().isEmpty().withMessage('Date is missing'),
   check('startTime')
     .not().isEmpty().withMessage('Start time is missing'),
   check('endTime')
     .not().isEmpty().withMessage('End time is missing')
+    .custom((endTime, { req }) => {
+      if (endTime > req.body.startTime || !req.body.startTime) {
+        return true
+      } else {
+        throw new Error('End time should be greater than start time, unless you have a time machine ;p')
+      }
+    })
 ]
 
 exports.createEventForm = async (req, res) => {
@@ -92,11 +97,14 @@ exports.editEventForm = async (req, res) => {
   try {
     const { venueData, clusterNames, cupNames } = await getVenueClusterCup()
     const eventToEdit = await Event.findById(req.params.id)
+    eventToEdit.startTime = moment(eventToEdit.startTime).format('YYYY-MM-DDTHH:mm')
+    eventToEdit.endTime = moment(eventToEdit.endTime).format('YYYY-MM-DDTHH:mm')
     Object.assign(eventToEdit, {
       rollno: req.session.rollnumber,
       venues: venueData,
       clusters: clusterNames,
-      cups: cupNames
+      cups: cupNames,
+      eventName: eventToEdit.name
     })
     res.render('auth/admin/eventEdit', {
       data: eventToEdit,
