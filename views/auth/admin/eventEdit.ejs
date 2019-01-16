@@ -42,12 +42,10 @@
   </div>  
   <div id="wrapdiv">
       <button id="addPoints"> Add points for more Winners </button><br/><br/>
-      <label for="points1">Points for Winner 1: </label>
-      <input type="number" id = 'points1' value="<%=data.points[0]%>" name='points1'><br/>
-      <label for="points2">Points for Winner 2: </label>
-      <input type="number" id = 'points2' value="<%=data.points[1]%>" name='points2'><br/>
-      <label for="points3">Points for Winner 3: </label>
-      <input type="number" id = 'points3' value="<%=data.points[2]%>" name='points3'><br/>
+      <%data.points.forEach((point, index)=>{%>
+        <label for="points<%=index+1%>">Points for Winner <%=index+1%>: </label>
+        <input type="number" id = 'points<%=index+1%>' value="<%=point%>" name='points<%=index+1%>' class="pointsInput"><br/>
+      <%})%>
   </div>
   <label for="venue">Venue: </label>
   <select name="venue" id="venue" required >

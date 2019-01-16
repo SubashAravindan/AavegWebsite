@@ -26,7 +26,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "public/*"
+      "public/*",
+      "views"
     ]
   },
   "author": "",
