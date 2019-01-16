@@ -2,16 +2,15 @@ $(document).ready(function () {
   let prizeCounter = 3
   prizeCounter = prizeCounter + 1
   $(document).on('click', '#addPoints', () => {
-    document.getElementById('wrapdiv').innerHTML = document.getElementById('wrapdiv').innerHTML +
-    ('<label for="points' + prizeCounter +
-    '">Points for Winner ' + prizeCounter +
-    ': </label><input type="number" id="points' + prizeCounter +
-    '" name="points' + prizeCounter + '">')
-    prizeCounter = prizeCounter + 1
+    let newHtml = `${$('#wrapdiv').html()}
+    <label for="points${prizeCounter}">Points for Winner  ${prizeCounter}: </label>
+    <input type="number" id="points${prizeCounter}" name="points${prizeCounter}">`
+    $('#wrapdiv').html(newHtml)
+    prizeCounter++
   })
-  let start = document.getElementById('startTime')
-  let end = document.getElementById('endTime')
-  start.addEventListener('change', function () {
+  let start = $('#startTime')
+  let end = $('#endTime')
+  start.on('change', function () {
     if (start.value) { end.min = start.value }
   }, false)
   $(document).on('click', '#submitCreate', () => {
