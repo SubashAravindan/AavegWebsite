@@ -1,7 +1,25 @@
 body {
   background: #2c2c54;
 }
+.popup_content {
+  margin: 10px;
+  padding: 10px;
+  padding-top: 50px;
+  width: 50%;
+  min-width: 350px;
+  background: #2c2c54;
+  border-radius: 10px;
+  color: #f49d6e;
+}
+.popup_content p{
+    text-align: center;
+}
 
+.popup_content .JPO_close{
+  color: #f49d6e !important;
+  margin: auto;
+  display: block;
+}
 main {
   color: #2c2c54;
 }
