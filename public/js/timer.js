@@ -62,16 +62,8 @@ $('[data-toggle="popover"]').popover({
   animation: true,
   html: true,
   content:
-  `<div id = "contactDiv">
-<<<<<<< HEAD
-<<<<<<< HEAD
+    `<div id = "contactDiv">
   <p>Chairperson : Savita -<a href = "tel:+917339367931"> 7339367931</a></p>
-=======
-  <p>Chairman : Savita -<a href = "tel:+917339367931"> 7339367931</a></p>
->>>>>>> Fix timer page
-=======
-  <p>Chairperson : Savita -<a href = "tel:+917339367931"> 7339367931</a></p>
->>>>>>> Fix timer page
   <p>Head, OC : Deeraj <a href="css/source.jpg" id="hi" class="links">-</a> <a href = "tel:+917339367931">9600852718 </a></p>
   <p>Head, OC : Evlin - <a href = "tel:+918129052491">8129052491 </a></p>
   <p>Head, Design : Yagnesh - <a href = "tel:+917358778423">7358778423 </a></p>
@@ -88,7 +80,6 @@ $(document).click(function (e) {
   } else {
     $('[data-toggle="popover"]').popover('hide')
   }
-<<<<<<< HEAD
 })
 
 $(function () {
@@ -115,8 +106,6 @@ $(function () {
     $('#door1').attr('src', 'images/left-door.png')
     $('#door2').attr('src', 'images/right-door.png')
   }
-=======
->>>>>>> Fix timer page
 })
 
 $(function () {
