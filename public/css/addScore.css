@@ -1,32 +1,12 @@
-body{
-  background-color:#2c2c54;
-}
-* {
-    box-sizing: border-box;
-    font-family:'Lato','sans-serif';
-    font-family:'Exo2','sans-serif';
-}
 form{
   margin:1.5em auto;
   width:90%;
 
 }
 select{
-    width: 150%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
+  height: 100%;
 }
 
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-    margin-top:5px;
-    margin-left:10px;
-    font-size: 17px;
-
-}
 .event-div{
   margin-top:10px;
   display:inline-block;
@@ -35,14 +15,10 @@ label {
   float:left;
 }
 .event-input-div{
+  margin-left: 15px;
   float:right;
 }
-.hostel-div{
-  float:left;
-}
-.points-div{
-  float:center;
-}
+
 .container{
   margin: 5px;
 }
@@ -57,10 +33,36 @@ input[type=text]{
   display:none;
 }
 .border-class{
-  border:2px solid black;
+  border:2px solid lightgray;
+  border-radius: 5px;
+  margin-top: 50px;
 }
 
 .delete{
   float: right;
   width: 20px;
+}
+
+/*Mine*/
+
+.border-class h1{
+  padding-left: 20px;
+  padding-top: 10px; 
+}
+
+#eventSelector+div{
+  vertical-align: baseline;
+  min-width: 30vw;
+}
+
+input[type=number]{
+  background: white !important;
+  height: unset;
+  border-radius: 2px;
+  min-height: 35px;
+}
+
+button[type=submit]{
+  background: #2c2c54 !important;
+  color: white !important;
 }

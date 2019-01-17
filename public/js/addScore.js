@@ -1,12 +1,24 @@
 $('document').ready(function () {
-  $('.selectpicker').selectpicker()
+  $('.select-selectize').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function (input) {
+      console.log('askjfkjs')
+      return {
+        value: input,
+        text: input
+      }
+    }
+  })
+  $('.select-selectize-single').selectize({
+    sortField: 'text'
+  })
 })
 window.onload = function () {
-  $('#eventId').change(function () {
+  $('#eventSelector').change(function () {
     let eventId = $(this).val()
-    console.log(eventId)
     $.ajax({
-      url: '/getPoints',
+      url: 'getPoints',
       type: 'GET',
       datatype: 'JSON',
       data: { 'data': eventId },
@@ -18,7 +30,8 @@ window.onload = function () {
             input.value = res[i]
           }
         }
-      } })
+      }
+    })
   })
 
   var ct = 3
@@ -28,16 +41,12 @@ window.onload = function () {
 
   function addPositionBlock () {
     $.ajax(
-      { url: '/api/hostels',
+      {
+        url: 'api/hostels',
         type: 'GET',
         success: function (result) {
           console.log(JSON.stringify(result))
           ct++
-          let br1 = document.createElement('br')
-          let br2 = document.createElement('br')
-          br1.classList.add('position' + ct + '-br')
-          br2.classList.add('position' + ct + '-br')
-          console.log('inside function')
 
           let position = 'position' + ct
           let wrapper = document.getElementById('p-div')
@@ -52,28 +61,21 @@ window.onload = function () {
             console.log('in remove')
             let elem = document.getElementById('div' + ct)
             elem.parentNode.removeChild(elem)
-            let br1 = wrapper.getElementsByClassName('position' + ct + '-br')[0]
-            let br2 = wrapper.getElementsByClassName('position' + ct + '-br')[1]
-            console.log(br1)
-            console.log(br2)
-            wrapper.removeChild(br1)
-            wrapper.removeChild(br2)
             ct = ct - 1
           })
           div.appendChild(deleteButton)
-          wrapper.appendChild(br1)
-          wrapper.appendChild(br2)
 
-          let positionLabel = document.createElement('Label')
-          positionLabel.setAttribute('for', position)
-          positionLabel.innerHTML = 'Position ' + ct + ' :'
-          div.appendChild(positionLabel)
+          let positionHead = document.createElement('h1')
+          positionHead.innerHTML = 'Position ' + ct + ':'
+          div.appendChild(positionHead)
 
           let container = document.createElement('div')
           container.classList.add('container')
+          container.classList.add('row')
 
           let hostelDiv = document.createElement('div')
-          hostelDiv.classList.add('hostel-div')
+          hostelDiv.classList.add('col-6')
+          hostelDiv.classList.add('col-12-small')
           let hostelLabel = document.createElement('Label')
           hostelLabel.setAttribute('for', position)
           hostelLabel.innerHTML = 'Hostel :'
@@ -81,8 +83,7 @@ window.onload = function () {
 
           let selectHostel = document.createElement('select')
           selectHostel.setAttribute('multiple', 'multiple')
-          selectHostel.classList.add('selectpicker')
-          selectHostel.setAttribute('data-live-search', 'true')
+          selectHostel.classList.add('select-selectize')
 
           for (let i = 0; i < result.length; i++) {
             let hostel = document.createElement('option')
@@ -94,7 +95,8 @@ window.onload = function () {
           container.appendChild(hostelDiv)
 
           let pointsDiv = document.createElement('div')
-          pointsDiv.classList.add('points-div')
+          pointsDiv.classList.add('col-6')
+          pointsDiv.classList.add('col-12-small')
           let pointsLabel = document.createElement('Label')
           var points = 'points' + ct
           pointsLabel.setAttribute('for', points)
@@ -113,7 +115,17 @@ window.onload = function () {
           div.appendChild(container)
           wrapper.appendChild(div)
           $(document).ready(function () {
-            $('.selectpicker').selectpicker()
+            $(selectHostel).selectize({
+              delimiter: ',',
+              persist: false,
+              create: function (input) {
+                console.log('askjfkjs')
+                return {
+                  value: input,
+                  text: input
+                }
+              }
+            })
           })
         }
       }

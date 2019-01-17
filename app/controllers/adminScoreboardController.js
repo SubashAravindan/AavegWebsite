@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const config = require('../../config/config')
 const logger = require('../../config/winston.js')
 const { check, validationResult } = require('express-validator/check')
 const Events = require('../models/Event.js')
@@ -43,6 +43,7 @@ exports.validate = [
 ]
 
 exports.createScore = async (req, res) => {
+  console.log(req.body)
   const errors = validationResult(req).array()
   if (errors.length) {
     const errorMessages = errors.map(error => error.msg)
@@ -53,18 +54,26 @@ exports.createScore = async (req, res) => {
       error: errorMessages
     })
   } else {
+    await Score.deleteMany({ event: req.body.eventId }).exec()
     let noOfPositions = []// array of hostels at different positions with keys position1, position2... in the body's object
     let noOfPoints = []// array of points of different positions with keys points1,points2.... in the body's object
     let keys = Object.keys(req.body)
     keys.forEach(function (item) {
       if (item.indexOf('position') !== -1) {
+        if (typeof req.body[item] !== 'object') {
+          let tempStr = req.body[item]
+          req.body[item] = [tempStr]
+          console.log(typeof req.body[item])
+        }
         noOfPositions.push(req.body[item])// items entered into the array after checking the key
       }
       if (item.indexOf('points') !== -1) { noOfPoints.push(req.body[item]) }// items added into the array after checking the key
     })
     for (let j = 0; j < noOfPositions.length; j++) {
       let hostelList = noOfPositions[j]// get hostels at a particular position
+      console.log(typeof hostelList)
       let points = noOfPoints[j]// get points at a particular position
+      console.log(points)
       for (let i = 0; i < hostelList.length; i++) {
         let pos = new Score({
           hostel: hostelList[i],
@@ -73,14 +82,15 @@ exports.createScore = async (req, res) => {
           points: points
         })
         try {
+          console.log(pos)
           let savedPos = await pos.save()
-          logger.info(`Scores of ${savedPos._id} added by ${req.session.rollnumber}`)
+          logger.info(`Scores of ${savedPos._id} added by ${req.user.username}`)
         } catch (error) {
           logger.error(error)
           return res.status(500).send(error)
         }
       }
     }
-    res.redirect('/admin')
+    res.redirect(config.APP_BASE_URL + 'events')
   }
 }
