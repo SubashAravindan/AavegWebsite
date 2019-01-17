@@ -17,7 +17,8 @@
   "standard": {
     "ignore": [
       "public/js/main.js",
-      "public/js/util.js"
+      "public/js/util.js",
+      "app/controllers/scoreboardController.js"
     ],
     "globals": [
       "$",

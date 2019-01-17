@@ -11,7 +11,6 @@ const methodOverride = require('method-override')
 const logger = require('./config/winston.js')
 const config = require('./config/config.js')
 const adminAuthRoutes = require('./app/routes/adminAuth.js')
-const adminAuthController = require('./app/controllers/adminAuthController.js')
 const studentAuthRoutes = require('./app/routes/studentAuth.js')
 const photographyRoutes = require('./app/routes/photography')
 const eventRoutes = require('./app/routes/events')
@@ -19,7 +18,6 @@ const tshirtRoutes = require('./app/routes/tshirtReg.js')
 const hostelRoutes = require('./app/routes/hostel.js')
 const authSetup = require('./app/utils/authSetup')
 const scoreRoutes = require('./app/routes/scoreboard.js')
-const adminScoreRoutes = require('./app/routes/adminScore.js')
 
 // ==================Middleware================
 

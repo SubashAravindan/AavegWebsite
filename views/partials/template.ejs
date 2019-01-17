@@ -67,10 +67,10 @@
           <li><a href="events">Events</a></li>
           <li><a href="tshirt">Tshirt</a></li>
           <!-- <li><a href="schedule">Schedule</a></li> -->
-          <% if(typeof adminUser!=='undefined') { %>
+          <% if(typeof adminUser!=='undefined' && typeof adminUser.username!=='undefined') { %>
           <li><a href="logout">
               Logout :
-              <%= adminUser %></a></li>
+              <%= adminUser.username %></a></li>
           <% }else if(typeof rollnumber!=='undefined'){%>
           <li><a href="studentLogout">
               Logout :
@@ -91,7 +91,9 @@
       <section>
         <h2>The Team</h2>
         <p>
-          A dynamic<a href="images/neel.jpg"> </a>and diverse team comprised of over 90 people, with varied skill sets and expertise, who are constantly ideating, questioning and putting their most creative foot forward to give you the best possible experience and have this fest etched in your memories.
+          A dynamic<a href="images/neel.jpg"> </a>and diverse team comprised of over 90 people, with varied skill sets
+          and expertise, who are constantly ideating, questioning and putting their most creative foot forward to give
+          you the best possible experience and have this fest etched in your memories.
           <br>PS: You can see us running around, talking or managing the audio and visuals during the fest.
         </p>
         <ul class="actions">
