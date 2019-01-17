@@ -1,4 +1,4 @@
-<% layout('../../partials/template') -%>
+<% layout('../partials/template') -%>
 <% stylesheet('css/eventEdit.css') %>
 <% script('https://unpkg.com/sweetalert/dist/sweetalert.min.js') -%>
 <% script('js/eventEditScript.js') -%>
@@ -65,11 +65,11 @@
   <div class="row">
       <div class="col-6 col-12-xsmall">
         <label for="startTime">Starting Time: </label>
-        <input type="datetime-local" id='startTime' value="<%=data.startTime%>" name='startTime'><br/>
+        <input type="datetime-local" id='startTime' value="<%=moment(data.startTime).format('YYYY-MM-DDTHH:mm')%>" name='startTime'><br/>
       </div>
       <div class="col-6 col-12-xsmall">
         <label for="endTime">Ending Time: </label>
-        <input type="datetime-local" id='endTime' value="<%=data.endTime%>" name='endTime'><br/><br/>
+        <input type="datetime-local" id='endTime' value="<%=moment(data.endTime).format('YYYY-MM-DDTHH:mm')%>" name='endTime'><br/><br/>
       </div>
     </div>
   <button id="submitCreate" class="button primary large"> Submit </button>

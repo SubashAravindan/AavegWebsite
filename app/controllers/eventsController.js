@@ -78,7 +78,7 @@ exports.validate = [
 exports.createEventForm = async (req, res) => {
   try {
     const { venueData, clusterNames, cupNames } = await getVenueClusterCup()
-    res.render('auth/admin/eventAdd', {
+    res.render('events/eventAdd', {
       data: {
         rollno: req.session.rollnumber,
         venues: venueData,
@@ -97,8 +97,6 @@ exports.editEventForm = async (req, res) => {
   try {
     const { venueData, clusterNames, cupNames } = await getVenueClusterCup()
     const eventToEdit = await Event.findById(req.params.id)
-    eventToEdit.startTime = moment(eventToEdit.startTime).format('YYYY-MM-DDTHH:mm')
-    eventToEdit.endTime = moment(eventToEdit.endTime).format('YYYY-MM-DDTHH:mm')
     Object.assign(eventToEdit, {
       rollno: req.session.rollnumber,
       venues: venueData,
@@ -106,8 +104,9 @@ exports.editEventForm = async (req, res) => {
       cups: cupNames,
       eventName: eventToEdit.name
     })
-    res.render('auth/admin/eventEdit', {
+    res.render('events/eventEdit', {
       data: eventToEdit,
+      moment: moment,
       title: 'Event Edit'
     })
   } catch (err) {
