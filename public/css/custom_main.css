@@ -114,3 +114,48 @@ main {
 #footer *{
   color: #f49d6e !important;
 }
+
+
+input[type="datetime-local"]{
+-moz-appearance: none;
+-webkit-appearance: none;
+-ms-appearance: none;
+appearance: none;
+border-radius: 8px;
+border: solid 1px;
+color: inherit;
+display: block;
+outline: 0;
+padding: 0 1em;
+text-decoration: none;
+width: 100%;
+}
+
+input[type="datetime-local"]:invalid,
+{
+box-shadow: none;
+}
+
+input[type="datetime-local"] {
+height: 2.75em;
+}
+
+input[type="datetime-local"]{
+background-color: rgba(255, 255, 255, 0.075);
+border-color: rgba(255, 255, 255, 0.35);
+}
+
+input[type="datetime-local"]{
+border-color: #8cc9f0;
+box-shadow: 0 0 0 1px #8cc9f0;
+}
+
+#main input[type="datetime-local"]{
+background-color: rgba(222, 222, 222, 0.25);
+border-color: #dddddd;
+}
+
+#main input[type="datetime-local"]:focus{
+border-color: #8cc9f0;
+box-shadow: 0 0 0 1px #8cc9f0;
+}
