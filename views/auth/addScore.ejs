@@ -1,87 +1,98 @@
-<% layout('../partials/score_template') -%>
-<% script('../js/addScore.js') -%>
-<% stylesheet('/css/addScore.css') -%>
-<% stylesheet("https://fonts.googleapis.com/css?family=Exo+2|Lato") -%>
-      <%if(locals.error){ %>
-          <div id="error"><%=error%></div>
-      <%}%>
-      <form id="score-form" method="POST" action="/admin/scoreboard">
-        <br>
-        <br>
-        <div class="event-div">
-        <div class="event-label-div">
-          <label for="eventId">Choose Event: </label>
-        </div>
-            <div class="event-input-div">
-          <select name="eventId" id="eventId"  required >
-              <option value="">Please select</option>
-              <% for(var i = 0; i< eventList.length; i++){ %>
-              <option value= "<%=eventList[i]._id%>" ><%=eventList[i].name%></option>
-              <% } %>
-          </select>
-        </div>
-      </div>
-      <div id="p-div">
-      <div class="border-class">
-          <label for="position1">First Place: </label>
-          <div class="container ">
-          <div class="hostel-div">
+<% layout('../partials/template') -%>
+<% script('js/addScore.js') -%>
+<% script('https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js') -%>
+<% stylesheet("css/addScore.css") -%>
+<% stylesheet("https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.min.css") -%>
+<%if(locals.error){ %>
+<div id="error">
+  <%=error%>
+</div>
+<%}%>
+<form id="score-form" method="POST" action="admin/scoreboard">
+  <br>
+  <br>
+  <div class="event-div">
+    <div class="event-label-div">
+      <h2>Choose Event: </h2>
+    </div>
+    <div class="event-input-div">
+      <select name="eventId" id="eventSelector" class="select-selectize-single" required>
+        <option value="">Please select</option>
+        <% for(var i = 0; i< eventList.length; i++){ %>
+        <option value="<%=eventList[i]._id%>">
+          <%=eventList[i].name%>
+        </option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div id="p-div">
+    <div class="border-class">
+      <h1>First Place: </h1>
+      <div class="container row">
+        <div class="col-6 col-12-small">
           <label for="position1">Hostel: </label>
-          <select name="position1" id="position1" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
-              <% for(var i = 0; i< hostels.length; i++){ %>
-              <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
-              <% } %>
+          <select name="position1" id="position1" class="select-selectize" value="" required multiple="multiple">
+            <% for(var i = 0; i< hostels.length; i++){ %>
+            <option value="<%=hostels[i]._id%>">
+              <%=hostels[i].name%>
+            </option>
+            <% } %>
           </select>
         </div>
-          <div class="points-div">
-            <label for="points1">Points: </label>
-              <input type="number" name="points1" id="points1" min=0 default=0>
-          </div>
+        <div class="col-6 col-12-small">
+          <label for="points1">Points: </label>
+          <input type="number" name="points1" id="points1" min=0 default=0>
         </div>
-      </div>
-      <br>
-      <br>
-      <div class="border-class">
-      <label for="position2">Second Position : </label>
-        <div class="container ">
-          <div class="hostel-div">
-            <label for="position2">Hostel: </label>
-            <select name="position2" id="position2" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
-                <% for(var i = 0; i< hostels.length; i++){ %>
-                <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
-                <% } %>
-            </select>
-          </div>
-            <div class="points-div">
-              <label for="points2">Points: </label>
-                <input type="number" name="points2" id="points2" min=0 default=0>
-            </div>
       </div>
     </div>
-    <br>
-    <br>
     <div class="border-class">
-        <label for="position3">Third Position : </label>
-        <div class="container ">
-          <div class="hostel-div">
-            <label for="position3">Hostel: </label>
-            <select name="position3" id="position3" value="" required class="selectpicker" multiple="multiple" data-live-search="true">
-                <% for(var i = 0; i< hostels.length; i++){ %>
-                <option value= "<%=hostels[i]._id%>" ><%=hostels[i].name%></option>
-                <% } %>
-            </select>
-          </div>
-            <div class="points-div">
-              <label for="points3">Points: </label>
-                <input type="number" name="points3" id="points3" min=0 default=0>
-            </div>
-          </div>
+      <h1>Second Place: </h1>
+      <div class="container row">
+        <div class="col-6 col-12-small">
+          <label for="position2">Hostel: </label>
+          <select name="position2" id="position2" class="select-selectize" value="" required multiple="multiple">
+            <% for(var i = 0; i< hostels.length; i++){ %>
+            <option value="<%=hostels[i]._id%>">
+              <%=hostels[i].name%>
+            </option>
+            <% } %>
+          </select>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="points2">Points: </label>
+          <input type="number" name="points2" id="points2" min=0 default=0>
         </div>
       </div>
-      <br>
-      <br>
-      <button value="AddPosition" id="addPositionBlock" class="btn-primary btn-sm" type="button">Add another position</button>
-        <div class="button-div">
-        <button type="submit" value="Add Score" class="button primary" onclick="submit()">Add Score</button>
+    </div>
+    <div class="border-class">
+      <h1>Third Place: </h1>
+      <div class="container row">
+        <div class="col-6 col-12-small">
+          <label for="position3">Hostel: </label>
+          <select name="position3" id="position3" class="select-selectize" value="" required multiple="multiple">
+            <% for(var i = 0; i< hostels.length; i++){ %>
+            <option value="<%=hostels[i]._id%>">
+              <%=hostels[i].name%>
+            </option>
+            <% } %>
+          </select>
+        </div>
+        <div class="col-6 col-12-small">
+          <label for="points3">Points: </label>
+          <input type="number" name="points3" id="points3" min=0 default=0>
+        </div>
       </div>
-      </form>
+    </div>
+  </div>
+  <br>
+  <br>
+  <button value="AddPosition" id="addPositionBlock" class="btn-primary btn-sm" type="button">Add another position</button>
+  <div class="button-div">
+    <button type="submit" value="Add Score" class="button primary" onclick="submit()">Add Score</button>
+  </div>
+  <br>
+  <br>
+</form>
