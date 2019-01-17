@@ -20,49 +20,53 @@ var showScoreboard = async (req, res) => {
           as: 'hostel'
         }
       },
-      { $group: { _id: { 'cup': '$event.cup', 'hostel': '$hostel.name', 'position': '$position' }, details: { $push: { event_id: '$event._id', event_name: '$event.name', points: '$points', 'date': '$event.date' } } } },
+      { $group: { _id: { 'cup': '$event.cup', 'hostel': '$hostel.name', 'position': '$position' }, details: { $push: { event_id: '$event._id', event_name: '$event.name', points: '$points', 'date': '$event.endTime' } } } },
       { $sort: { 'event.date': -1 } }]).exec()
 
-    const totalData = await getTotalByHostel();
+    const totalData = await getTotalByHostel()
 
-    const culturalTotals = []
-    const sportsTotals = []
-    const spectrumTotals = []
+    let culturalTotals = []
+    let sportsTotals = []
+    let spectrumTotals = []
+    let culturalTotalsObj = {}
+    let sportsTotalsObj = {}
+    let spectrumTotalsObj = {}
     const total = {}
-    const event_culturals = []
-    const event_sports = []
-    const event_spectrum = []
-    const event_culturals_arr = []
-    const event_sports_arr = []
-    const event_spectrum_arr = []
+    const eventCulturals = []
+    const eventSports = []
+    const eventSpectrum = []
+    const eventCulturalsArr = []
+    const eventSportsArr = []
+    const eventSpectrumArr = []
     const recents = {}
 
     totalData.forEach((item) => {
-      if (item._id.cup[0] == 'Culturals')
-        culturalTotals.push(item)
-      if (item._id.cup[0] == 'Sports')
-        sportsTotals.push(item)
-      if (item._id.cup[0] == 'Spectrum')
-        spectrumTotals.push(item)
+      if (item._id.cup[0] == 'Culturals') { culturalTotals.push(item) }// By default its in decending order
+      if (item._id.cup[0] == 'Sports') { sportsTotals.push(item) }
+      if (item._id.cup[0] == 'Spectrum') { spectrumTotals.push(item) }
 
       let hostel = item._id.hostel[0]
-      if (total[String(hostel)] != undefined)
-        total[String(hostel)] += item.hostel_total_points
-      else
-        total[String(hostel)] = item.hostel_total_points
+      if (total[String(hostel)] != undefined) { total[String(hostel)] += item.hostel_total_points } else { total[String(hostel)] = item.hostel_total_points }
     })
 
-    culturalTotals.map(pointsMapper)
-    sportsTotals.map(pointsMapper)
-    spectrumTotals.map(pointsMapper)
+    culturalTotals = culturalTotals.map(pointsMapper)
+    sportsTotals = sportsTotals.map(pointsMapper)
+    spectrumTotals = spectrumTotals.map(pointsMapper)
+    culturalTotals.forEach((item) => {
+      culturalTotalsObj[item.name] = item.points
+    })
+    sportsTotals.forEach((item) => {
+      sportsTotalsObj[item.name] = item.points
+    })
+    spectrumTotals.forEach((item) => {
+      spectrumTotalsObj[item.name] = item.points
+    })
+    console.log(JSON.stringify(sportsTotals, null, 2))
 
     scoreData.forEach((item) => {
-      if (item._id.cup[0] == 'Culturals')
-        event_culturals.push(item)
-      if (item._id.cup[0] == 'Spectrum')
-        event_spectrum.push(item)
-      if (item._id.cup[0] == 'Sports')
-        event_sports.push(item)
+      if (item._id.cup[0] == 'Culturals') { eventCulturals.push(item) }
+      if (item._id.cup[0] == 'Spectrum') { eventSpectrum.push(item) }
+      if (item._id.cup[0] == 'Sports') { eventSports.push(item) }
 
       let hostel = item._id.hostel[0]
       if (recents[String(hostel)] == undefined) {
@@ -70,92 +74,105 @@ var showScoreboard = async (req, res) => {
       }
 
       if (recents[String(hostel)].length < 3) {
-        const recent_obj = {
+        const recentObj = {
           event_name: item.details[0].event_name[0],
-          position: item._id.position
+          position: getOrdinalNumber(item._id.position)
         }
 
-        recents[String(hostel)].push(recent_obj)
+        recents[String(hostel)].push(recentObj)
       }
     })
 
-    event_culturals.forEach((item) => {
-      let index = event_culturals_arr.find((ele) => {
+    eventCulturals.forEach((item) => {
+      let index = eventCulturalsArr.findIndex((ele) => {
         return ele.event_name == item.details[0].event_name[0]
       })
-      hostel = item._id.hostel[0]
+      let hostel = item._id.hostel[0]
       if (index != -1) {
-        event_culturals_arr[index][String(hostel)] = item.details[0].points
+        eventCulturalsArr[index][String(hostel)] = item.details[0].points
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
           [String(hostel)]: item.details[0].points
         }
-        event_culturals_arr.push(event_obj)
+        eventCulturalsArr.push(event_obj)
       }
     })
 
-    event_sports.forEach((item) => {
-      let index = event_sports_arr.find((ele) => {
+    // console.log(JSON.stringify(eventSports, null, 2))
+    eventSports.forEach((item) => {
+      let index = eventSportsArr.findIndex((ele) => {
         return ele.event_name == item.details[0].event_name[0]
       })
-      hostel = item._id.hostel[0]
+      let hostel = item._id.hostel[0]
+
       if (index != -1) {
-        event_sports_arr[index][String(hostel)] = item.details[0].points
+        eventSportsArr[index][String(hostel)] = item.details[0].points
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
           [String(hostel)]: item.details[0].points
         }
-        event_sports_arr.push(event_obj)
+        eventSportsArr.push(event_obj)
       }
     })
 
-    event_spectrum.forEach((item) => {
-      let index = event_spectrum_arr.find((ele) => {
+    eventSpectrum.forEach((item) => {
+      let index = eventSpectrumArr.findIndex((ele) => {
         return ele.event_name == item.details[0].event_name[0]
       })
-      hostel = item._id.hostel[0]
+      let hostel = item._id.hostel[0]
       if (index != -1) {
-        event_spectrum_arr[index][String(hostel)] = item.details[0].points
+        eventSpectrumArr[index][String(hostel)] = item.details[0].points
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
           [String(hostel)]: item.details[0].points
         }
-        event_spectrum_arr.push(event_obj)
+        eventSpectrumArr.push(event_obj)
       }
     })
 
     const returnData = {
       standings: {
-        culturals: culturalTotals,
-        spectrum: spectrumTotals,
-        sports: sportsTotals
+        culturals: culturalTotalsObj,
+        spectrum: spectrumTotalsObj,
+        sports: sportsTotalsObj
       },
       total: total,
       recents: recents,
       events_score: {
-        culturals: event_culturals_arr,
-        sports: event_sports_arr,
-        spectrum: event_spectrum_arr
+        culturals: eventCulturalsArr,
+        sports: eventSportsArr,
+        spectrum: eventSpectrumArr
       }
     }
 
-    return res.send({ 'scoreData': scoreData, 'totals': totalData, 'data': returnData })
+    // return res.send({ scoreData: scoreData, totals: totalData, data: returnData })
+    return res.render('scoreboard/scoreboard', { scoreData: scoreData, totals: totalData, data: returnData, title: 'Scoreboard' })
   } catch (error) {
+    console.log(error)
     return res.status(500).send(error)
   }
 }
 
-function pointsMapper(item) {
+function pointsMapper (item) {
   return {
     name: item._id.hostel[0],
     points: item.hostel_total_points
   }
 }
 
-async function getTotalByHostel() {
+function getOrdinalNumber (number) {
+  switch (number) {
+    case 1: return '1st'
+    case 2: return '2nd'
+    case 3: return '3rd'
+    default: return number + 'th'
+  }
+}
+
+async function getTotalByHostel () {
   try {
     const totals = await Score.aggregate([
       {
@@ -175,15 +192,22 @@ async function getTotalByHostel() {
         }
       },
       { $group: { '_id': { 'cup': '$event.cup', 'hostel': '$hostel.name' }, 'hostel_total_points': { $sum: '$points' } } }, { '$sort': { 'hostel_total_points': -1 } }])
-    console.log('debug', totals)
+    // console.log('debug', totals)
     return totals
   } catch (error) {
     logger.error(error)
   }
 }
 
-var getEventScores = async function getEventScores(eventId) {
-  const scoreData = await Score.find({ 'event': eventId }).exec()
+var getEventScores = async function getEventScores (eventId) {
+  const scoreData = await Score.find({ 'event': eventId }).populate('hostel').exec()
+  let returnData = {}
+  scoreData.forEach(score => {
+    if (typeof returnData[score.position] === 'undefined') {
+      returnData[score.position] = []
+    }
+    returnData[score.position].push(score.hostel.name)
+  })
   return scoreData
 }
 
