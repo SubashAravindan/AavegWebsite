@@ -15,6 +15,7 @@ const studentAuthRoutes = require('./app/routes/studentAuth.js')
 const photographyRoutes = require('./app/routes/photography')
 const eventRoutes = require('./app/routes/events')
 const hostelRoutes = require('./app/routes/hostel.js')
+const miscRoutes = require('./app/routes/misc')
 const authSetup = require('./app/utils/authSetup')
 const scoreRoutes = require('./app/routes/scoreboard.js')
 
@@ -45,13 +46,11 @@ app.get('/', (req, res) => {
 app.use(photographyRoutes)
 app.use(studentAuthRoutes)
 app.use(adminAuthRoutes)
-
 app.use(hostelRoutes)
 app.use(eventRoutes)
 app.use(scoreRoutes)
-/* app.get('*', (req, res) => {
-  res.render('comingSoon', { url: req.url })
-}) */
+app.use(miscRoutes)
+
 app.listen(config.port, () => {
   logger.info(`Server started on port ${config.port}`)
 })
