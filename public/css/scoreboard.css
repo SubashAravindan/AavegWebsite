@@ -6,6 +6,11 @@
   margin-left:0 !important;
 }
 
+.card-body .row{
+  padding:5px !important;
+  margin-left:0 !important;
+}
+
 #scorecard-container{
   font-size: 1rem;
   padding: 20px;
@@ -72,9 +77,14 @@
 }
 
 .mini-standings .row{
-  padding-top:0 !important;
+  padding-top:5px !important;
   padding-bottom:0 !important;
   margin: 0 auto;
+}
+
+
+.mini-standings > ul > li{
+  margin: 5px auto !important;
 }
 
 .mini-standings{
@@ -149,4 +159,21 @@
 
 #chart-options>button:hover{
   color: #ffffff !important;
+}
+
+table{
+  text-align: center;
+}
+
+th{
+  text-align: center !important;
+}
+
+.card-body .recents *{
+  padding:0 !important;
+  text-align: center;
+}
+
+#hack{
+  display: none;
 }

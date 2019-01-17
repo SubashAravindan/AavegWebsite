@@ -1,32 +1,48 @@
 <% layout('../partials/template') -%>
-<% stylesheet('/css/scoreboard.css') -%>
+<% stylesheet('css/scoreboard.css') -%>
 <% script('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js') -%>
-<% script('/js/scoreboard.js') -%>
+<% script('js/scoreboard.js') -%>
+
+
 <div id="scorecard-container">
+  <div id="hack" class="magic" data-comment="You -> *Insert suprised pikachu meme here :)*">
+    <%= JSON.stringify(data) %>
+  </div>
   <h1 id="standing-header">Standings</h1>
   <div class="row" id="mini-standings">
     <div class="mini-standings col-4-xlarge col-12-small">
       <h2 class="mini-standings-header">Culturals</h2>
       <ul>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+        <% if(typeof data!=='undefined')Object.keys(data.standings.culturals).forEach((item,index)=>{
+              if(index<3){
+          %>
+        <li class="row"><span class="col-4-xlarge"><img alt=<%=item %> class="mini-hostel-logo"></span><span class="col-8-xlarge">
+            <%= item %></span></li>
+        <% }}) %>
       </ul>
     </div>
     <div class="mini-standings col-4-xlarge col-12-small">
       <h2 class="mini-standings-header">Spectrum</h2>
       <ul>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+        <% if(typeof data!=='undefined') Object.keys(data.standings.spectrum).forEach((item)=>{
+            if(index<3){  
+          %>
+        <li class="row"><span class="col-4-xlarge"><img alt=<%=item %> class="mini-hostel-logo">
+            alt=""></span><span class="col-8-xlarge">
+            <%= item %></span></li>
+        <% }}) %>
       </ul>
     </div>
     <div class="mini-standings col-4-xlarge col-12-small">
-      <h2 class="mini-standings-header">Culturals</h2>
+      <h2 class="mini-standings-header">Sports</h2>
       <ul>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/agate_logo.png" alt=""></span><span class="col-8-xlarge">Agate</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/diamond_logo.png" alt=""></span><span class="col-8-xlarge">Diamond</span></li>
-        <li class="row"><span class="col-4-xlarge"><img src="/images/opal_logo.png" alt=""></span><span class="col-8-xlarge">Opal</span></li>
+        <% if(typeof data!=='undefined')Object.keys(data.standings.sports).forEach((item,index)=>{ 
+              if(index<3){
+          %>
+        <li class="row"><span class="col-4-xlarge"><img alt=<%=item %> class="mini-hostel-logo"></span><span class="
+              col-8-xlarge">
+            <%= item %></span></li>
+        <% }}) %>
       </ul>
     </div>
   </div>
@@ -43,66 +59,256 @@
     <!-- Agate -->
     <div class="scorecard card col-12-small col-6-large col-2-xlarge">
       <div class="img-wrapper" style="background: #654ea3;background: -webkit-radial-gradient(center, black, purple);background: radial-gradient(center, black, purple);">
-        <img class="card-img-top" src="/images/agate_logo.png" alt="Card image cap">
+        <img class="card-img-top" src="images/agate_logo.png" alt="Card image cap">
       </div>
       <div class="card-body">
-        <h1 class="card-title">9999</h1>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h1 class="card-title">
+          <% if(typeof data.total!=='undefined'){%>
+          <%= data.total.Agate %>
+          <%} else {%>
+          <%= 0 %>
+          <%}%>
+        </h1>
+        <div class="row recents">
+          <% if(typeof data.recents.Agate!=='undefined'){data.recents.Agate.forEach((item)=>{ %>
+          <h3 class="col-8">
+            <%= item.event_name%>
+          </h3>
+          <h3 class="col-4">
+            <%= item.position%>
+          </h3>
+          <% })} %>
+        </div>
       </div>
     </div>
 
     <!-- Diamond -->
     <div class="scorecard card col-12-small col-6-large col-2-xlarge">
       <div class="img-wrapper" style="background: white;">
-        <img class="card-img-top" src="/images/diamond_logo.png" alt="Card image cap">
+        <img class="card-img-top" src="images/diamond_logo.png" alt="Card image cap">
       </div>
       <div class="card-body">
-        <h1 class="card-title">9999</h1>
-        <p class="card-text">Some quick example text to build on the Card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h1 class="card-title">
+          <% if(typeof data.total.Diamond!=='undefined'){%>
+          <%= data.total.Diamond %>
+          <%}else {%>
+          <%= 0 %>
+          <% }%>
+        </h1>
+        <div class="row recents">
+          <% if(typeof data.recents.Diamond!=='undefined')data.recents.Diamond.forEach((item)=>{ %>
+          <h3 class="col-8">
+            <%= item.event_name%>
+          </h3>
+          <h3 class="col-4">
+            <%= item.position%>
+          </h3>
+          <% }) %>
+        </div>
       </div>
     </div>
 
     <!-- Coral -->
     <div class="scorecard card col-12-small col-6-large col-2-xlarge">
       <div class="img-wrapper" style="background:darkred;">
-        <img class="card-img-top" src="/images/coral_logo.png" alt="Card image cap">
+        <img class="card-img-top" src="images/coral_logo.png" alt="Card image cap">
       </div>
       <div class="card-body">
-        <h1 class="card-title">9999</h1>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h1 class="card-title">
+          <% if(typeof data.total.Coral!=='undefined'){%>
+          <%= data.total.Coral %>
+          <%}else {%>
+          <%= 0 %>
+          <% }%>
+        </h1>
+        <div class="row recents">
+          <% if(typeof data.recents.Coral!=='undefined')data.recents.Coral.forEach((item)=>{ %>
+          <h3 class="col-8">
+            <%= item.event_name%>
+          </h3>
+          <h3 class="col-4">
+            <%= item.position%>
+          </h3>
+          <% }) %>
+        </div>
       </div>
     </div>
     <!-- Opal -->
     <div class="scorecard card col-12-small col-6-large col-2-xlarge">
       <div class="img-wrapper" style="background: gray;background: -webkit-radial-gradient(center, black, gray);background: radial-gradient(center, black, gray);">
-        <img class="card-img-top" src="/images/opal_logo.png" alt="Card image cap">
+        <img class="card-img-top" src="images/opal_logo.png" alt="Card image cap">
       </div>
       <div class="card-body">
-        <h1 class="card-title">9999</h1>
-        <p class="card-text">Some quick example text to build on the Card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h1 class="card-title">
+          <% if(typeof data.total.Opal!=='undefined'){%>
+          <%= data.total.Opal %>
+          <%}else {%>
+          <%= 0 %>
+          <% }%>
+        </h1>
+        <div class="row recents">
+          <% if(typeof data.recents.Opal!=='undefined')data.recents.Opal.forEach((item)=>{ %>
+          <h3 class="col-8">
+            <%= item.event_name%>
+          </h3>
+          <h3 class="col-4">
+            <%= item.position%>
+          </h3>
+          <% }) %>
+        </div>
       </div>
     </div>
 
     <!-- Jade -->
     <div class="scorecard card col-12-small col-6-large col-2-xlarge">
       <div class="img-wrapper" style="background:black;">
-        <img class="card-img-top" src="/images/jade_logo.png" alt="Card image cap">
+        <img class="card-img-top" src="images/jade_logo.png" alt="Card image cap">
       </div>
       <div class="card-body">
-        <h1 class="card-title">9999</h1>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h1 class="card-title">
+          <% if(typeof data.total.Jade!=='undefined'){%>
+          <%= data.total.Jade %>
+          <%}else {%>
+          <%= 0 %>
+          <% }%>
+        </h1>
+        <div class="row recents">
+          <% if(typeof data.recents.Jade!=='undefined')data.recents.Jade.forEach((item)=>{ %>
+          <h3 class="col-8">
+            <%= item.event_name%>
+          </h3>
+          <h3 class="col-4">
+            <%= item.position%>
+          </h3>
+          <% }) %>
+        </div>
       </div>
     </div>
   </div>
+  <div class="table-wrapper row">
+    <h1>Culturals</h1>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Agate</th>
+          <th>Diamond</th>
+          <th>Coral</th>
+          <th>Jade</th>
+          <th>Opal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(typeof data!=='undefined' && typeof data.events_score.culturals!=='undefined'){
+            data.events_score.culturals.forEach((item)=>{%>
+        <tr>
+          <td>
+            <%= item.event_name %>
+          </td>
+          <td>
+            <%= (typeof item.Agate!='undefined')?item.Agate:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Diamond!='undefined')?item.Diamond:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Coral!='undefined')?item.Coral:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Jade!='undefined')?item.Jade:'-' %>
+          </td>
+          <td>
+            <%= item.Opal %>
+          </td>
+        </tr>
 
+        <% })} %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="table-wrapper row">
+    <h1>Spectrum</h1>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Agate</th>
+          <th>Diamond</th>
+          <th>Coral</th>
+          <th>Jade</th>
+          <th>Opal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(typeof data!=='undefined' && typeof data.events_score.spectrum!=='undefined'){
+            data.events_score.spectrum.forEach((item)=>{%>
+        <tr>
+          <td>
+            <%= item.event_name %>
+          </td>
+          <td>
+            <%= (typeof item.Agate!='undefined')?item.Agate:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Diamond!='undefined')?item.Diamond:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Coral!='undefined')?item.Coral:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Jade!='undefined')?item.Jade:'-' %>
+          </td>
+          <td>
+            <%= item.Opal %>
+          </td>
+        </tr>
+
+        <% })} %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="table-wrapper row">
+    <h1>Sports</h1>
+    <table class="alt">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Agate</th>
+          <th>Diamond</th>
+          <th>Coral</th>
+          <th>Jade</th>
+          <th>Opal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(typeof data!=='undefined' && typeof data.events_score.sports!=='undefined'){
+            data.events_score.sports.forEach((item)=>{%>
+        <tr>
+          <td>
+            <%= item.event_name %>
+          </td>
+          <td>
+            <%= (typeof item.Agate!='undefined')?item.Agate:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Diamond!='undefined')?item.Diamond:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Coral!='undefined')?item.Coral:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Jade!='undefined')?item.Jade:'-' %>
+          </td>
+          <td>
+            <%= (typeof item.Opal!='undefined')?item.Opal:'-' %>
+          </td>
+        </tr>
+
+        <% })} %>
+      </tbody>
+    </table>
+
+  </div>
 </div>
