@@ -1,0 +1,100 @@
+.text-center, .text-center::after{
+  text-align: center;
+}
+.hide{
+  display: none;
+}
+#main button#deleteBtn, #main button#deleteBtn:hover{
+  background-color: red;
+  color: white !important;
+}
+
+.winner{
+  border: 2px solid;
+  margin: 10px auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 20%;
+  padding-left: 20%;
+  display: inline-block;
+  font-size: 1.5rem;
+  border-color: #2c2c54;
+  width: 50vw;
+  max-width: 550px;
+  min-width: 250px;
+  font-weight: bold;
+}
+
+.adminControls .button.small.primary{
+  background: #2c2c54 !important;
+}
+.winner1:hover, .winner1:active{
+  background: url('../images/red-fire.gif');
+  background-size:     cover;                   
+  background-repeat:   no-repeat;
+  background-position: center center;
+  font-weight: bold;
+}
+
+.winner1:hover .winnerName {
+  background-color: rgba(110,	106, 106, 0.6);
+  color: white;   
+}
+.winner2:hover .winnerName {
+  background-color: rgba(110,	106, 106, 0.6);
+  color: white;   
+}
+.winner3:hover .winnerName {
+  background-color: rgba(110, 106, 106, 0.6);
+  color: white;   
+}
+
+.winners{
+  display: none;
+}
+
+.winner2:hover, .winner2:active{
+  background: url("../images/blue-fire.gif");
+  background-size:     cover;                      
+  background-repeat:   no-repeat;
+  background-position: center center;
+  font-weight: bold;
+
+}
+
+.winner3:hover, .winner3:active{
+  background: url("../images/green-fire.gif");
+  background-size:     cover;                      
+  background-repeat:   no-repeat;
+  background-position: center center;
+  font-weight: bold;
+
+}
+
+.cupCluster h2{
+  display: inline;
+}
+
+.winnerName{
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.secondWinner{
+  border-color: #2c2c54;
+}
+.thirdWinner{
+  border-color: #2c2c54;
+}
+
+.rulebook .button{
+  background: #2c2c54 !important;
+}
+
+.cupCluster{
+  margin-bottom: 30px;
+}}
+
+button.swal-button {
+  padding: 5px 25px;
+}

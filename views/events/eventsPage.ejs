@@ -1,0 +1,28 @@
+<% layout('../partials/template') -%>
+<% stylesheet('css/eventsPage.css') -%>
+<%script('js/eventsPage.js') -%>
+
+</section>
+<section id="first" class="main special">
+	<header class="major">
+		<h2>Events</h2>
+	</header>
+	<div class="row clusterRow">
+			<%eventsData.forEach(data=>{ %>					
+				<div class="col-6-small col-12-xsmall col-3-large col-4-medium col-3-xlarge clusterContainer text-center"><img class="clusterImg" src="images/clusters/<%=data._id%>.png"><span class="clusterText"><%=data._id%></span></div>
+			<%})%>
+			
+	</div>
+	<div class="container eventsContainer">
+		<% eventsData.forEach(cluster=>{ %>	
+			<ul class="alt eventsList hide">
+				<%for(let i=0;i<cluster.events.length;i++) {%>
+					<li><a href="events/<%=cluster.events[i]._id%>"><%=cluster.events[i].name%></a></li>	
+				<%}%>
+			</ul>		
+		<% }) %>
+		<button class="button primary hide" id="backBtn"><i class="icon fa-arrow-left "></i> All clusters</button>
+	</div>
+
+</section>
+

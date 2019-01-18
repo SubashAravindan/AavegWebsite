@@ -1,0 +1,56 @@
+<% layout('../partials/template') -%>
+<% stylesheet('css/showEvent.css') -%>
+<% script('https://unpkg.com/sweetalert/dist/sweetalert.min.js') -%>
+<% script('js/showEvent.js') -%>
+<section id="content" class="main">
+  <header class="major">
+      <h1 class="text-center" id="eventName"><%=eventData.name%></h1>
+  </header>
+  <%if(typeof adminUser !=='undefined'&&adminUser.permissions.includes(1)){%>
+    <div class="adminControls text-center">
+      <a href="admin/events/edit/<%=eventData._id%>" class="button small primary">Edit event</a>
+      <button class="button small" id="deleteBtn"><i class="icon fa-trash"></i>  Delete</button>
+    </div>
+  <% } %>
+  <div class="winners text-center">
+    <% Object.keys(winners).forEach(key=>{%>
+      <div class="place<%=key%>">
+          <% winners[key].forEach(hostel=>{%>
+            <div class="winner<%=key%> winner"><span class="winnerName"><%=hostel%></span></div>
+          <% })%>
+      </div>      
+    <%})%>
+  </div>
+  <div class="cupCluster row">
+      <div class="col-6 align-center col-12-xsmall">
+        <p><h2><i class="icon fa-trophy"></i> Cup : </h2>  <%=eventData.cup%></p>
+      </div>
+      <div class="col-6 align-center col-12-xsmall">
+        <p><h2><i class="icon fa-star"></i> Cluster : </h2>  <%=eventData.cluster%></p>
+      </div>
+    </div>
+    <div class="container description">
+        <h2><i class="icon fa-pencil"></i> Description : </h2>
+        <p>
+          <%=eventData.description%>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias placeat maiores optio perspiciatis! Nihil porro commodi beatae, eligendi voluptatibus neque, pariatur rem asperiores magnam ducimus illo, suscipit assumenda. Obcaecati, at? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum maiores expedita magni omnis consectetur voluptatibus, quidem, sed quas, quisquam harum blanditiis sapiente ab incidunt fugiat consequuntur dicta fuga aliquid molestias! Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium inventore officia, dicta quod numquam temporibus. Cum saepe vero atque sapiente cupiditate voluptatum, nisi veniam, animi in, maxime molestiae cumque qui!
+        </p>
+      </div>
+    
+    <div class="dateTime">
+      <h3><i class="icon fa-clock-o"></i> Time : </h3>
+      <p><strong><%=eventData.startTime%></strong> to <strong><%=eventData.endTime%></strong></p>
+    </div>
+    <div class="venue">
+      <h3><i class="icon fa-map"></i>   Venue:</h3>
+      <p>
+          <%=eventData.venue.name%> <a href=" https://www.google.com/maps/search/?api=1&query= <%=eventData.venue.lat%>, <%=eventData.venue.lng%>" class="icon fa-map-marker"></a>
+      </p>
+    </div>
+    <div class="rulebook">
+      <h2><i class="icon fa-book"></i> Rulebook : </h2>
+      <p>
+        <a href="<%=eventData.rules%>" class="button primary"> View rulebook</a>
+      </p>
+    </div>
+</section>
