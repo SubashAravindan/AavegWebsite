@@ -7,11 +7,11 @@ const returnImgLink = (hostel) => {
 }
 
 let logos = {
-  Agate: 'images/agate_logo.png',
-  Diamond: 'images/diamond_logo.png',
-  Coral: 'images/coral_logo.png',
-  Jade: 'images/jade_logo.png',
-  Opal: 'images/opal_logo.png'
+  Agate: 'images/agate_logo_bg.png',
+  Diamond: 'images/diamond_logo_bg.png',
+  Coral: 'images/coral_logo_bg.png',
+  Jade: 'images/jade_logo_bg.png',
+  Opal: 'images/opal_logo_bg.png'
 }
 
 $('.mini-hostel-logo').each((index, ele) => {
