@@ -105,7 +105,7 @@ const showScoreboard = async (req, res) => {
 
     eventSports.forEach((item) => {
       let index = eventSportsArr.findIndex((ele) => {
-        return ele.event_name == item.details[0].event_name[0]
+      return ele.event_name == item.details[0].event_name[0]
       })
       let hostel = item._id.hostel[0]
 
