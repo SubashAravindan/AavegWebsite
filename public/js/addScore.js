@@ -3,7 +3,6 @@ $('document').ready(function () {
     delimiter: ',',
     persist: false,
     create: function (input) {
-      console.log('askjfkjs')
       return {
         value: input,
         text: input
@@ -36,7 +35,6 @@ window.onload = function () {
 
   var ct = 3
   let addButton = document.getElementById('addPositionBlock')
-  console.log(addButton)
   addButton.addEventListener('click', addPositionBlock)
 
   function addPositionBlock () {
@@ -45,7 +43,6 @@ window.onload = function () {
         url: 'api/hostels',
         type: 'GET',
         success: function (result) {
-          console.log(JSON.stringify(result))
           ct++
 
           let position = 'position' + ct
@@ -58,7 +55,6 @@ window.onload = function () {
           deleteButton.innerHTML = 'Close ❌ '
           deleteButton.classList.add('delete')
           deleteButton.addEventListener('click', function () {
-            console.log('in remove')
             let elem = document.getElementById('div' + ct)
             elem.parentNode.removeChild(elem)
             ct = ct - 1
@@ -82,6 +78,7 @@ window.onload = function () {
           hostelDiv.appendChild(hostelLabel)
 
           let selectHostel = document.createElement('select')
+          selectHostel.setAttribute('name', ('position' + ct))
           selectHostel.setAttribute('multiple', 'multiple')
           selectHostel.classList.add('select-selectize')
 
@@ -119,7 +116,6 @@ window.onload = function () {
               delimiter: ',',
               persist: false,
               create: function (input) {
-                console.log('askjfkjs')
                 return {
                   value: input,
                   text: input

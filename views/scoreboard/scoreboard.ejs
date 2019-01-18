@@ -63,7 +63,7 @@
       </div>
       <div class="card-body">
         <h1 class="card-title">
-          <% if(typeof data.total!=='undefined'){%>
+          <% if(typeof data.total.Agate!=='undefined'){%>
           <%= data.total.Agate %>
           <%} else {%>
           <%= 0 %>
@@ -218,7 +218,7 @@
             <%= (typeof item.Jade!='undefined')?item.Jade:'-' %>
           </td>
           <td>
-            <%= item.Opal %>
+            <%= (typeof item.Opal!='undefined')?item.Opal:'-' %>
           </td>
         </tr>
 
@@ -260,7 +260,7 @@
             <%= (typeof item.Jade!='undefined')?item.Jade:'-' %>
           </td>
           <td>
-            <%= item.Opal %>
+            <%= (typeof item.Opal!='undefined')?item.Opal:'-' %>
           </td>
         </tr>
 

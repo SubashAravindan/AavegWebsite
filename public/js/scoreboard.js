@@ -6,7 +6,7 @@ const returnImgLink = (hostel) => {
   return logos[hostel]
 }
 
-var logos = {
+let logos = {
   Agate: 'images/agate_logo.png',
   Diamond: 'images/diamond_logo.png',
   Coral: 'images/coral_logo.png',
@@ -14,26 +14,25 @@ var logos = {
   Opal: 'images/opal_logo.png'
 }
 
-console.log($('.mini-hostel-logo'))
 $('.mini-hostel-logo').each((index, ele) => {
   $(ele).attr('src', String(returnImgLink(String($(ele).attr('alt')))))
 })
 
-var culturalsData = [
+let culturalsData = [
   data.standings.culturals.Agate,
   data.standings.culturals.Diamond,
   data.standings.culturals.Coral,
   data.standings.culturals.Jade,
   data.standings.culturals.Opal
 ]
-var spectrumData = [
+let spectrumData = [
   data.standings.spectrum.Agate,
   data.standings.spectrum.Diamond,
   data.standings.spectrum.Coral,
   data.standings.spectrum.Jade,
   data.standings.spectrum.Opal
 ]
-var sportsData = [
+let sportsData = [
   data.standings.sports.Agate,
   data.standings.sports.Diamond,
   data.standings.sports.Coral,
@@ -41,7 +40,7 @@ var sportsData = [
   data.standings.sports.Opal
 ]
 
-var barChartDataCultural = {// eslint-disable-line
+let barChartDataCultural = {// eslint-disable-line
   labels: ['Agate', 'Diamond', 'Coral', 'Jade', 'Opal'],
   datasets: [{
     label: 'Cultural',
@@ -51,7 +50,7 @@ var barChartDataCultural = {// eslint-disable-line
 
 }
 
-var barChartDataSpectrum = {// eslint-disable-line
+let barChartDataSpectrum = {// eslint-disable-line
   labels: ['Agate', 'Diamond', 'Coral', 'Jade', 'Opal'],
   datasets: [{
     label: 'Spectrum',
@@ -61,7 +60,7 @@ var barChartDataSpectrum = {// eslint-disable-line
 
 }
 
-var barChartDataSports = {// eslint-disable-line
+let barChartDataSports = {// eslint-disable-line
   labels: ['Agate', 'Diamond', 'Coral', 'Jade', 'Opal'],
   datasets: [{
     label: 'Sports',
@@ -71,7 +70,7 @@ var barChartDataSports = {// eslint-disable-line
 
 }
 
-var barChartData = {
+let barChartData = {
   labels: ['Agate', 'Diamond', 'Coral', 'Jade', 'Opal'],
   datasets: [{
     label: 'Cultural',
@@ -92,7 +91,7 @@ var barChartData = {
 window.onload = chartMaker(barChartData, true)
 
 function chartMaker (dataset, stacked = false) {
-  var ctx = document.getElementById('canvas').getContext('2d')
+  let ctx = document.getElementById('canvas').getContext('2d')
   window.myBar = new Chart(ctx, {// eslint-disable-line
     type: 'bar',
     data: dataset,
