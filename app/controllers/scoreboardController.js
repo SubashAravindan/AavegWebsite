@@ -88,7 +88,12 @@ const showScoreboard = async (req, res) => {
       })
       let hostel = item._id.hostel[0]
       if (index != -1) {
-        eventCulturalsArr[index][String(hostel)] = item.details[0].points
+        if (eventCulturalsArr[index][String(hostel)] === undefined) {
+          eventCulturalsArr[index][String(hostel)] = item.details[0].points
+        }
+        else {
+          eventCulturalsArr[index][String(hostel)] += item.details[0].points
+        }
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
@@ -105,7 +110,12 @@ const showScoreboard = async (req, res) => {
       let hostel = item._id.hostel[0]
 
       if (index != -1) {
-        eventSportsArr[index][String(hostel)] = item.details[0].points
+        if (eventSportsArr[index][String(hostel)] === undefined) {
+          eventSportsArr[index][String(hostel)] = item.details[0].points
+        }
+        else {
+          eventSportsArr[index][String(hostel)] += item.details[0].points
+        }
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
@@ -121,7 +131,12 @@ const showScoreboard = async (req, res) => {
       })
       let hostel = item._id.hostel[0]
       if (index != -1) {
-        eventSpectrumArr[index][String(hostel)] = item.details[0].points
+        if (eventSpectrumArr[index][String(hostel)] === undefined) {
+          eventSpectrumArr[index][String(hostel)] = item.details[0].points
+        }
+        else {
+          eventSpectrumArr[index][String(hostel)] += item.details[0].points
+        }
       } else {
         const event_obj = {
           event_name: item.details[0].event_name[0],
@@ -148,6 +163,7 @@ const showScoreboard = async (req, res) => {
 
     return res.render('scoreboard/scoreboard', { scoreData: scoreData, totals: totalData, data: returnData, title: 'Scoreboard' })
   } catch (error) {
+    console.log(error)
     return res.status(500).send(error)
   }
 }
