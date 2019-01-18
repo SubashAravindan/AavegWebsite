@@ -219,7 +219,7 @@ const getEventScores = async function getEventScores(eventId) {
     }
     returnData[score.position].push(score.hostel.name)
   })
-  return scoreData
+  return returnData
 }
 
 module.exports = {

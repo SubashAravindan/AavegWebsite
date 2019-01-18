@@ -5,6 +5,8 @@ const Cluster = require('../models/Cluster.js')
 const venueController = require('./venueController.js')
 const { check, validationResult } = require('express-validator/check')
 const moment = require('moment')
+const scoreboardController = require('../controllers/scoreboardController')
+
 /* Returns venue data, cluster names, cup names all at once for simplification */
 async function getVenueClusterCup () {
   let venue = venueController.getVenues()
@@ -150,7 +152,7 @@ exports.deleteEventData = async (req, res) => {
   try {
     await Event.findByIdAndDelete(req.params.id).exec()
     logger.info(`Event ${req.params.id} deleted by ${req.session.passport.user}`)
-    res.redirect('events')
+    res.sendStatus(200)
   } catch (err) {
     logger.error(err)
     res.status(500).send(err)
@@ -193,5 +195,57 @@ exports.editEventData = async (req, res) => {
       logger.error(err)
       res.status(500).send(err)
     }
+  }
+}
+
+exports.getEvents = async (req, res) => {
+  try {
+    const eventsData = await Event.find({}).exec()
+    return res.send(eventsData)
+  } catch (e) {
+    logger.error(e)
+    return res.status(500).json(e)
+  }
+}
+
+exports.getEventData = async (req, res) => {
+  try {
+    const eventData = await Event.find({ _id: req.params.id }).exec()
+    return res.json(eventData)
+  } catch (e) {
+    logger.error(e)
+    return res.status(500).json(e)
+  }
+}
+
+exports.showEventsPage = async (req, res) => {
+  try {
+    const eventsByCluster = await Event.aggregate([
+      {
+        $group: {
+          '_id': '$cluster',
+          'events': { $push: '$$ROOT' }
+        }
+      }
+    ])
+    res.render('events/eventsPage', { title: 'Events', eventsData: eventsByCluster })
+  } catch (e) {
+    res.status(500).json(e)
+  }
+}
+
+exports.showEvent = async (req, res) => {
+  try {
+    const eventData = await Event.findById(req.params.id).populate('venue').exec()
+    if (eventData) {
+      eventData.startTime = new Date(Date.parse(eventData.startTime)).toLocaleString()
+      eventData.endTime = new Date(Date.parse(eventData.endTime)).toLocaleString()
+      const winners = await scoreboardController.getEventScores(req.params.id)
+      res.render('events/showEvent', { title: eventData.name, eventData, winners })
+    } else {
+      res.render('error', { title: 'Error', error: 'No such event' })
+    }
+  } catch (e) {
+    res.status(500).send(e)
   }
 }

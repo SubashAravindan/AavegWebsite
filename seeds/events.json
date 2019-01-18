@@ -1,0 +1,49 @@
+[
+	{
+	  "name": "CTF",
+	  "cup": "spectrum",
+	  "points": [10, 7, 5],
+	  "venue": "string",
+	  "cluster": "Gaming",
+	  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	  "rules": "http://google.com",
+	  "startTime": "4 PM",
+	  "endTime": "5 PM",
+	  "date": "1/1/19"
+	},
+	{
+	  "name": "Mini militia",
+	  "cup": "spectrum",
+	  "points": [10, 7, 5],
+	  "venue": "string",
+	  "cluster": "Gaming",
+	  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	  "rules": "http://google.com",
+	  "startTime": "4 PM",
+	  "endTime": "5 PM",
+	  "date": "2/1/19"	},
+	{
+	  "name": "Name the tune - tamil",
+	  "cup": "cultural",
+	  "points": [10, 7, 5],
+	  "venue": "string",
+	  "cluster": "Culturals",
+	  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	  "rules": "http://google.com",
+	  "startTime": "4 PM",
+	  "endTime": "5 PM",
+	  "date": "6/1/19"
+	},
+	{
+	  "name": "JAM",
+	  "cup": "cultural",
+	  "points": [10, 7, 5],
+	  "venue": "string",
+	  "cluster": "Lits",
+	  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	  "rules": "http://google.com",
+	  "startTime": "4 PM",
+	  "endTime": "5 PM",
+	  "date": "7/1/19"
+	}
+]
