@@ -1,7 +1,7 @@
 const logger = require('../../config/winston.js')
 const Score = require('../models/Score.js')
 
-var showScoreboard = async (req, res) => {
+const showScoreboard = async (req, res) => {
   try {
     const scoreData = await Score.aggregate([
       {
@@ -61,7 +61,6 @@ var showScoreboard = async (req, res) => {
     spectrumTotals.forEach((item) => {
       spectrumTotalsObj[item.name] = item.points
     })
-    console.log(JSON.stringify(sportsTotals, null, 2))
 
     scoreData.forEach((item) => {
       if (item._id.cup[0] == 'Culturals') { eventCulturals.push(item) }
@@ -99,7 +98,6 @@ var showScoreboard = async (req, res) => {
       }
     })
 
-    // console.log(JSON.stringify(eventSports, null, 2))
     eventSports.forEach((item) => {
       let index = eventSportsArr.findIndex((ele) => {
         return ele.event_name == item.details[0].event_name[0]
@@ -148,22 +146,20 @@ var showScoreboard = async (req, res) => {
       }
     }
 
-    // return res.send({ scoreData: scoreData, totals: totalData, data: returnData })
     return res.render('scoreboard/scoreboard', { scoreData: scoreData, totals: totalData, data: returnData, title: 'Scoreboard' })
   } catch (error) {
-    console.log(error)
     return res.status(500).send(error)
   }
 }
 
-function pointsMapper (item) {
+function pointsMapper(item) {
   return {
     name: item._id.hostel[0],
     points: item.hostel_total_points
   }
 }
 
-function getOrdinalNumber (number) {
+function getOrdinalNumber(number) {
   switch (number) {
     case 1: return '1st'
     case 2: return '2nd'
@@ -172,7 +168,7 @@ function getOrdinalNumber (number) {
   }
 }
 
-async function getTotalByHostel () {
+async function getTotalByHostel() {
   try {
     const totals = await Score.aggregate([
       {
@@ -192,14 +188,13 @@ async function getTotalByHostel () {
         }
       },
       { $group: { '_id': { 'cup': '$event.cup', 'hostel': '$hostel.name' }, 'hostel_total_points': { $sum: '$points' } } }, { '$sort': { 'hostel_total_points': -1 } }])
-    // console.log('debug', totals)
     return totals
   } catch (error) {
     logger.error(error)
   }
 }
 
-var getEventScores = async function getEventScores (eventId) {
+const getEventScores = async function getEventScores(eventId) {
   const scoreData = await Score.find({ 'event': eventId }).populate('hostel').exec()
   let returnData = {}
   scoreData.forEach(score => {

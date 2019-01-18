@@ -43,7 +43,6 @@ exports.validate = [
 ]
 
 exports.createScore = async (req, res) => {
-  console.log(req.body)
   const errors = validationResult(req).array()
   if (errors.length) {
     const errorMessages = errors.map(error => error.msg)
@@ -63,7 +62,6 @@ exports.createScore = async (req, res) => {
         if (typeof req.body[item] !== 'object') {
           let tempStr = req.body[item]
           req.body[item] = [tempStr]
-          console.log(typeof req.body[item])
         }
         noOfPositions.push(req.body[item])// items entered into the array after checking the key
       }
@@ -71,9 +69,7 @@ exports.createScore = async (req, res) => {
     })
     for (let j = 0; j < noOfPositions.length; j++) {
       let hostelList = noOfPositions[j]// get hostels at a particular position
-      console.log(typeof hostelList)
       let points = noOfPoints[j]// get points at a particular position
-      console.log(points)
       for (let i = 0; i < hostelList.length; i++) {
         let pos = new Score({
           hostel: hostelList[i],
@@ -82,7 +78,6 @@ exports.createScore = async (req, res) => {
           points: points
         })
         try {
-          console.log(pos)
           let savedPos = await pos.save()
           logger.info(`Scores of ${savedPos._id} added by ${req.user.username}`)
         } catch (error) {
