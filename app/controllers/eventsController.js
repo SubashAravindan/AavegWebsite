@@ -238,10 +238,10 @@ exports.showEvent = async (req, res) => {
   try {
     const eventData = await Event.findById(req.params.id).populate('venue').exec()
     if (eventData) {
-      eventData.startTime = new Date(Date.parse(eventData.startTime)).toLocaleString()
-      eventData.endTime = new Date(Date.parse(eventData.endTime)).toLocaleString()
+      const startTime = new Date(Date.parse(eventData.startTime)).toDateString()
+      const endTime = new Date(Date.parse(eventData.endTime)).toDateString()
       const winners = await scoreboardController.getEventScores(req.params.id)
-      res.render('events/showEvent', { title: eventData.name, eventData, winners })
+      res.render('events/showEvent', { title: eventData.name, eventData, startTime, endTime, winners })
     } else {
       res.render('error', { title: 'Error', error: 'No such event' })
     }
