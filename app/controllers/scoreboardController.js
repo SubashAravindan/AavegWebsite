@@ -83,69 +83,73 @@ const showScoreboard = async (req, res) => {
     })
 
     eventCulturals.forEach((item) => {
-      let index = eventCulturalsArr.findIndex((ele) => {
-        return ele.event_name == item.details[0].event_name[0]
-      })
-      let hostel = item._id.hostel[0]
-      if (index != -1) {
-        if (eventCulturalsArr[index][String(hostel)] === undefined) {
-          eventCulturalsArr[index][String(hostel)] = item.details[0].points
+      for (let i = 0; i < item.details.length; i++) {
+        let index = eventCulturalsArr.findIndex((ele) => {
+          return ele.event_name == item.details[i].event_name[0]
+        })
+        let hostel = item._id.hostel[0]
+        if (index != -1) {
+          if (eventCulturalsArr[index][String(hostel)] === undefined) {
+            eventCulturalsArr[index][String(hostel)] = item.details[i].points
+          }
+          else {
+            eventCulturalsArr[index][String(hostel)] += item.details[i].points
+          }
+        } else {
+          const event_obj = {
+            event_name: item.details[i].event_name[0],
+            [String(hostel)]: item.details[i].points
+          }
+          eventCulturalsArr.push(event_obj)
         }
-        else {
-          eventCulturalsArr[index][String(hostel)] += item.details[0].points
-        }
-      } else {
-        const event_obj = {
-          event_name: item.details[0].event_name[0],
-          [String(hostel)]: item.details[0].points
-        }
-        eventCulturalsArr.push(event_obj)
       }
     })
 
     eventSports.forEach((item) => {
-      let index = eventSportsArr.findIndex((ele) => {
-      return ele.event_name == item.details[0].event_name[0]
-      })
-      let hostel = item._id.hostel[0]
+      for (let i = 0; i < item.details.length; i++) {
+        let index = eventSportsArr.findIndex((ele) => {
+          return ele.event_name == item.details[0].event_name[0]
+        })
+        let hostel = item._id.hostel[0]
 
-      if (index != -1) {
-        if (eventSportsArr[index][String(hostel)] === undefined) {
-          eventSportsArr[index][String(hostel)] = item.details[0].points
+        if (index != -1) {
+          if (eventSportsArr[index][String(hostel)] === undefined) {
+            eventSportsArr[index][String(hostel)] = item.details[0].points
+          }
+          else {
+            eventSportsArr[index][String(hostel)] += item.details[0].points
+          }
+        } else {
+          const event_obj = {
+            event_name: item.details[0].event_name[0],
+            [String(hostel)]: item.details[0].points
+          }
+          eventSportsArr.push(event_obj)
         }
-        else {
-          eventSportsArr[index][String(hostel)] += item.details[0].points
-        }
-      } else {
-        const event_obj = {
-          event_name: item.details[0].event_name[0],
-          [String(hostel)]: item.details[0].points
-        }
-        eventSportsArr.push(event_obj)
       }
     })
-
     eventSpectrum.forEach((item) => {
-      let index = eventSpectrumArr.findIndex((ele) => {
-        return ele.event_name == item.details[0].event_name[0]
-      })
-      let hostel = item._id.hostel[0]
-      if (index != -1) {
-        if (eventSpectrumArr[index][String(hostel)] === undefined) {
-          eventSpectrumArr[index][String(hostel)] = item.details[0].points
+      for (let i = 0; i < item.details.length; i++) {
+        let index = eventSpectrumArr.findIndex((ele) => {
+          return ele.event_name == item.details[i].event_name[0]
+        })
+        let hostel = item._id.hostel[0]
+        if (index != -1) {
+          if (eventSpectrumArr[index][String(hostel)] === undefined) {
+            eventSpectrumArr[index][String(hostel)] = item.details[i].points
+          }
+          else {
+            eventSpectrumArr[index][String(hostel)] += item.details[i].points
+          }
+        } else {
+          const event_obj = {
+            event_name: item.details[i].event_name[0],
+            [String(hostel)]: item.details[i].points
+          }
+          eventSpectrumArr.push(event_obj)
         }
-        else {
-          eventSpectrumArr[index][String(hostel)] += item.details[0].points
-        }
-      } else {
-        const event_obj = {
-          event_name: item.details[0].event_name[0],
-          [String(hostel)]: item.details[0].points
-        }
-        eventSpectrumArr.push(event_obj)
       }
     })
-
     const returnData = {
       standings: {
         culturals: culturalTotalsObj,
