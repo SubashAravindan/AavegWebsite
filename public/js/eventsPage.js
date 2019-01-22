@@ -1,5 +1,4 @@
 $('.clusterText').click(function () {
-  console.log('hi')
   const clusterIndex = $('.clusterText').index($(this))
   if (window.screen.width > 700 || $($('.clusterContainer')[clusterIndex]).is(':active')) {
     $('.eventsList').addClass('hide')

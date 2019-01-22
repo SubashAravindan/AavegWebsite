@@ -40,12 +40,18 @@ function countdown (endDate) {
       let stringH = '' + ('0' + hours).slice(-2)
       let stringM = '' + ('0' + minutes).slice(-2)
       let stringS = '' + ('0' + seconds).slice(-2)
-      daysS.innerHTML = stringD[0]
+      if(stringD.length>=2)
+        daysS.innerHTML = stringD[0]
+      else
+        daysS.innerHTML = 0
       hrsS.innerHTML = stringH[0]
       minsS.innerHTML = stringM[0]
       secsS.innerHTML = stringS[0]
 
-      daysS1.innerHTML = stringD[1]
+      if(stringD.length>=2)  
+        daysS1.innerHTML = stringD[1]
+      else
+        daysS1.innerHTML = stringD[0]
       hrsS1.innerHTML = stringH[1]
       minsS1.innerHTML = stringM[1]
       secsS1.innerHTML = stringS[1]
