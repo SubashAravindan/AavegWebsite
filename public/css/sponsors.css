@@ -5,3 +5,12 @@
 h2 {
     display: inline-block
 }
+
+.spotlight .content header.major h2:after{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sponsorImg{
+    max-width: 80%;
+}
