@@ -200,7 +200,7 @@ exports.editEventData = async (req, res) => {
 
 exports.getEvents = async (req, res) => {
   try {
-    const eventsData = await Event.find({}).exec()
+    const eventsData = await Event.find({}).populate('venue').exec()
     return res.send(eventsData)
   } catch (e) {
     logger.error(e)

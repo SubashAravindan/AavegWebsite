@@ -226,7 +226,14 @@ const getEventScores = async function getEventScores(eventId) {
   return returnData
 }
 
+const getScoreData = async (req, res) => {
+  const scoreData = await Score.find().populate('hostel').populate('event','name').exec()
+  res.send(scoreData)
+}
+
+
 module.exports = {
-  showScoreboard: showScoreboard,
-  getEventScores: getEventScores
+  showScoreboard,
+  getEventScores,
+  getScoreData
 }
