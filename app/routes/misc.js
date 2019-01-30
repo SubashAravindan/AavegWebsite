@@ -7,6 +7,9 @@ router.get('/about', (req, res) => {
 
 router.get('/schedule', (req, res) => {
   res.download('public/others/Schedule.pdf', 'Schedule.pdf')
+
+  router.get('/sponsors', (req, res) => {
+  res.render('sponsors', { title: 'Sponsors' })
 })
 
 router.get('*', (req, res) => {
