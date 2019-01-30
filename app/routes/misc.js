@@ -7,13 +7,15 @@ router.get('/about', (req, res) => {
 
 router.get('/schedule', (req, res) => {
   res.download('public/others/Schedule.pdf', 'Schedule.pdf')
+})
 
-  router.get('/sponsors', (req, res) => {
+router.get('/sponsors', (req, res) => {
   res.render('sponsors', { title: 'Sponsors' })
 })
 
+// 404
 router.get('*', (req, res) => {
-  res.render('comingSoon', { url: req.url })
+  res.render('error', { error: 'Page not found', title: '404' })
 })
 
 module.exports = router
