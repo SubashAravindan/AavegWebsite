@@ -32,11 +32,10 @@ mkdir logs && touch logs/erros.log logs/warnings.log
 
 - Follow the coding style given below
 - Maintain the project structure (routes, conrollers etc).
-- Work on feature branches and give a PR to dev with proper rebasing. Dont push.
 - Use ES6+ features to write clean code. Especially async await, template strings etc
 - _Update README_
 - Add seed data if needed
-- Use the winston library for logging. No console.log plis
+- Use the winston library for logging.
 
 ## Style guide
 
@@ -54,8 +53,8 @@ Most of the times, this following command will magically fix it for you :)
 standard --fix
 ```
 
-PLEASE DON'T COMMIT CODE WITHOUT PROPER FORMATTING
 
 ## Api Reference
 
-Coming soon...
+/api/events for event details
+/api/scoreboard for score details
