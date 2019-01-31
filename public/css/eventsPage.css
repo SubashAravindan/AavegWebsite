@@ -1,6 +1,8 @@
 .clusterImg{
   width: 100%;
   transition: all 2s ease;
+  box-shadow: 10px 10px 10px rgba(107, 155, 163, 0.5);
+  -webkit-box-shadow: 10px 10px 10px rgba(107, 155, 163, 0.5);
 }
 
 .clusterRow{
@@ -9,6 +11,7 @@
 
 .clusterContainer{
   position: relative;
+  padding: 20px;
 }
 
 .clusterText{
@@ -67,9 +70,9 @@
 }
 
 @media (max-width: 736px){
-  .clusterImg{
+  /* .clusterImg{
     padding: 5%;
-  }
+  } */
   header.major{
     font-size: 2rem;
   }
