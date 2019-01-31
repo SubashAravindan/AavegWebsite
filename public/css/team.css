@@ -1,0 +1,203 @@
+#mainSection {
+  margin: 20px;
+  padding-top: 10%;
+}
+
+#mainSection h1 {
+  text-align: center;
+}
+
+.row {
+  margin: 0 auto;
+}
+
+.member {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-webkit-transition: clip-path 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transition: clip-path 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: clip-path 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  clip-path: circle(40% at 50% 40%);
+  box-shadow: 30px 30px 30px rgba(13, 8, 5, 0.5);
+  -webkit-box-shadow: 30px 30px 30px rgba(13, 8, 5, 0.5);
+  box-shadow: 8px 8px 8px rgba(13, 8, 5, 0.5);
+  -webkit-box-shadow: 8px 8px 8px rgba(13, 8, 5, 0.5);
+}
+
+.imgContainer {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.facultyContainer{
+  padding-left: 0;
+}
+
+.fireOverlay {
+  pointer-events: none;
+  position: absolute;
+  bottom: -10%;
+  left: 0;
+  opacity: 0;
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.member:hover+.fireOverlay {
+  opacity: 1;
+  /* height: 100%; */
+  bottom: 0;
+}
+
+.member:hover, .member:active {
+  clip-path: circle(100% at 50% 40%);
+  filter: none;
+  -webkit-filter: none;
+}
+
+.headerContainer {
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+}
+
+.name {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  opacity: 0;
+  color: white;
+  font-weight: bold;
+  background: rgba(13, 8, 5, 0.4);
+  width: 100%;
+  font-size: 2rem;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+
+.headerContainer h2{
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.description{
+  font-size: 1.2rem;
+}
+
+.member:hover~.name {
+  opacity: 1;
+}
+
+@media(max-width:768px) {
+  .imgContainer {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .name {
+    font-size: 1.5rem;
+  }
+  .desig{
+    font-size: 1.2rem !important;
+  }
+}
+
+.webops .member {
+  -webkit-animation: box-glow 1s ease-in-out infinite alternate;
+  -moz-animation: box-glow 1s ease-in-out infinite alternate;
+  animation: box-glow 1s ease-in-out infinite alternate;
+}
+
+.webops .name {
+  -webkit-animation: text-glow 1s ease-in-out infinite alternate;
+  -moz-animation: text-glow 1s ease-in-out infinite alternate;
+  animation: text-glow 1s ease-in-out infinite alternate;
+}
+
+h2.webops, p.webops{
+  padding: 10px;
+}
+
+h2.webops:hover, p.webops:hover {
+  color: #33FF00 !important;
+  background: #282828;
+}
+
+.image.fit{
+  margin-bottom: 0.5em;
+}
+
+.desig{
+  text-align: center;
+  font-size: 2rem;
+}
+
+@keyframes text-glow{
+  from{
+    text-shadow: none;
+  }
+  to{
+    text-shadow: 5px 5px 15px #F7A33C;
+  }
+}
+
+@-o-keyframes text-glow{
+  from{
+    text-shadow: none;
+  }
+  to{
+    text-shadow: 5px 5px 15px #F7A33C;
+  }
+}
+@-moz-keyframes text-glow{
+  from{
+    text-shadow: none;
+  }
+  to{
+    text-shadow: 5px 5px 15px #F7A33C;
+  }
+}
+
+@-webkit-keyframes text-glow{
+  from{
+    text-shadow: none;
+  }
+  to{
+    text-shadow: 5px 5px 15px #F7A33C;
+  }
+}
+@keyframes box-glow{
+  from{
+    box-shadow: none;
+  }
+  to{
+    box-shadow:  0px 0px 10px 10px #F7A33C;
+  }
+}
+
+@-o-keyframes box-glow{
+  from{
+    box-shadow: none;
+  }
+  to{
+    box-shadow:  0px 0px 10px 10px #F7A33C;
+  }
+}
+@-moz-keyframes box-glow{
+  from{
+    box-shadow: none;
+  }
+  to{
+    box-shadow:  0px 0px 10px 10px #F7A33C;
+  }
+}
+
+@-webkit-keyframes box-glow{
+  from{
+    box-shadow: none;
+  }
+  to{
+    box-shadow:  0px 0px 10px 10px #F7A33C;
+  }
+}

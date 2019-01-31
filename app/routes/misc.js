@@ -14,6 +14,10 @@ router.get('/sponsors', (req, res) => {
 })
 
 // 404
+router.get('/team', (req, res) => {
+  res.render('team', { title: 'Team' })
+})
+
 router.get('*', (req, res) => {
   res.render('error', { error: 'Page not found', title: '404' })
 })
