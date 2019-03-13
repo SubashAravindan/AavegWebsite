@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const logger = require('../../config/winston.js')
 const Event = require('../models/Event.js')
 const Cup = require('../models/Cup.js')
@@ -91,7 +92,7 @@ exports.createEventForm = async (req, res) => {
     })
   } catch (err) {
     logger.error(err)
-    res.status(500).send(err)
+    res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
 
@@ -112,7 +113,7 @@ exports.editEventForm = async (req, res) => {
       title: 'Event Edit'
     })
   } catch (err) {
-    res.status(500).send(err)
+    res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
     logger.error(err)
   }
 }
@@ -143,7 +144,7 @@ exports.saveEventData = async (req, res) => {
       res.sendStatus(200)
     } catch (err) {
       logger.error(err)
-      res.status(500).send(err)
+      res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
     }
   }
 }
@@ -155,7 +156,7 @@ exports.deleteEventData = async (req, res) => {
     res.sendStatus(200)
   } catch (err) {
     logger.error(err)
-    res.status(500).send(err)
+    res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
 
@@ -189,11 +190,11 @@ exports.editEventData = async (req, res) => {
         logger.info(`Event ${req.params.id} edited by ${req.session.passport.user}`)
         res.sendStatus(200)
       } catch (error) {
-        res.status(500).send(error)
+        res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
       }
     } catch (err) {
       logger.error(err)
-      res.status(500).send(err)
+      res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
     }
   }
 }
@@ -204,7 +205,7 @@ exports.getEvents = async (req, res) => {
     return res.send(eventsData)
   } catch (e) {
     logger.error(e)
-    return res.status(500).json(e)
+    return res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
 
@@ -214,7 +215,7 @@ exports.getEventData = async (req, res) => {
     return res.json(eventData)
   } catch (e) {
     logger.error(e)
-    return res.status(500).json(e)
+    return res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
 
@@ -230,22 +231,25 @@ exports.showEventsPage = async (req, res) => {
     ])
     res.render('events/eventsPage', { title: 'Events', eventsData: eventsByCluster })
   } catch (e) {
-    res.status(500).json(e)
+    res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
 
 exports.showEvent = async (req, res) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.render('error', { title: 'Error', error: 'No such event' })
+    }
     const eventData = await Event.findById(req.params.id).populate('venue').exec()
     if (eventData) {
       const startTime = new Date(Date.parse(eventData.startTime)).toDateString()
       const endTime = new Date(Date.parse(eventData.endTime)).toDateString()
       const winners = await scoreboardController.getEventScores(req.params.id)
-      res.render('events/showEvent', { title: eventData.name, eventData, startTime, endTime, winners })
+      return res.render('events/showEvent', { title: eventData.name, eventData, startTime, endTime, winners })
     } else {
-      res.render('error', { title: 'Error', error: 'No such event' })
+      return res.render('error', { title: 'Error', error: 'No such event' })
     }
   } catch (e) {
-    res.status(500).send(e)
+    return res.status(500).render('error', { title: 'Error', error: 'Internal server error' })
   }
 }
