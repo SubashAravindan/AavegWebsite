@@ -18,6 +18,7 @@ const hostelRoutes = require('./app/routes/hostel.js')
 const miscRoutes = require('./app/routes/misc')
 const authSetup = require('./app/utils/authSetup')
 const scoreRoutes = require('./app/routes/scoreboard.js')
+const router = express.Router()
 
 // ==================Middleware================
 
@@ -37,6 +38,15 @@ app.use(
   })
 )
 authSetup(passport, app)
+
+// ===========Swagger============
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api/v1', router)
+
 // =============Routes=============
 
 app.get('/', (req, res) => {
