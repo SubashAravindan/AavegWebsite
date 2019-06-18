@@ -1,0 +1,366 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is the Aaveg API.  You can find \nout more about Swagger at \n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "version" : "1.0.0",
+    "title" : "Aaveg API",
+    "termsOfService" : "http://swagger.io/terms/",
+    "contact" : {
+      "email" : "apiteam@swagger.io"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "aaveg.net",
+  "basePath" : "/19",
+  "tags" : [ {
+    "name" : "events",
+    "description" : "About Events"
+  }, {
+    "name" : "hostel",
+    "description" : "About Hostels"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/events" : {
+      "get" : {
+        "tags" : [ "events" ],
+        "summary" : "Returns list of events",
+        "description" : "Renders the list of events",
+        "operationId" : "getEvents",
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Event"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write", "read" ]
+        } ]
+      }
+    },
+    "/events/{eventId}" : {
+      "get" : {
+        "tags" : [ "events" ],
+        "summary" : "Finds event by ID",
+        "description" : "Displays all details regarding chosen event",
+        "operationId" : "getEventData",
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "name" : "eventId",
+          "in" : "path",
+          "description" : "ID of event to return",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Event"
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Event not found"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write", "read" ]
+        } ]
+      }
+    },
+    "/admin/events/edit/{eventId}" : {
+      "get" : {
+        "tags" : [ "events" ],
+        "summary" : "Renders edit event form",
+        "description" : "Renders form with pre filled data to edit",
+        "operationId" : "editEventForm",
+        "parameters" : [ {
+          "name" : "eventId",
+          "in" : "path",
+          "description" : "ID of event to return",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Event not found"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write" ]
+        } ]
+      }
+    },
+    "/admin/events" : {
+      "post" : {
+        "tags" : [ "events" ],
+        "summary" : "Save new event",
+        "description" : "",
+        "operationId" : "saveEventData",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Event object to be added to event list",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Event"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write" ]
+        } ]
+      }
+    },
+    "/admin/events/{eventId}" : {
+      "put" : {
+        "tags" : [ "events" ],
+        "summary" : "Edit event",
+        "description" : "",
+        "operationId" : "editEventData",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Edited event object to be saved",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Event"
+          }
+        }, {
+          "name" : "eventId",
+          "in" : "path",
+          "description" : "ID of event to edit",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Event not found"
+          },
+          "405" : {
+            "description" : "Validation exception"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write" ]
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "events" ],
+        "summary" : "Delete event",
+        "description" : "",
+        "operationId" : "deleteEventData",
+        "parameters" : [ {
+          "name" : "eventId",
+          "in" : "path",
+          "description" : "ID of event to edit",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "404" : {
+            "description" : "Event not found"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write" ]
+        } ]
+      }
+    },
+    "/admin/events/create" : {
+      "get" : {
+        "tags" : [ "events" ],
+        "summary" : "Renders create event form",
+        "description" : "Renders form to create a new event",
+        "operationId" : "createEventForm",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write" ]
+        } ]
+      }
+    },
+    "/hostels" : {
+      "get" : {
+        "tags" : [ "hostel" ],
+        "summary" : "Returns a list of hostels",
+        "description" : "Renders list of hostels",
+        "operationId" : "getHostels",
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Hostel"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "aaveg_auth" : [ "write", "read" ]
+        } ]
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "aaveg_auth" : {
+      "type" : "oauth2",
+      "authorizationUrl" : "http://aaveg.net/19/login",
+      "flow" : "implicit",
+      "scopes" : {
+        "write" : "Aaveg Core",
+        "read" : "Any user"
+      }
+    }
+  },
+  "definitions" : {
+    "Hostel" : {
+      "type" : "object",
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Agate"
+        }
+      },
+      "xml" : {
+        "name" : "Hostel"
+      }
+    },
+    "Venue" : {
+      "type" : "object",
+      "properties" : {
+        "_id" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "NSO Ground"
+        },
+        "lat" : {
+          "type" : "number",
+          "format" : "float",
+          "example" : 10.757028
+        },
+        "lng" : {
+          "type" : "number",
+          "format" : "float",
+          "example" : 78.81255
+        },
+        "__v" : {
+          "type" : "number",
+          "readOnly" : true
+        }
+      },
+      "xml" : {
+        "name" : "Venue"
+      }
+    },
+    "Event" : {
+      "type" : "object",
+      "required" : [ "cluster", "cup", "description", "endTime", "name", "rules", "startTime", "venue" ],
+      "properties" : {
+        "points" : {
+          "type" : "array",
+          "example" : [ 10, 7, 5 ],
+          "xml" : {
+            "name" : "points",
+            "wrapped" : true
+          },
+          "items" : {
+            "type" : "number"
+          }
+        },
+        "_id" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "Cricket"
+        },
+        "cluster" : {
+          "type" : "string",
+          "example" : "Sports"
+        },
+        "cup" : {
+          "type" : "string",
+          "example" : "Sports"
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Hit it out of the park, or get out. Survive on the pitch while the bowl travels at you with blazing speed and spin.  Score as many runs as possible and hustle in your fielding. Run as fast as you can and dive without fear because those few runs will make the difference. Time to test your endurance."
+        },
+        "rules" : {
+          "type" : "string",
+          "example" : "https://drive.google.com/open?id=1V8E-ojy6adphRWnYG12t3FSl66kUmTr4\""
+        },
+        "startTime" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2019-01-26T07:00:00.000Z"
+        },
+        "endTime" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2019-01-27T12:00:00.000Z"
+        },
+        "venue" : {
+          "$ref" : "#/definitions/Venue"
+        }
+      },
+      "xml" : {
+        "name" : "Event"
+      }
+    }
+  }
+}
