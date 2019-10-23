@@ -2,7 +2,7 @@
 
 # Aaveg
 
-Website and app backend for Aaveg.
+Website and app backend for Aaveg. Checkout the site at aaveg.net
 
 ## Developing
 
